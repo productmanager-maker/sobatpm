@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ihsan Nugraha — PM & Builder</title>
+  <meta name="description" content="Product Manager & Builder. Membuat tools, AI agents, dan sistem kerja untuk profesional Indonesia." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --border: #e4e6ef;
+      --text: #1a1d2e;
+      --text2: #4a5068;
+      --text3: #8b91a8;
+      --primary: #4f46e5;
+      --primary-light: #ede9fe;
+      --accent: #0ea5e9;
+      --green: #059669;
+      --green-light: #d1fae5;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --purple: #7c3aed;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 52px;
+    }
+    .nav-brand {
+      font-size: 13px; font-weight: 700; color: var(--primary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      color: var(--text3); font-size: 13px; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: var(--primary-light); color: var(--primary); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 45%, #0ea5e9 100%);
+      padding: 72px 32px 64px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 20%, rgba(124,58,237,.35), transparent),
+                  radial-gradient(ellipse 40% 60% at 10% 80%, rgba(14,165,233,.2), transparent);
+    }
+    .hero-inner {
+      max-width: 800px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
+      padding: 4px 14px; border-radius: 99px; margin-bottom: 24px;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; display: inline-block; }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 52px); font-weight: 800;
+      color: white; line-height: 1.1; margin-bottom: 16px;
+    }
+    .hero-title .name { color: #a5b4fc; }
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,.75);
+      max-width: 520px; margin-bottom: 32px; line-height: 1.65;
+    }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .chip {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85); font-size: 12px; font-weight: 500;
+      padding: 5px 14px; border-radius: 99px;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-primary {
+      background: white; color: var(--primary);
+      font-size: 14px; font-weight: 700;
+      padding: 12px 24px; border-radius: 10px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+    .btn-ghost {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25);
+      color: white; font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border-radius: 10px;
+      transition: background .15s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.18); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+    }
+    .stats-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 32px;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .stat-label { font-size: 12px; color: var(--text3); font-weight: 500; }
+
+    /* ── SECTION ── */
+    .section { max-width: 800px; margin: 0 auto; padding: 56px 32px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 26px; font-weight: 800; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 15px; color: var(--text2); max-width: 520px;
+      margin-bottom: 32px; line-height: 1.7;
+    }
+
+    /* ── FEATURED CARDS ── */
+    .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .featured-grid { grid-template-columns: 1fr; } }
+
+    .feat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: column; gap: 16px;
+      position: relative; overflow: hidden;
+    }
+    .feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #c4b5fd; }
+    .feat-card.primary-card {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-color: transparent; color: white;
+      grid-column: span 2;
+    }
+    @media (max-width: 600px) { .feat-card.primary-card { grid-column: span 1; } }
+    .feat-card.primary-card:hover { border-color: transparent; }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .icon-indigo { background: var(--primary-light); }
+    .icon-sky { background: #e0f2fe; }
+    .icon-green { background: var(--green-light); }
+    .icon-orange { background: var(--orange-light); }
+    .icon-white { background: rgba(255,255,255,.2); }
+
+    .card-tag {
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px;
+      text-transform: uppercase; letter-spacing: .8px; flex-shrink: 0;
+    }
+    .tag-new { background: #dcfce7; color: #15803d; }
+    .tag-live { background: #dbeafe; color: #1d4ed8; }
+    .tag-beta { background: #fef9c3; color: #854d0e; }
+    .tag-white { background: rgba(255,255,255,.2); color: white; }
+
+    .card-name { font-size: 18px; font-weight: 800; }
+    .card-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+    .feat-card.primary-card .card-desc { color: rgba(255,255,255,.8); }
+    .feat-card.primary-card .card-name { color: white; }
+
+    .card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 700; color: var(--primary);
+      margin-top: auto;
+    }
+    .feat-card.primary-card .card-link { color: rgba(255,255,255,.9); }
+    .card-link:hover { gap: 10px; }
+    .card-link svg { transition: transform .15s; }
+    .card-link:hover svg { transform: translateX(4px); }
+
+    .card-features {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+    }
+    .card-feature {
+      font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+    }
+
+    /* ── PROJECTS GRID ── */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 700px) { .projects-grid { grid-template-columns: 1fr; } }
+
+    .proj-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .proj-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .proj-icon { font-size: 28px; margin-bottom: 12px; }
+    .proj-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stack-tag {
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
+      background: var(--bg); color: var(--text3); border: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px;
+      display: flex; gap: 32px; align-items: flex-start;
+    }
+    @media (max-width: 600px) { .about-card { flex-direction: column; gap: 20px; } }
+    .about-avatar {
+      width: 80px; height: 80px; border-radius: 20px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 800; color: white;
+    }
+    .about-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .about-role { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 12px; }
+    .about-bio { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 16px; }
+    .about-contact {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .contact-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: var(--text2);
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 99px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); background: white;
+      padding: 28px 32px; text-align: center;
+    }
+    .footer-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 13px; font-weight: 700; color: var(--primary); }
+    .footer-text { font-size: 13px; color: var(--text3); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <div class="nav-dot"></div>
+      Ihsan Nugraha
+    </div>
+    <div class="nav-links">
+      <a href="#karya">Karya</a>
+      <a href="#tools">Tools</a>
+      <a href="#tentang">Tentang</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span></span>
+        Product Manager & Builder
+      </div>
+      <h1 class="hero-title">
+        Halo, saya<br/>
+        <span class="name">Ihsan Nugraha.</span>
+      </h1>
+      <p class="hero-sub">
+        PM di Sekolah.mu yang juga suka bikin. Dari AI agent, tools produktivitas,
+        sampai aplikasi untuk profesional Indonesia — semuanya dimulai dari rasa penasaran.
+      </p>
+      <div class="hero-chips">
+        <span class="chip">🎓 Sekolah.mu / SID</span>
+        <span class="chip">🤖 AI Tools Builder</span>
+        <span class="chip">🇮🇩 Made for Indonesia</span>
+        <span class="chip">⚡ Next.js · Astro · Python</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#karya" class="btn-primary">Lihat Karya →</a>
+        <a href="mailto:product.manager@sekolahmu.co.id" class="btn-ghost">Hubungi Saya</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Project Aktif</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Claude Skills</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Stack Favorit</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Rasa Penasaran</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KARYA UTAMA -->
+  <div class="section" id="karya">
+    <div class="section-label">Karya Unggulan</div>
+    <h2 class="section-title">Yang Saya Buat</h2>
+    <p class="section-desc">
+      Setiap project lahir dari kebutuhan nyata — baik untuk diri sendiri, tim, maupun komunitas profesional Indonesia.
+    </p>
+
+    <div class="featured-grid">
+
+      <!-- SKILLCLAUDE — FEATURED -->
+      <a href="./skillclaude/" class="feat-card primary-card">
+        <div class="card-top">
+          <div class="card-icon icon-white">🧠</div>
+          <span class="card-tag tag-white">Live</span>
+        </div>
+        <div>
+          <div class="card-name">SkillClaude.id</div>
+          <div class="card-desc">
+            Koleksi Claude Skills pertama dalam Bahasa Indonesia. Instruksi permanen yang membuat Claude
+            bekerja sesuai standar kerjamu — PRD, riset kompetitor, rangkuman meeting, dan banyak lagi.
+          </div>
+        </div>
+        <div class="card-features">
+          <span class="card-feature">10 Skills</span>
+          <span class="card-feature">Gratis Selamanya</span>
+          <span class="card-feature">Bahasa Indonesia</span>
+        </div>
+        <div class="card-link">
+          Buka SkillClaude
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- TOOLS RECAP -->
+      <a href="./tools-recap.html" class="feat-card">
+        <div class="card-top">
+          <div class="card-icon icon-sky">🛠️</div>
+          <span class="card-tag tag-live">Referensi</span>
+        </div>
+        <div>
+          <div class="card-name">Tools & Platform Recap</div>
+          <div class="card-desc">
+            Peta lengkap tools, platform, dan stack yang saya gunakan sehari-hari sebagai PM dan builder.
+            Dari AI tools sampai infra.
+          </div>
+        </div>
+        <div class="card-link">
+          Lihat Tools Recap
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- PRDIFY -->
+      <a href="#" class="feat-card">
+        <div class="card-top">
+          <div class="card-icon icon-indigo">📋</div>
+          <span class="card-tag tag-beta">Beta</span>
+        </div>
+        <div>
+          <div class="card-name">PRDify</div>
+          <div class="card-desc">
+            AI-powered PRD generator. Upload brief, dapat dokumen PRD lengkap dengan scoring dan coaching dari AI.
+          </div>
+        </div>
+        <div class="card-link" style="color:var(--primary)">
+          Segera Hadir
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- NYERAT -->
+      <a href="#" class="feat-card">
+        <div class="card-top">
+          <div class="card-icon icon-green">📝</div>
+          <span class="card-tag tag-beta">Beta</span>
+        </div>
+        <div>
+          <div class="card-name">Nyerat</div>
+          <div class="card-desc">
+            Notion + Evernote alternative dengan AI. Block editor, database views, dan AI assistant — semua dalam satu tempat.
+          </div>
+        </div>
+        <div class="card-link" style="color:var(--primary)">
+          Segera Hadir
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- PROJECT LAINNYA -->
+  <div class="section" id="tools">
+    <div class="section-label">Eksperimen & Build</div>
+    <h2 class="section-title">Project Lainnya</h2>
+    <p class="section-desc">
+      Build cepat, iterasi, belajar. Tidak semua harus jadi produk — yang penting prosesnya.
+    </p>
+
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-icon">🤖</div>
+        <div class="proj-name">AI Agent 001</div>
+        <div class="proj-desc">Telegram sales bot berbasis AI dengan persistent memory dan partner lookup.</div>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Telegram</span>
+          <span class="stack-tag">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon">👨‍🏫</div>
+        <div class="proj-name">Expert App</div>
+        <div class="proj-desc">Platform presensi, penilaian, dan program untuk expert Sekolah.mu.</div>
+        <div class="proj-stack">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">MSW</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon">📦</div>
+        <div class="proj-name">Lebih Banyak</div>
+        <div class="proj-desc">Selalu ada yang sedang dibangun. Follow untuk update terbaru.</div>
+        <div class="proj-stack">
+          <span class="stack-tag">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- TENTANG -->
+  <div class="section" id="tentang">
+    <div class="section-label">Tentang Saya</div>
+    <h2 class="section-title">Siapa Ihsan?</h2>
+    <p class="section-desc">Sedikit latar belakang.</p>
+
+    <div class="about-card">
+      <div class="about-avatar">I</div>
+      <div>
+        <div class="about-name">Ihsan Nugraha</div>
+        <div class="about-role">Product Manager · Sekolah.mu / SID</div>
+        <p class="about-bio">
+          PM dengan kebiasaan ngoding. Saya percaya PM yang bisa build sendiri punya perspektif berbeda
+          dalam mengambil keputusan produk. Di luar jam kerja, saya eksperimen dengan AI tools,
+          membangun produk kecil, dan mendokumentasikan cara kerja modern untuk profesional Indonesia.
+          <br/><br/>
+          Saat ini fokus di: <strong>AI-augmented workflows</strong>, <strong>education tech</strong>,
+          dan <strong>tools untuk produktivitas</strong>.
+        </p>
+        <div class="about-contact">
+          <span class="contact-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            product.manager@sekolahmu.co.id
+          </span>
+          <span class="contact-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            productmanager-maker
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Ihsan Nugraha</div>
+      <div class="footer-text">Dibuat dengan Claude Code · 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>

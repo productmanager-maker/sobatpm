@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'skillclaude/**'
+      - 'index.html'
+      - 'tools-recap.html'
       - '.github/workflows/deploy-skillclaude.yml'
   workflow_dispatch:
 
@@ -40,6 +42,7 @@ jobs:
       - name: Assemble Pages output
         run: |
           mkdir -p _site/skillclaude
+          cp index.html _site/index.html
           cp tools-recap.html _site/tools-recap.html
           cp -r skillclaude/dist/. _site/skillclaude/
 
