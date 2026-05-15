@@ -1,0 +1,10 @@
+services:
+  skillclaude:
+    image: skillclaude:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skillclaude
+    restart: unless-stopped
+    ports:
+      - "3003:80"

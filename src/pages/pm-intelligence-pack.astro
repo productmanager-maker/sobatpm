@@ -1,0 +1,812 @@
+---
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM Intelligence Pack — Sistem Kerja Lengkap untuk Product Manager</title>
+  <meta name="description" content="Bukan template kosong. Sistem kerja PM dari pengalaman nyata di 4 industri: Kementerian, Microfinance, Ecommerce, Edtech. PRD Generator, Research Synthesis, Stakeholder Deck, Competitor Framework." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0f;
+      --ink-soft: #3a3a3a;
+      --ink-muted: #767676;
+      --paper: #faf9f7;
+      --paper-warm: #f3f0eb;
+      --accent: #1a4fff;
+      --accent-light: #e8eeff;
+      --gold: #c9a84c;
+      --gold-light: #fdf6e3;
+      --border: #e2ddd7;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,247,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      background: var(--ink); color: var(--paper);
+      padding: 8px 20px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .8; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 24px 64px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold-light);
+      border: 1px solid #e8d5a3;
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600;
+      color: #7a5c1e;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '✦'; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--ink-soft);
+      max-width: 580px; margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--ink); color: var(--paper);
+      padding: 14px 32px; border-radius: 10px;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: transform .15s, box-shadow .15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .btn-secondary {
+      color: var(--ink-soft);
+      padding: 14px 20px;
+      font-size: 14px; font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { color: var(--ink); }
+    .hero-proof {
+      margin-top: 40px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--ink-muted);
+    }
+    .proof-item::before { content: '✓'; color: #22a06b; font-weight: 700; }
+
+    /* ── SEPARATOR ── */
+    .sep { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* ── PROBLEM SECTION ── */
+    .section { max-width: 860px; margin: 0 auto; padding: 72px 24px; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: var(--ink-muted);
+      letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--ink-soft);
+      max-width: 580px; line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .pain-card {
+      background: var(--paper-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .pain-card .icon { font-size: 20px; margin-bottom: 12px; }
+    .pain-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .pain-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ── DIFFERENTIATOR ── */
+    .diff-section {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .diff-inner {
+      max-width: 860px; margin: 0 auto;
+      padding: 72px 24px;
+    }
+    .diff-inner .section-label { color: #888; }
+    .diff-inner h2 { color: var(--paper); margin-bottom: 40px; }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    @media (max-width: 600px) { .diff-grid { grid-template-columns: 1fr; } }
+    .diff-col { padding: 32px; }
+    .diff-col.bad {
+      background: #1a1a1a;
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .diff-col.good {
+      background: #1e2f5e;
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    }
+    .diff-col-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: .1em;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .diff-col.bad .diff-col-label { color: #666; }
+    .diff-col.good .diff-col-label { color: #7ea8ff; }
+    .diff-item {
+      display: flex; gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px; line-height: 1.5;
+    }
+    .diff-col.bad .diff-item { color: #777; }
+    .diff-col.good .diff-item { color: #d4e1ff; }
+    .diff-item-icon { flex-shrink: 0; margin-top: 2px; }
+
+    /* ── KOMPONEN ── */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 480px) { .component-grid { grid-template-columns: 1fr; } }
+    .component-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .component-header {
+      background: var(--paper-warm);
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .component-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--ink-muted);
+      letter-spacing: .08em; margin-bottom: 10px;
+    }
+    .component-header h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .component-header p {
+      font-size: 13px; color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .component-body { padding: 24px 28px; }
+    .feature-list { list-style: none; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; line-height: 1.6;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink-soft);
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .component-example {
+      background: var(--paper-warm);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+    .component-example strong { color: var(--ink-soft); }
+
+    /* ── INDUSTRI ── */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) { .industry-grid { grid-template-columns: 1fr 1fr; } }
+    .industry-card {
+      background: var(--paper-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .industry-icon { font-size: 24px; margin-bottom: 8px; }
+    .industry-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .industry-note { font-size: 11px; color: var(--ink-muted); }
+
+    /* ── FOR WHOM ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .persona-card {
+      background: var(--paper-warm);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+    }
+    .persona-card .avatar {
+      width: 40px; height: 40px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    .persona-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .persona-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-inner {
+      max-width: 860px; margin: 0 auto;
+      padding: 72px 24px;
+    }
+    .pricing-card {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 480px; margin: 40px auto 0;
+      position: relative;
+    }
+    .pricing-tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--ink); color: var(--paper);
+      padding: 4px 20px; border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .pricing-amount {
+      text-align: center; margin-bottom: 8px;
+    }
+    .pricing-amount .price {
+      font-size: 2.8rem; font-weight: 700;
+      letter-spacing: -.03em;
+    }
+    .pricing-amount .period {
+      font-size: 14px; color: var(--ink-muted);
+      display: block; margin-top: 4px;
+    }
+    .pricing-compare {
+      text-align: center;
+      font-size: 13px; color: var(--ink-muted);
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-compare del { color: #bbb; }
+    .pricing-includes { margin-bottom: 32px; }
+    .pricing-includes h4 {
+      font-size: 12px; font-weight: 600;
+      color: var(--ink-muted); letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .include-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .include-item:last-child { border-bottom: none; }
+    .include-check { color: #22a06b; font-weight: 700; }
+    .btn-buy {
+      width: 100%;
+      background: var(--ink); color: var(--paper);
+      padding: 16px 24px;
+      border-radius: 10px;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; text-align: center;
+      display: block;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+    .btn-buy-sub {
+      text-align: center; font-size: 12px;
+      color: var(--ink-muted); margin-top: 12px;
+    }
+    .pricing-anchor {
+      text-align: center; margin-top: 40px;
+    }
+    .anchor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px; max-width: 480px; margin: 20px auto 0;
+    }
+    @media (max-width: 480px) { .anchor-grid { grid-template-columns: 1fr; } }
+    .anchor-item {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 12px; text-align: center;
+    }
+    .anchor-item .anchor-price {
+      font-size: 1rem; font-weight: 700;
+      display: block; margin-bottom: 4px;
+    }
+    .anchor-item .anchor-desc { font-size: 11px; color: var(--ink-muted); }
+    .anchor-item.highlight {
+      border-color: var(--ink);
+      background: var(--ink); color: var(--paper);
+    }
+    .anchor-item.highlight .anchor-desc { color: #aaa; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 640px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .faq-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .faq-item p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      text-align: center;
+      max-width: 560px; margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700; margin-bottom: 16px;
+      letter-spacing: -.02em;
+    }
+    .final-cta p { font-size: 1rem; color: var(--ink-soft); margin-bottom: 32px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px; color: var(--ink-muted);
+    }
+    footer a { color: var(--ink-soft); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+
+    /* ── UTILS ── */
+    .text-center { text-align: center; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-40 { margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://sobatpm.sekolahmu.net/skillclaude/" class="nav-logo">⟨<span>S</span>⟩ SkillClaude.id</a>
+    <a href="#beli" class="nav-cta">Beli Sekarang →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">PRO · PM Intelligence Pack</div>
+    <h1>
+      Sistem kerja PM yang<br/>
+      <em>sudah dipikirkan</em> untukmu
+    </h1>
+    <p class="hero-sub">
+      Bukan template kosong yang harus kamu isi sendiri.<br/>
+      Ini sistem kerja lengkap dari pengalaman nyata di 4 industri berbeda —
+      PRD Generator, Research Synthesis, Stakeholder Deck, Competitor Framework.
+    </p>
+    <div class="hero-actions">
+      <a href="#beli" class="btn-primary">Dapatkan Sekarang — Rp 350.000 →</a>
+      <a href="#komponen" class="btn-secondary">Lihat isinya dulu ↓</a>
+    </div>
+    <div class="hero-proof">
+      <span class="proof-item">Notion template siap pakai</span>
+      <span class="proof-item">Contoh nyata, bukan fiktif</span>
+      <span class="proof-item">4 komponen dalam 1 sistem</span>
+      <span class="proof-item">Update seumur hidup</span>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <p class="section-label">Masalah yang kamu hadapi</p>
+    <h2>PM yang bagus tahu <em>apa</em> yang harus dikerjakan.<br/>Tapi sering stuck di <em>bagaimana</em>.</h2>
+    <p class="section-sub">
+      Bukan karena tidak kompeten. Tapi karena tidak ada sistem yang bisa langsung dipakai —
+      semua harus dibangun dari nol, setiap kali.
+    </p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="icon">📄</div>
+        <h3>PRD yang tidak pernah benar-benar selesai</h3>
+        <p>Selalu ada yang kurang — scope-nya blur, metric-nya tidak ada baseline, stakeholder bingung cara bacanya.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">📊</div>
+        <h3>Data riset yang tidak bisa di-present</h3>
+        <p>Sudah interview 10 orang, sudah ada survey, ada analytics — tapi bagaimana cara nyambungkannya jadi satu insight?</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🎯</div>
+        <h3>Deck stakeholder yang tidak meyakinkan</h3>
+        <p>Konten sudah ada, tapi setiap kali presentasi selalu ada saja yang "perlu direvisi dulu" atau "kurang ini".</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🔍</div>
+        <h3>Analisis kompetitor yang dangkal</h3>
+        <p>Buka website kompetitor, screenshot beberapa hal, taruh di spreadsheet — tapi tidak tahu apa kesimpulannya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATOR -->
+  <div class="diff-section">
+    <div class="diff-inner">
+      <p class="section-label">Kenapa beli, padahal bisa prompt AI sendiri?</p>
+      <h2 style="color: var(--paper); max-width: 540px; margin-bottom: 40px;">
+        Bisa. Tapi kamu akan spending 40 jam iterasi yang sudah kami bayar duluan.
+      </h2>
+      <div class="diff-grid">
+        <div class="diff-col bad">
+          <span class="diff-col-label">Prompt AI sendiri dari nol</span>
+          <div class="diff-item"><span class="diff-item-icon">✗</span> Mulai dari prompt generik, hasilnya juga generik</div>
+          <div class="diff-item"><span class="diff-item-icon">✗</span> Harus iterasi berkali-kali baru dapat output yang benar</div>
+          <div class="diff-item"><span class="diff-item-icon">✗</span> Tidak tahu standar "PRD yang baik" seperti apa</div>
+          <div class="diff-item"><span class="diff-item-icon">✗</span> Contoh yang dibuat AI tidak punya konteks industri nyata</div>
+          <div class="diff-item"><span class="diff-item-icon">✗</span> Tiap orang di tim punya versi berbeda</div>
+        </div>
+        <div class="diff-col good">
+          <span class="diff-col-label">PM Intelligence Pack</span>
+          <div class="diff-item"><span class="diff-item-icon">✓</span> Framework sudah dikurasi dari 4 industri — langsung pakai</div>
+          <div class="diff-item"><span class="diff-item-icon">✓</span> Semua keputusan struktur sudah dibuat, kamu tinggal isi konten</div>
+          <div class="diff-item"><span class="diff-item-icon">✓</span> Ada standar jelas: checklist, scoring, panduan keputusan</div>
+          <div class="diff-item"><span class="diff-item-icon">✓</span> Contoh nyata dari Ecommerce, Edtech, Fintech, Kementerian</div>
+          <div class="diff-item"><span class="diff-item-icon">✓</span> Tim bisa align karena pakai sistem yang sama</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KOMPONEN -->
+  <section class="section" id="komponen">
+    <p class="section-label">Isi produk</p>
+    <h2>4 komponen, 1 sistem terpadu</h2>
+    <p class="section-sub">
+      Setiap komponen bisa dipakai terpisah, tapi dirancang untuk bekerja bersama —
+      dari riset ke PRD ke presentasi ke analisis kompetitor.
+    </p>
+    <div class="component-grid">
+
+      <div class="component-card">
+        <div class="component-header">
+          <p class="component-num">KOMPONEN 01</p>
+          <h3>🧩 PRD Generator</h3>
+          <p>Dari brief singkat jadi PRD lengkap yang siap di-review tim engineering, design, dan stakeholder — tanpa ada yang kurang.</p>
+        </div>
+        <div class="component-body">
+          <ul class="feature-list">
+            <li>Layer 1: 7 pertanyaan diagnosis wajib sebelum nulis — eliminasi asumsi dari awal</li>
+            <li>Layer 2: Struktur PRD lengkap 9 section dengan contoh nyata ecommerce</li>
+            <li>User stories dalam format Given/When/Then, bukan placeholder kosong</li>
+            <li>Risk matrix dengan kolom mitigasi yang actionable</li>
+            <li>Layer 3: Self-review checklist 14 poin dengan scoring — PM tahu kapan PRD-nya benar-benar siap</li>
+          </ul>
+          <div class="component-example">
+            <strong>Contoh nyata:</strong> Cart abandonment feature di platform ecommerce — dari problem statement sampai acceptance criteria edge cases.
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <p class="component-num">KOMPONEN 02</p>
+          <h3>🔬 Research Synthesis Engine</h3>
+          <p>Ubah data mentah dari interview, survey, dan analytics menjadi insight yang bisa langsung diputuskan — bukan sekadar ringkasan.</p>
+        </div>
+        <div class="component-body">
+          <ul class="feature-list">
+            <li>Tahap 0: Audit data dengan standar minimum aman per sumber — tahu kapan data cukup</li>
+            <li>Strukturisasi terpisah untuk interview, survey, dan analytics</li>
+            <li>Cross-source Evidence Mapping: temukan insight yang tidak bisa ditemukan dari satu sumber saja</li>
+            <li>Framework identifikasi kontradiksi antar sumber — yang paling sering dilewati PM</li>
+            <li>Impact × Confidence matrix untuk prioritisasi — output berupa keputusan, bukan daftar temuan</li>
+            <li>Research report 1 halaman siap share ke stakeholder</li>
+          </ul>
+          <div class="component-example">
+            <strong>Contoh nyata:</strong> Sintesis riset cart abandonment dari 5 user interview + 180 responden survey + 90 hari analytics data.
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <p class="component-num">KOMPONEN 03</p>
+          <h3>🎯 Stakeholder Deck Builder</h3>
+          <p>Framework untuk membangun presentasi yang menghasilkan keputusan — bukan sekadar update status yang berakhir "oke nanti kita follow up".</p>
+        </div>
+        <div class="component-body">
+          <ul class="feature-list">
+            <li>Bagian A: Pilih tipe deck yang tepat — 4 tipe dengan tujuan, tone, dan output berbeda: Proposal Fitur, Prioritization, Alignment, dan Quarterly Review</li>
+            <li>Bagian B1: Tabel pemetaan peserta — Decision Maker, Influencer, FYI — lengkap dengan kolom "potensi objeksi" dan "posisi awal" tiap stakeholder</li>
+            <li>Bagian B2: Analisis Decision Maker — cara mereka mengambil keputusan (data-driven, intuition-based, consensus-driven, speed-driven) dan apa yang akan membuat mereka langsung setuju atau menolak</li>
+            <li>Bagian B3: Strategi pre-meeting — siapa yang perlu di-align sebelum masuk ruangan, karena keputusan besar jarang dibuat di tempat</li>
+            <li>Bagian C: Slide-by-slide template untuk semua 4 tipe deck — 6–7 slide per tipe, dengan judul, konten, dan contoh nyata di tiap slide</li>
+            <li>Bagian D: Pre-meeting checklist (H-2), facilitation guide saat ada pushback atau diskusi melebar, dan post-meeting follow-up email template (H+24)</li>
+          </ul>
+          <div class="component-example">
+            <strong>Contoh nyata:</strong> Proposal fitur ongkir transparan ke CPO (Decision Maker/Netral), Head of Engineering (Influencer/Skeptis), dan Head of Finance (Influencer) — termasuk tabel objeksi yang disiapkan per stakeholder dan cara framing trade-off di Slide 4.
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <p class="component-num">KOMPONEN 04</p>
+          <h3>🔍 Competitor Analysis Framework</h3>
+          <p>Dari "buka website kompetitor dan screenshot" jadi analisis kompetitor yang menghasilkan gap opportunity yang bisa langsung jadi roadmap input.</p>
+        </div>
+        <div class="component-body">
+          <ul class="feature-list">
+            <li>Framework analisis 5 dimensi: Positioning, Fitur, Pengalaman User, Pricing, Distribusi</li>
+            <li>Feature parity matrix — cepat lihat di mana kita tertinggal dan di mana kita unggul</li>
+            <li>Panduan JTBD analysis: apa yang sebenarnya user "hire" kompetitor untuk melakukan</li>
+            <li>Gap-to-opportunity mapping: dari temuan ke rekomendasi roadmap yang konkret</li>
+            <li>Template competitive intel yang bisa di-update berkala oleh tim</li>
+          </ul>
+          <div class="component-example">
+            <strong>Contoh nyata:</strong> Analisis 3 kompetitor utama di edtech Indonesia — positioning, differentiasi, dan gap opportunity yang actionable.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- INDUSTRI -->
+  <section class="section">
+    <p class="section-label">Sumber pengalaman</p>
+    <h2>Dibuat dari 4 industri nyata.<br/>Bukan studi kasus yang dibuat-buat.</h2>
+    <p class="section-sub">
+      Setiap framework dalam pack ini sudah digunakan, diuji, dan diiterasi di lingkungan kerja yang berbeda —
+      bukan didesain dari teori.
+    </p>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="industry-icon">🏛️</div>
+        <div class="industry-name">Kementerian</div>
+        <div class="industry-note">Produk digital pemerintah, stakeholder kompleks, regulasi ketat</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">💰</div>
+        <div class="industry-name">Microfinance</div>
+        <div class="industry-note">Fintech lending, user low-literacy, constraint infrastruktur</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🛒</div>
+        <div class="industry-name">Ecommerce</div>
+        <div class="industry-note">Growth produk, marketplace, conversion optimization</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">📚</div>
+        <div class="industry-name">Education Tech</div>
+        <div class="industry-note">Platform pembelajaran, multi-stakeholder, impact metrics</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- FOR WHOM -->
+  <section class="section">
+    <p class="section-label">Untuk siapa</p>
+    <h2>Dibuat untuk PM yang sudah tidak punya waktu membangun sistem dari nol</h2>
+    <div class="persona-grid mt-40">
+      <div class="persona-card">
+        <div class="avatar">👤</div>
+        <h3>Product Manager</h3>
+        <p>Yang ingin output kerjanya lebih rapi dan stakeholder-ready tanpa harus reinvent the wheel setiap sprint.</p>
+      </div>
+      <div class="persona-card">
+        <div class="avatar">🚀</div>
+        <h3>Founder / CPO</h3>
+        <p>Yang perlu standar kerja untuk timnya tapi tidak punya waktu membangun framework dari nol.</p>
+      </div>
+      <div class="persona-card">
+        <div class="avatar">🌱</div>
+        <h3>Associate PM</h3>
+        <p>Yang ingin naik level lebih cepat dengan melihat langsung standar kerja PM senior — bukan teori.</p>
+      </div>
+      <div class="persona-card">
+        <div class="avatar">🔄</div>
+        <h3>PM yang pindah industri</h3>
+        <p>Yang berganti industri dan butuh referensi cepat tentang bagaimana cara kerja di konteks yang berbeda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <div class="pricing-section" id="beli">
+    <div class="pricing-inner">
+      <p class="section-label text-center">Pricing</p>
+      <h2 class="text-center" style="font-size: clamp(1.5rem, 3.5vw, 2.2rem); letter-spacing: -.02em;">
+        Satu kali bayar.<br/>Pakai seumur karir.
+      </h2>
+
+      <div class="pricing-card">
+        <div class="pricing-tag">🔥 PM Intelligence Pack</div>
+        <div class="pricing-amount">
+          <span class="price">Rp 350.000</span>
+          <span class="period">Bayar sekali · Akses selamanya</span>
+        </div>
+        <p class="pricing-compare">
+          Lebih murah dari satu jam konsultan produk (<del>Rp 750.000+/jam</del>)
+        </p>
+        <div class="pricing-includes">
+          <h4>Yang kamu dapat</h4>
+          <div class="include-item"><span class="include-check">✓</span> PRD Generator (3 layer, 9 section, contoh nyata)</div>
+          <div class="include-item"><span class="include-check">✓</span> Research Synthesis Engine (interview + survey + analytics)</div>
+          <div class="include-item"><span class="include-check">✓</span> Stakeholder Deck Builder (4 tipe deck)</div>
+          <div class="include-item"><span class="include-check">✓</span> Competitor Analysis Framework (5 dimensi)</div>
+          <div class="include-item"><span class="include-check">✓</span> Notion template siap duplicate</div>
+          <div class="include-item"><span class="include-check">✓</span> Update seumur hidup</div>
+          <div class="include-item"><span class="include-check">✓</span> Akses komunitas Sobat PM (Telegram)</div>
+        </div>
+        <a href="https://trakteer.id" target="_blank" class="btn-buy">Dapatkan PM Intelligence Pack →</a>
+        <p class="btn-buy-sub">Pembayaran aman via Trakteer · Transfer bank, GoPay, OVO, kartu kredit</p>
+      </div>
+
+      <!-- ANCHOR PRICING -->
+      <div class="pricing-anchor">
+        <p style="font-size: 13px; color: var(--ink-muted);">Bandingkan dengan alternatif lain</p>
+        <div class="anchor-grid">
+          <div class="anchor-item">
+            <span class="anchor-price">Rp 750.000+</span>
+            <span class="anchor-desc">1 jam konsultan produk</span>
+          </div>
+          <div class="anchor-item highlight">
+            <span class="anchor-price">Rp 350.000</span>
+            <span class="anchor-desc">PM Intelligence Pack ✦</span>
+          </div>
+          <div class="anchor-item">
+            <span class="anchor-price">40+ jam</span>
+            <span class="anchor-desc">Build framework sendiri</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <p class="section-label">FAQ</p>
+    <h2>Pertanyaan yang sering ditanya</h2>
+    <div class="faq-list mt-40">
+      <div class="faq-item">
+        <h3>Formatnya apa? Bisa langsung dipakai?</h3>
+        <p>Notion template — tinggal duplicate ke workspace kamu dan langsung bisa dipakai. Tidak perlu setup rumit. Kalau belum punya Notion, tersedia versi Markdown yang bisa dibuka di mana saja.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Bedanya apa sama template PRD yang bisa di-Google gratis?</h3>
+        <p>Template gratis adalah struktur kosong. PM Intelligence Pack adalah sistem kerja yang sudah dipikirkan — ada panduan kapan menggunakan apa, contoh nyata dari industri spesifik, standar review, dan framework keputusan. Kamu tidak perlu mikir "ini sudah benar atau belum?"</p>
+      </div>
+      <div class="faq-item">
+        <h3>Saya PM junior, apakah ini terlalu advanced?</h3>
+        <p>Justru sebaliknya. PM junior akan benefit paling besar karena langsung mendapatkan standar kerja yang biasanya butuh 2–3 tahun pengalaman untuk dibangun sendiri. Semua instruksi ditulis untuk langsung bisa dipraktikkan, bukan teori.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Saya sudah langganan Claude / ChatGPT, masih perlu beli ini?</h3>
+        <p>AI membantu kamu mengeksekusi. PM Intelligence Pack memberikan apa yang harus dieksekusi dan standarnya seperti apa. Keduanya komplementer — kombinasinya jauh lebih powerful dari masing-masing saja.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Apakah ada garansi uang kembali?</h3>
+        <p>Jika dalam 7 hari kamu merasa produk ini tidak memberikan nilai seperti yang dijanjikan, tulis ke kami dan kami kembalikan penuh — tanpa pertanyaan tambahan.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Update-nya seberapa sering?</h3>
+        <p>Setiap kali ada komponen baru atau penyempurnaan signifikan, semua pembeli mendapatkan akses otomatis. Tidak ada biaya tambahan, selamanya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="sep"></div>
+  <div class="final-cta">
+    <h2>Mulai kerja lebih terstruktur mulai hari ini</h2>
+    <p>Sistem kerja yang sudah ratusan jam diiterasi — tersedia untukmu dengan harga lebih murah dari satu jam konsultan.</p>
+    <a href="#beli" class="btn-primary" style="display: inline-flex; font-size: 15px;">
+      Dapatkan PM Intelligence Pack — Rp 350.000 →
+    </a>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--ink-muted);">
+      Atau <a href="https://sobatpm.sekolahmu.net/skillclaude/" style="color: var(--ink-soft);">coba dulu skill gratisnya →</a>
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://sobatpm.sekolahmu.net/skillclaude/">⟨S⟩ SkillClaude.id</a> · Dibuat oleh <strong>Sobat Produk</strong>
+    <br/><br/>
+    <a href="https://sobatpm.sekolahmu.net/skillclaude/">Semua Skills</a> ·
+    <a href="https://sobatpm.sekolahmu.net/skillclaude/cara-install">Cara Install</a> ·
+    <a href="https://sobatpm.sekolahmu.net/skillclaude/apa-itu-claude-code">Apa itu Claude Code?</a>
+  </footer>
+
+</body>
+</html>

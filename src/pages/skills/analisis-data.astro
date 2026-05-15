@@ -1,0 +1,112 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+const skillCode = `
+---
+name: analisis-data
+description: Ubah data mentah jadi narasi insight yang actionable.
+  Aktif ketika user paste data angka, tabel, CSV, atau minta interpretasi data,
+  menyebut "analisis data", "baca data ini", "insight dari angka ini", atau "narasi untuk atasan".
+---
+# Analisis Data & Narasi
+## Cara Kerja
+Ketika user memberikan data (angka, tabel, CSV), lakukan:
+1. Baca dan pahami konteks data
+2. Identifikasi 3-5 insight paling signifikan
+3. Buat narasi yang bisa langsung dipresentasikan
+## Format Output
+### 📊 Ringkasan Data
+**Periode:** [periode data]
+**Sumber:** [sumber jika disebutkan]
+**Total data poin:** [jumlah]
+---
+### 🔑 Key Insights
+**1. [Insight terbesar / paling mengejutkan]**
+[1-2 kalimat penjelasan dengan angka spesifik. Mengapa ini penting?]
+**2. [Tren yang perlu diperhatikan]**
+[Penjelasan dengan konteks — naik/turun berapa %, dibanding periode apa?]
+**3. [Anomali atau outlier]**
+[Data yang tidak biasa dan perlu investigasi lebih lanjut]
+---
+### 📈 Narasi untuk Presentasi
+[3-4 paragraf narasi siap presentasi. Tone profesional, mengalir, dan berbasis data. Bisa langsung di-copy ke slide atau laporan.]
+---
+### ⚠️ Catatan & Limitasi
+[Hal yang perlu diperhatikan dalam interpretasi data — sample size, periode, asumsi yang dibuat]
+---
+### 🎯 Rekomendasi (jika diminta)
+[Maksimal 3 aksi konkret berdasarkan data]
+## Panduan Analisis
+- Selalu sebut angka spesifik, bukan hanya "naik" atau "turun"
+- Bandingkan dengan periode sebelumnya atau benchmark jika ada
+- Bedakan korelasi dan kausalitas — jangan overclaim
+- Flag jika data kurang untuk kesimpulan yang kuat
+- Gunakan persentase DAN angka absolut`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<SkillLayout
+  activePath="/skills/analisis-data"
+  skill={{
+    icon: "📊",
+    name: "Analisis Data & Narasi",
+    tagline: "Ubah angka dari Excel/CSV jadi narasi insight yang bisa langsung dipresentasikan.",
+    tags: ["Analis", "Finance"],
+    category: "Semua Profesi",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Key Insights Terstruktur</strong><p>3-5 temuan terpenting dengan angka spesifik — bukan hanya "data naik".</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Narasi Siap Presentasi</strong><p>Paragraf yang mengalir, berbasis data, bisa langsung masuk ke slide atau laporan.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Flag Anomali & Limitasi</strong><p>Data yang tidak biasa dan catatan penting tentang interpretasi yang perlu hati-hati.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Rekomendasi Actionable</strong><p>Maksimal 3 langkah konkret yang bisa diambil berdasarkan data.</p></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Data Analyst</strong><br/>yang perlu buat narasi cepat dari output query atau dashboard</div>
+      <div class="persona-card">👤 <strong>Finance & Accounting</strong><br/>yang laporan angkanya perlu dijelaskan ke stakeholder non-finance</div>
+      <div class="persona-card">👤 <strong>Product Manager</strong><br/>yang mau baca data metrik produk dan buat kesimpulan untuk review</div>
+      <div class="persona-card">👤 <strong>Marketing</strong><br/>yang butuh interpretasi campaign performance untuk laporan ke klien</div>
+    </div>
+  </section>
+  <section class="skill-section" id="install">
+    <h2>Cara Install</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan sebagai <code>skills/analisis-data.md</code></strong></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="skill-md">
+    <div class="code-header"><h2>File SKILL.md</h2><button class="copy-skill-btn" data-target="skill-analisis">📋 Copy SKILL.md</button></div>
+    <div class="code-block"><pre id="skill-analisis">{skillCode}</pre></div>
+  </section>
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block"><div class="example-label input">Input</div><div class="example-content"><p>analisis data ini untuk laporan bulanan ke atasan:<br/>Jan: 1.200 user aktif, Feb: 1.450, Mar: 1.380, Apr: 1.620, Mei: 2.100<br/>Churn rate: Jan 8%, Feb 7%, Mar 9%, Apr 6%, Mei 5%</p></div></div>
+    <div class="example-arrow">↓ Claude menggunakan skill analisis-data</div>
+    <div class="example-block"><div class="example-label output">Output (ringkasan)</div><div class="example-content output-content">
+      <h4>🔑 Key Insights</h4>
+      <p><strong>1. Pertumbuhan user akselerasi di Mei</strong><br/>User aktif melonjak 29,6% dari April (1.620) ke Mei (2.100) — pertumbuhan tertinggi dalam 5 bulan. Total tumbuh 75% sejak Januari.</p>
+      <p><strong>2. Tren churn membaik signifikan</strong><br/>Churn rate turun dari puncak 9% di Maret ke 5% di Mei — level terendah sejak tracking dimulai.</p>
+      <p><strong>3. Anomali di Maret perlu diinvestigasi</strong><br/>User turun dari 1.450 ke 1.380 (-4,8%) sementara churn naik ke 9%. Ada event yang perlu dicek.</p>
+    </div></div>
+  </section>
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/rangkuman-meeting`} class="related-card"><span>📝</span><div><strong>Rangkuman Meeting</strong><p>Dokumentasi hasil data review meeting</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/prd-generator`} class="related-card"><span>🧩</span><div><strong>PRD Generator</strong><p>Gunakan insight data untuk buat PRD</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

@@ -1,0 +1,126 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+const skillCode = `
+---
+name: proposal-klien
+description: Buat proposal bisnis yang meyakinkan untuk klien atau partner.
+  Aktif ketika user menyebut "buat proposal", "tulis proposal", "proposal klien",
+  "proposal kerjasama", atau membutuhkan dokumen penawaran formal.
+---
+# Proposal Klien
+## Format Output
+### 📄 PROPOSAL KERJASAMA
+**[Judul Proposal]**
+Disiapkan oleh: [Nama/Perusahaan]
+Untuk: [Nama Klien/Perusahaan]
+Tanggal: [hari ini]
+---
+### Salam Pembuka
+[Paragraf singkat — apresiasi kesempatan, konteks pertemuan atau diskusi sebelumnya]
+---
+### Pemahaman Kami terhadap Kebutuhan Anda
+[Tunjukkan bahwa kamu paham masalah atau kebutuhan klien — ini yang membedakan proposal generik vs proposal yang dipersonalisasi]
+---
+### Solusi yang Kami Tawarkan
+[Jelaskan apa yang kamu tawarkan — spesifik, bukan abstrak. Fokus pada outcome untuk klien, bukan fitur produk/layanan kamu]
+**Deliverable:**
+- [deliverable 1]
+- [deliverable 2]
+**Timeline:**
+| Fase | Kegiatan | Durasi |
+|------|----------|--------|
+| 1 | [fase awal] | [durasi] |
+| 2 | [fase utama] | [durasi] |
+---
+### Investasi
+| Item | Harga |
+|------|-------|
+| [layanan/produk] | Rp [harga] |
+| **Total** | **Rp [total]** |
+*[Catatan pembayaran — DP, termin, dll]*
+---
+### Mengapa Kami
+[2-3 poin differensiator — bukan basa-basi, tapi bukti konkret: portofolio, metric, pengalaman spesifik]
+---
+### Langkah Selanjutnya
+Jika Bapak/Ibu tertarik untuk melanjutkan, kami mengusulkan:
+1. [next step konkret — meeting, sign agreement, dll]
+2. [timeline mulai]
+---
+*Proposal ini berlaku hingga [tanggal + 14 hari]. Kami terbuka untuk diskusi lebih lanjut.*`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<SkillLayout
+  activePath="/skills/proposal-klien"
+  skill={{
+    icon: "💼",
+    name: "Proposal Klien",
+    tagline: "Buat proposal bisnis yang meyakinkan dalam menit — terstruktur, profesional, personalized.",
+    tags: ["Freelancer", "Agency"],
+    category: "Marketing",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Problem Understanding</strong><p>Tunjukkan ke klien bahwa kamu paham masalah mereka — bukan proposal copy-paste.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Solusi + Deliverable Jelas</strong><p>Apa yang klien dapat, kapan, dan dalam format apa.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Tabel Investasi</strong><p>Rincian harga yang transparan dengan catatan syarat pembayaran.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Next Steps Konkret</strong><p>Klien tahu persis apa yang harus dilakukan setelah baca proposal.</p></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Freelancer</strong><br/>yang sering buang waktu buat proposal dari nol untuk setiap klien baru</div>
+      <div class="persona-card">👤 <strong>Agency / Konsultan</strong><br/>yang butuh proposal cepat tapi tetap terasa personal dan profesional</div>
+      <div class="persona-card">👤 <strong>Business Development</strong><br/>yang pitch ke banyak prospect dan butuh proposal yang bisa dikustomisasi cepat</div>
+      <div class="persona-card">👤 <strong>UMKM</strong><br/>yang mau tampil profesional tapi tidak punya tim sales atau copywriter</div>
+    </div>
+  </section>
+  <section class="skill-section" id="install">
+    <h2>Cara Install</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan sebagai <code>skills/proposal-klien.md</code></strong></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="skill-md">
+    <div class="code-header"><h2>File SKILL.md</h2><button class="copy-skill-btn" data-target="skill-proposal">📋 Copy SKILL.md</button></div>
+    <div class="code-block"><pre id="skill-proposal">{skillCode}</pre></div>
+  </section>
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block"><div class="example-label input">Input</div><div class="example-content"><p>buat proposal untuk jasa pembuatan website company profile. klien: PT Maju Bersama, perusahaan logistik. budget mereka sekitar 25-35 juta. timeline 6 minggu.</p></div></div>
+    <div class="example-arrow">↓ Claude menggunakan skill proposal-klien</div>
+    <div class="example-block"><div class="example-label output">Output (ringkasan)</div><div class="example-content output-content">
+      <h4>📄 PROPOSAL KERJASAMA</h4>
+      <p><strong>Pembuatan Website Company Profile PT Maju Bersama</strong></p>
+      <h4>Pemahaman Kami</h4>
+      <p>Sebagai perusahaan logistik yang berkembang, PT Maju Bersama membutuhkan kehadiran digital yang mencerminkan profesionalisme layanan... Website yang ada saat ini belum mencerminkan skala operasi dan kapabilitas tim.</p>
+      <h4>Investasi</h4>
+      <table><thead><tr><th>Item</th><th>Harga</th></tr></thead><tbody>
+        <tr><td>Design & Development Website</td><td>Rp 22.000.000</td></tr>
+        <tr><td>Copywriting & Konten</td><td>Rp 5.000.000</td></tr>
+        <tr><td>Training & Handover</td><td>Rp 3.000.000</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>Rp 30.000.000</strong></td></tr>
+      </tbody></table>
+    </div></div>
+  </section>
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/email-profesional`} class="related-card"><span>✉️</span><div><strong>Email Profesional</strong><p>Follow-up setelah kirim proposal</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/riset-kompetitor`} class="related-card"><span>🔍</span><div><strong>Riset Kompetitor</strong><p>Perkuat positioning di proposal</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

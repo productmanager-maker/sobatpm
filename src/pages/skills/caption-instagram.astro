@@ -1,0 +1,151 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+
+const skillCode = `
+---
+name: caption-instagram
+description: Buat caption Instagram yang engaging dari brief singkat.
+  Aktif ketika user menyebut "caption Instagram", "caption IG", "caption sosmed",
+  "tulis caption", atau memberikan brief konten untuk Instagram.
+---
+
+# Caption Instagram
+
+## Identifikasi Konteks
+Sebelum menulis, tentukan dari brief:
+- **Tujuan:** awareness, engagement, soft sell, hard sell, edukasi, atau hiburan?
+- **Tone brand:** profesional, friendly, playful, inspiratif, atau otoritatif?
+- **Jika tidak disebutkan:** default ke tone friendly dan tujuan engagement
+
+## Format Output
+
+**Pilihan Caption 1 — [pendek/hook kuat]**
+
+[Hook — 1 kalimat pembuka yang menarik perhatian]
+
+[Body — 2-4 kalimat konten utama]
+
+[CTA — ajakan aksi yang jelas]
+
+.
+.
+.
+#hashtag1 #hashtag2 #hashtag3 [10-15 hashtag relevan]
+
+---
+
+**Pilihan Caption 2 — [panjang/storytelling]**
+
+[Hook alternatif]
+
+[Cerita atau konteks yang lebih dalam]
+
+[CTA]
+
+.
+.
+.
+#hashtag
+
+---
+
+## Panduan Penulisan
+- Selalu mulai dengan hook yang kuat — bukan nama brand atau kalimat basa-basi
+- Hook bisa berupa: pertanyaan, fakta mengejutkan, pernyataan kontroversial, atau relatable moment
+- Gunakan line break untuk readability (Instagram tidak render markdown)
+- Emoji boleh tapi tidak berlebihan (maks 3-4 per caption)
+- Hashtag: 10-15, mix antara besar (#Indonesia) dan niche (#ProductManagerIndonesia)
+- CTA harus spesifik: "Klik link di bio", "Tag teman kamu", "Komen 'INFO' untuk detail"
+- Selalu berikan 2 pilihan caption dengan pendekatan berbeda`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<SkillLayout
+  activePath="/skills/caption-instagram"
+  skill={{
+    icon: "📣",
+    name: "Caption Instagram",
+    tagline: "Dari brief singkat jadi caption engaging — dengan 2 pilihan dan hashtag yang relevan.",
+    tags: ["Marketing", "Content Creator"],
+    category: "Marketing",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <p>Dari brief konten, skill ini memberikan 2 pilihan caption siap posting:</p>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>2 Pilihan Caption</strong><p>Satu pendek dengan hook kuat, satu panjang dengan storytelling — pilih yang paling cocok.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Hook yang Menarik</strong><p>Bukan dimulai dengan nama brand — tapi pertanyaan, fakta, atau pernyataan yang bikin orang berhenti scroll.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>CTA yang Jelas</strong><p>Setiap caption diakhiri dengan ajakan aksi spesifik — bukan hanya "follow ya!"</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>10-15 Hashtag Relevan</strong><p>Mix hashtag besar dan niche, disesuaikan dengan konten dan target audiens.</p></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Social Media Manager</strong><br/>yang butuh caption konsisten untuk puluhan post per bulan</div>
+      <div class="persona-card">👤 <strong>Content Creator</strong><br/>yang sering stuck di caption dan buang waktu terlalu lama</div>
+      <div class="persona-card">👤 <strong>UMKM / Brand</strong><br/>yang belum punya tim konten tapi perlu posting rutin</div>
+      <div class="persona-card">👤 <strong>Marketing In-house</strong><br/>yang handle banyak channel sekaligus dan butuh efisiensi</div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="install">
+    <h2>Cara Install — 3 Langkah</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan instalasi →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat folder <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan SKILL.md sebagai <code>skills/caption-instagram.md</code></strong></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="skill-md">
+    <div class="code-header">
+      <h2>File SKILL.md</h2>
+      <button class="copy-skill-btn" data-target="skill-caption">📋 Copy SKILL.md</button>
+    </div>
+    <div class="code-block"><pre id="skill-caption">{skillCode}</pre></div>
+  </section>
+
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block">
+      <div class="example-label input">Input</div>
+      <div class="example-content"><p>caption untuk post tentang fitur baru aplikasi belajar kami — siswa sekarang bisa belajar offline. tone friendly. target: orang tua siswa SMP.</p></div>
+    </div>
+    <div class="example-arrow">↓ Claude menggunakan skill caption-instagram</div>
+    <div class="example-block">
+      <div class="example-label output">Output</div>
+      <div class="example-content output-content">
+        <p><strong>Pilihan 1 — Hook Singkat</strong></p>
+        <p>Sinyal lemah bukan lagi alasan untuk skip belajar. 📵</p>
+        <p>Sekarang anak kamu bisa akses semua materi di aplikasi kami tanpa koneksi internet sama sekali. Download sekali, belajar kapanpun dan di manapun.</p>
+        <p>Cocok banget buat yang tinggal di area sinyal naik-turun atau lagi dalam perjalanan jauh.</p>
+        <p>Coba fitur offline-nya sekarang — link di bio! 👆</p>
+        <p style="color:#94a3b8;font-size:0.85rem;">#BelajarOffline #AplikasiPendidikan #TipsOrangTua #BelajarDiManaAja...</p>
+        <br/>
+        <p><strong>Pilihan 2 — Storytelling</strong></p>
+        <p>Pernah nggak sih si kecil lagi semangat mau belajar, tapi internet di rumah tiba-tiba mati? 😩</p>
+        <p>Kami dengerin cerita ini berkali-kali dari para orang tua. Makanya kami hadirkan mode belajar offline...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/proposal-klien`} class="related-card"><span>💼</span><div><strong>Proposal Klien</strong><p>Buat proposal untuk brand deal atau kolaborasi</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/desain-brief`} class="related-card"><span>🎨</span><div><strong>Desain Brief ke Feedback</strong><p>Kasih feedback ke desainer konten</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

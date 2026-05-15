@@ -1,0 +1,298 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Cara Install Skill Claude — SkillClaude.id"
+  description="Panduan lengkap install Claude Code dan skill dari SkillClaude.id. Step by step, tidak perlu bisa coding."
+  activePath="/cara-install"
+>
+  <link rel="stylesheet" href={`${BASE}/styles/skill-page.css`} slot="head" />
+
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+    <div class="topbar-right">
+      <a href={`${BASE}/`} class="topbar-link">← Kembali ke semua skills</a>
+    </div>
+  </header>
+
+  <div class="skill-layout">
+    <article class="skill-content">
+      <div class="breadcrumb">
+        <a href={`${BASE}/`}>Skills</a>
+        <span>›</span>
+        <span>Cara Install Skill</span>
+      </div>
+
+      <div class="skill-hero">
+        <div class="skill-hero-icon">📖</div>
+        <div>
+          <h1 class="skill-title">Cara Install Skill Claude</h1>
+          <p class="skill-tagline">Dari nol sampai skill aktif — sekitar 10 menit untuk pertama kali, 30 detik untuk skill berikutnya.</p>
+        </div>
+      </div>
+
+      <section class="skill-section" id="step1">
+        <h2>Step 1 — Install Claude Code</h2>
+        <p>Claude Code adalah aplikasi CLI dari Anthropic. Butuh Node.js 18+ di komputer kamu.</p>
+
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="install-num">A</div>
+            <div>
+              <strong>Install Node.js (jika belum ada)</strong>
+              <p>Download dari <a href="https://nodejs.org" target="_blank">nodejs.org</a> — pilih versi LTS. Setelah install, cek dengan:</p>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>node --version</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Harus muncul angka seperti <code>v20.x.x</code></p>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">B</div>
+            <div>
+              <strong>Install Claude Code via npm</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>npm install -g @anthropic-ai/claude-code</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">C</div>
+            <div>
+              <strong>Cek instalasi berhasil</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>claude --version</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Muncul versi Claude Code → instalasi berhasil ✓</p>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">D</div>
+            <div>
+              <strong>Login ke akun Anthropic</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>claude</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Akan muncul prompt login. Ikuti instruksi di browser untuk auth. Butuh akun Anthropic dengan billing aktif.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section" id="step2">
+        <h2>Step 2 — Siapkan Folder Kerja</h2>
+        <p>Skill bekerja per-folder. Buat folder untuk proyek atau pekerjaan harianmu:</p>
+
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="install-num">1</div>
+            <div>
+              <strong>Buat folder kerja (atau pakai yang sudah ada)</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>mkdir ~/kerja
+cd ~/kerja</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">2</div>
+            <div>
+              <strong>Buat subfolder <code>skills/</code> di dalamnya</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>mkdir skills</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Semua file skill akan disimpan di sini.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="example-block" style="margin-top: 1.5rem;">
+          <div class="example-label input">Struktur Folder yang Direkomendasikan</div>
+          <div class="example-content">
+            <pre style="font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.8; margin: 0;">~/kerja/
+├── skills/
+│   ├── rangkuman-meeting.md
+│   ├── prd-generator.md
+│   └── email-profesional.md
+├── meeting-notes/
+└── documents/</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section" id="step3">
+        <h2>Step 3 — Install Skill</h2>
+        <p>Pilih skill dari SkillClaude.id, lalu ikuti cara di bawah:</p>
+
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="install-num">1</div>
+            <div>
+              <strong>Buka halaman skill yang kamu mau</strong>
+              <p>Contoh: <a href={`${BASE}/skills/rangkuman-meeting`}>Rangkuman Meeting →</a></p>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">2</div>
+            <div>
+              <strong>Klik tombol "📋 Copy SKILL.md"</strong>
+              <p>Atau select-all teks di kotak kode dan copy manual.</p>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">3</div>
+            <div>
+              <strong>Buat file baru di folder <code>skills/</code></strong>
+              <p>Nama file sesuai nama skill, dengan ekstensi <code>.md</code>:</p>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>nano ~/kerja/skills/rangkuman-meeting.md</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Paste konten yang dicopy → <kbd>Ctrl+X</kbd> → <kbd>Y</kbd> → Enter untuk save.</p>
+              <p style="margin-top: 0.25rem; color: #64748b; font-size: 0.875rem;">Atau buka dengan text editor biasa (VS Code, Notepad, TextEdit).</p>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="install-num">4</div>
+            <div>
+              <strong>Jalankan Claude Code dari folder kerja</strong>
+              <div class="code-block" style="margin-top: 0.75rem;">
+                <pre>cd ~/kerja
+claude</pre>
+              </div>
+              <p style="margin-top: 0.5rem; color: #64748b; font-size: 0.875rem;">Claude otomatis mendeteksi folder <code>skills/</code> dan mengaktifkan semua skill di dalamnya.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section" id="test">
+        <h2>Test — Apakah Skill Aktif?</h2>
+        <p>Setelah Claude Code berjalan, coba ketik:</p>
+        <div class="code-block">
+          <pre>rangkum ini: meeting bahas fitur baru, Rafi handle dev, deadline Jumat</pre>
+        </div>
+        <p style="margin-top: 1rem;">Jika skill aktif, Claude akan langsung output format ringkasan yang benar — tanpa kamu perlu explain format-nya.</p>
+
+        <div class="example-block" style="margin-top: 1.5rem;">
+          <div class="example-label output">Tanda Skill Aktif</div>
+          <div class="example-content">
+            <p>Claude menggunakan format output yang konsisten sesuai SKILL.md — ada bagian Ringkasan Eksekutif, Keputusan, Action Items, dll. — tanpa kamu minta format itu secara eksplisit.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section" id="tips">
+        <h2>Tips & Troubleshooting</h2>
+        <div class="output-list">
+          <div class="output-item">
+            <span class="output-check" style="background: #fef3c7; color: #d97706;">!</span>
+            <div>
+              <strong>Skill tidak aktif?</strong>
+              <p>Pastikan kamu menjalankan <code>claude</code> dari folder yang sama dengan subfolder <code>skills/</code>, bukan dari folder lain.</p>
+            </div>
+          </div>
+          <div class="output-item">
+            <span class="output-check" style="background: #fef3c7; color: #d97706;">!</span>
+            <div>
+              <strong>Bisa install banyak skill sekaligus</strong>
+              <p>Tidak ada batasan jumlah skill di folder <code>skills/</code>. Semua akan aktif bersamaan saat Claude Code berjalan.</p>
+            </div>
+          </div>
+          <div class="output-item">
+            <span class="output-check" style="background: #fef3c7; color: #d97706;">!</span>
+            <div>
+              <strong>Update skill</strong>
+              <p>Kalau ada update SKILL.md di SkillClaude.id, cukup copy konten baru dan timpa file lama. Langsung aktif di sesi berikutnya.</p>
+            </div>
+          </div>
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div>
+              <strong>Skill berlaku di semua OS</strong>
+              <p>Windows, macOS, Linux — Claude Code dan skill berjalan sama di semua platform.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section" id="mulai">
+        <h2>Skill Apa yang Mau Dicoba Pertama?</h2>
+        <div class="related-skills">
+          <a href={`${BASE}/skills/rangkuman-meeting`} class="related-card">
+            <span>📝</span>
+            <div><strong>Rangkuman Meeting</strong><p>Paling populer — langsung terasa bedanya</p></div>
+            <span class="skill-arrow">→</span>
+          </a>
+          <a href={`${BASE}/skills/email-profesional`} class="related-card">
+            <span>✉️</span>
+            <div><strong>Email Profesional</strong><p>Cocok untuk semua profesi</p></div>
+            <span class="skill-arrow">→</span>
+          </a>
+          <a href={`${BASE}/skills/prd-generator`} class="related-card">
+            <span>🧩</span>
+            <div><strong>PRD Generator</strong><p>Untuk Product Manager</p></div>
+            <span class="skill-arrow">→</span>
+          </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="toc-sidebar">
+      <div class="toc-card">
+        <div class="toc-title">Di Halaman Ini</div>
+        <nav class="toc-nav">
+          <a href="#step1" class="toc-item">Step 1 — Install Claude Code</a>
+          <a href="#step2" class="toc-item">Step 2 — Folder Kerja</a>
+          <a href="#step3" class="toc-item">Step 3 — Install Skill</a>
+          <a href="#test" class="toc-item">Test Skill Aktif</a>
+          <a href="#tips" class="toc-item">Tips & Troubleshooting</a>
+          <a href="#mulai" class="toc-item">Skill Pertama</a>
+        </nav>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">⚡</div>
+        <strong>Belum paham Claude Code?</strong>
+        <p>Baca dulu penjelasan tentang apa itu Claude Code dan kenapa berbeda dari chatbot biasa.</p>
+        <a href={`${BASE}/apa-itu-claude-code`} class="btn-cta">Apa itu Claude Code? →</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span class="logo-mark small">⟨S⟩</span>
+          <span class="logo-text small">SkillClaude<span class="logo-tld">.id</span></span>
+        </div>
+        <p>Skill Claude terbaik untuk profesional Indonesia.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-heading">Panduan</div>
+          <a href={`${BASE}/cara-install`}>Cara Install Skill</a>
+          <a href={`${BASE}/apa-itu-claude-code`}>Apa itu Claude Code?</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Skills Populer</div>
+          <a href={`${BASE}/skills/rangkuman-meeting`}>Rangkuman Meeting</a>
+          <a href={`${BASE}/skills/prd-generator`}>PRD Generator</a>
+          <a href={`${BASE}/skills/email-profesional`}>Email Profesional</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillClaude.id · Dibuat oleh <strong>Sobat Produk</strong></span>
+      <span class="footer-note">Skills gratis, selamanya.</span>
+    </div>
+  </footer>
+</BaseLayout>

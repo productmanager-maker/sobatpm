@@ -1,0 +1,144 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+
+const skillCode = `
+---
+name: email-profesional
+description: Tulis email kerja yang tepat sasaran dan profesional.
+  Aktif ketika user menyebut "tulis email", "buat email", "draft email",
+  "balas email", "follow-up email", atau meminta template email untuk situasi tertentu.
+---
+
+# Email Profesional
+
+## Identifikasi Tipe Email
+Sebelum menulis, tentukan tipe email dari konteks user:
+- **Follow-up** — mengingatkan atau menindaklanjuti sesuatu
+- **Permintaan** — meminta sesuatu dari pihak lain
+- **Negosiasi** — tawar-menawar syarat atau kondisi
+- **Eskalasi** — meningkatkan urgensi atau level penerima
+- **Penolakan** — menolak dengan sopan
+- **Apresiasi** — ucapan terima kasih formal
+- **Informasi** — menyampaikan update atau pengumuman
+
+## Format Output
+
+**Subject:** [subject yang jelas, spesifik, dan actionable]
+
+---
+
+[Salam pembuka sesuai konteks — formal/semi-formal]
+
+[Paragraf 1: konteks atau referensi sebelumnya — 1-2 kalimat]
+
+[Paragraf 2: isi utama — apa yang diminta/disampaikan, jelas dan langsung]
+
+[Paragraf 3: next step atau apa yang diharapkan dari penerima — 1-2 kalimat]
+
+[Closing yang sesuai tone]
+
+[Nama & posisi placeholder]
+
+---
+
+## Panduan Tone
+- **Formal:** untuk atasan, klien baru, pejabat — gunakan "Bapak/Ibu", bahasa Indonesia baku
+- **Semi-formal:** untuk kolega, vendor lama, partner — lebih natural tapi tetap profesional  
+- **Urgent:** tambahkan "[URGENT]" atau "[ACTION NEEDED]" di subject, paragraf singkat
+- Tidak gunakan bahasa informal atau singkatan tidak resmi (gk, yg, dll)
+- Tidak bertele-tele — maksimal 3 paragraf untuk email biasa
+
+## Hal yang Selalu Disertakan
+- Subject yang spesifik (bukan hanya "Follow-up" atau "Halo")
+- Clear call-to-action di akhir
+- Deadline jika ada
+- Nama pengirim (placeholder [Nama Kamu])`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<SkillLayout
+  activePath="/skills/email-profesional"
+  skill={{
+    icon: "✉️",
+    name: "Email Profesional",
+    tagline: "Tulis email kerja yang tepat sasaran — follow-up, negosiasi, eskalasi, permintaan.",
+    tags: ["Semua Profesi"],
+    category: "Semua Profesi",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <p>Dari brief situasi, skill ini menghasilkan email siap kirim — bukan template kosong:</p>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Subject yang Tepat</strong><p>Bukan "Follow-up" atau "Halo" — tapi subject spesifik yang langsung jelas tujuannya.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Tone yang Sesuai Konteks</strong><p>Formal untuk atasan/klien baru, semi-formal untuk kolega, urgent untuk deadline mepet.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Struktur 3 Paragraf</strong><p>Konteks → isi utama → next step. Tidak bertele-tele, langsung ke poin.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Clear Call-to-Action</strong><p>Penerima tahu persis apa yang harus mereka lakukan setelah baca email.</p></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Semua Profesional</strong><br/>yang kirim lebih dari 10 email sehari dan ingin kualitas konsisten</div>
+      <div class="persona-card">👤 <strong>Sales & BD</strong><br/>yang butuh email outreach, follow-up, dan negosiasi yang efektif</div>
+      <div class="persona-card">👤 <strong>HR & Rekruter</strong><br/>yang sering kirim email ke kandidat, offer letter, atau rejection</div>
+      <div class="persona-card">👤 <strong>PM & Manajer</strong><br/>yang perlu eskalasi, update stakeholder, atau koordinasi lintas tim</div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="install">
+    <h2>Cara Install — 3 Langkah</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan instalasi →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat folder <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan SKILL.md sebagai <code>skills/email-profesional.md</code></strong></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="skill-md">
+    <div class="code-header">
+      <h2>File SKILL.md</h2>
+      <button class="copy-skill-btn" data-target="skill-email">📋 Copy SKILL.md</button>
+    </div>
+    <div class="code-block"><pre id="skill-email">{skillCode}</pre></div>
+  </section>
+
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block">
+      <div class="example-label input">Input</div>
+      <div class="example-content"><p>tulis email follow-up ke vendor yang belum kirim proposal dari 3 hari lalu. formal. deadline pengiriman harusnya kemarin.</p></div>
+    </div>
+    <div class="example-arrow">↓ Claude menggunakan skill email-profesional</div>
+    <div class="example-block">
+      <div class="example-label output">Output</div>
+      <div class="example-content output-content">
+        <p><strong>Subject:</strong> Follow-up: Proposal [Nama Proyek] — Melewati Deadline 11 Mei 2026</p>
+        <p>Yth. Bapak/Ibu [Nama],</p>
+        <p>Saya ingin menindaklanjuti permintaan proposal yang kami sampaikan sebelumnya, dengan deadline pengiriman yang telah disepakati pada 11 Mei 2026.</p>
+        <p>Hingga saat ini kami belum menerima proposal dari pihak Bapak/Ibu. Mohon konfirmasi apakah ada kendala yang perlu kami ketahui, atau jika membutuhkan informasi tambahan dari kami untuk melengkapi dokumen tersebut.</p>
+        <p>Kami mengharapkan proposal dapat dikirimkan selambatnya <strong>hari ini, 12 Mei 2026 pukul 17.00 WIB</strong>, mengingat jadwal evaluasi kami sudah berjalan.</p>
+        <p>Terima kasih atas perhatian dan kerjasamanya.</p>
+        <p>Hormat kami,<br/>[Nama Kamu]<br/>[Posisi]</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/rangkuman-meeting`} class="related-card"><span>📝</span><div><strong>Rangkuman Meeting</strong><p>Kirim recap meeting via email</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/proposal-klien`} class="related-card"><span>💼</span><div><strong>Proposal Klien</strong><p>Buat proposal yang dikirim via email</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

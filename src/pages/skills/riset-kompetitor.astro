@@ -1,0 +1,152 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+
+const skillCode = `
+---
+name: riset-kompetitor
+description: Analisis kompetitor terstruktur untuk product strategy.
+  Aktif ketika user menyebut "riset kompetitor", "analisis kompetitor",
+  "competitive analysis", "benchmark kompetitor", atau "cek kompetitor".
+---
+
+# Riset Kompetitor
+
+## Format Output
+
+### 🗺️ Overview Kompetitor
+**Produk yang Dianalisis:** [nama produk kita]
+**Tanggal Riset:** [hari ini]
+**Kompetitor:** [daftar nama]
+
+---
+
+### 📊 Comparison Matrix
+| Dimensi | [Produk Kita] | [Kompetitor A] | [Kompetitor B] |
+|---------|--------------|----------------|----------------|
+| Target User | | | |
+| Pricing | | | |
+| Core Features | | | |
+| UX/UI | | | |
+| Kekuatan | | | |
+| Kelemahan | | | |
+
+---
+
+### 🔍 Deep-Dive per Kompetitor
+
+**[Nama Kompetitor]**
+- **Positioning:** [bagaimana mereka memposisikan diri]
+- **Target User:** [siapa yang mereka sasar]
+- **Pricing:** [model & harga]
+- **Fitur Unggulan:** [3-5 fitur terkuat]
+- **Kelemahan:** [pain point yang sering dikeluhkan user]
+- **Review User:** [sentimen dari App Store/G2/Trustpilot jika ada]
+
+---
+
+### 💡 Gap & Opportunity
+[Apa yang belum dilakukan kompetitor? Di mana kita bisa menang?]
+
+**Blue Ocean (belum ada yang lakukan):**
+- [peluang 1]
+
+**Better Execution (sudah ada tapi bisa lebih baik):**
+- [peluang 2]
+
+---
+
+### 🎯 Rekomendasi Positioning
+[Berdasarkan analisis, bagaimana sebaiknya kita positioning terhadap kompetitor?]
+
+---
+*Riset ini berdasarkan informasi publik. Verifikasi data sensitif sebelum digunakan untuk keputusan strategis.*`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<SkillLayout
+  activePath="/skills/riset-kompetitor"
+  skill={{
+    icon: "🔍",
+    name: "Riset Kompetitor",
+    tagline: "Analisis kompetitor terstruktur — positioning, fitur, pricing, dan gap opportunity.",
+    tags: ["Product Manager", "Founder"],
+    category: "Product Manager",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <p>Dari nama produk dan kompetitor, skill ini menghasilkan analisis kompetitor yang actionable:</p>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Comparison Matrix</strong><p>Perbandingan side-by-side di dimensi yang penting: pricing, fitur, UX, target user.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Deep-Dive per Kompetitor</strong><p>Positioning, kekuatan, kelemahan, dan sentimen user dari review publik.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Gap & Opportunity</strong><p>Blue ocean (belum dilakukan siapapun) dan better execution (bisa lebih baik dari kompetitor).</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Rekomendasi Positioning</strong><p>Saran konkret bagaimana membedakan diri dari kompetitor.</p></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Product Manager</strong><br/>yang perlu data kompetitor sebelum planning atau pitching fitur baru</div>
+      <div class="persona-card">👤 <strong>Founder / CEO</strong><br/>yang mau tahu posisi produknya di pasar sebelum investor meeting</div>
+      <div class="persona-card">👤 <strong>Product Marketing</strong><br/>yang butuh battle card atau comparison page untuk tim sales</div>
+      <div class="persona-card">👤 <strong>Strategy Team</strong><br/>yang melakukan competitive intelligence secara rutin</div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="install">
+    <h2>Cara Install — 3 Langkah</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan instalasi →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat folder <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan SKILL.md sebagai <code>skills/riset-kompetitor.md</code></strong></div></div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="skill-md">
+    <div class="code-header">
+      <h2>File SKILL.md</h2>
+      <button class="copy-skill-btn" data-target="skill-riset">📋 Copy SKILL.md</button>
+    </div>
+    <div class="code-block"><pre id="skill-riset">{skillCode}</pre></div>
+  </section>
+
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block">
+      <div class="example-label input">Input</div>
+      <div class="example-content"><p>analisis kompetitor untuk platform LMS kami (Sekolah.mu) vs Ruangguru, Zenius, dan Quipper</p></div>
+    </div>
+    <div class="example-arrow">↓ Claude menggunakan skill riset-kompetitor</div>
+    <div class="example-block">
+      <div class="example-label output">Output (ringkasan)</div>
+      <div class="example-content output-content">
+        <h4>📊 Comparison Matrix</h4>
+        <table><thead><tr><th>Dimensi</th><th>Sekolah.mu</th><th>Ruangguru</th><th>Zenius</th></tr></thead><tbody>
+          <tr><td>Target</td><td>Sekolah K-12</td><td>Siswa individual</td><td>Belajar mandiri</td></tr>
+          <tr><td>Pricing</td><td>B2B (sekolah)</td><td>B2C subscription</td><td>B2C subscription</td></tr>
+          <tr><td>Kekuatan</td><td>Integrasi sekolah</td><td>Brand awareness</td><td>Konten mendalam</td></tr>
+        </tbody></table>
+        <h4>💡 Gap & Opportunity</h4>
+        <p><strong>Blue Ocean:</strong> Tidak ada yang fokus pada keterlibatan orang tua secara real-time dalam proses belajar...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/prd-generator`} class="related-card"><span>🧩</span><div><strong>PRD Generator</strong><p>Lanjut dari riset kompetitor ke PRD fitur</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/proposal-klien`} class="related-card"><span>💼</span><div><strong>Proposal Klien</strong><p>Gunakan data kompetitor di proposal bisnis</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

@@ -1,0 +1,199 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Apa itu Claude Code? — SkillClaude.id"
+  description="Penjelasan lengkap tentang Claude Code: apa itu, cara kerjanya, dan kenapa lebih powerful dari chatbot biasa."
+  activePath="/apa-itu-claude-code"
+>
+  <link rel="stylesheet" href={`${BASE}/styles/skill-page.css`} slot="head" />
+
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+    <div class="topbar-right">
+      <a href={`${BASE}/`} class="topbar-link">← Kembali ke semua skills</a>
+    </div>
+  </header>
+
+  <div class="skill-layout">
+    <article class="skill-content">
+      <div class="breadcrumb">
+        <a href={`${BASE}/`}>Skills</a>
+        <span>›</span>
+        <span>Apa itu Claude Code?</span>
+      </div>
+
+      <div class="skill-hero">
+        <div class="skill-hero-icon">⚡</div>
+        <div>
+          <h1 class="skill-title">Apa itu Claude Code?</h1>
+          <p class="skill-tagline">AI assistant yang bekerja langsung di terminal kamu — bukan di browser, bukan tab yang terbuka terus.</p>
+        </div>
+      </div>
+
+      <section class="skill-section">
+        <h2>Claude Code vs Claude di Browser</h2>
+        <p>Claude yang kamu pakai di claude.ai adalah versi web — bagus untuk chat, tapi terbatas. Claude Code adalah versi CLI (Command Line Interface) yang berjalan langsung di terminal dan bisa:</p>
+        <div class="output-list">
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div><strong>Baca dan tulis file</strong><p>Langsung akses dokumen, kode, spreadsheet di komputer kamu tanpa copy-paste.</p></div>
+          </div>
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div><strong>Jalankan perintah terminal</strong><p>Eksekusi script, install package, compile kode — semua bisa diotomasi.</p></div>
+          </div>
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div><strong>Pakai skill permanen</strong><p>Instruksi khusus yang selalu aktif — tidak perlu explain dari awal setiap sesi.</p></div>
+          </div>
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div><strong>Konteks panjang</strong><p>Bisa baca seluruh folder proyek sekaligus, bukan hanya file yang kamu paste.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section">
+        <h2>Apa itu "Skill"?</h2>
+        <p>Skill adalah file instruksi (<code>skill.md</code>) yang kamu simpan di folder proyekmu. Setiap kali Claude Code berjalan di folder itu, instruksi tersebut otomatis terbaca — jadi Claude langsung "tahu" cara kerjamu tanpa perlu diajarkan ulang.</p>
+
+        <div class="example-block" style="margin-top: 1.5rem;">
+          <div class="example-label input">Tanpa Skill</div>
+          <div class="example-content">
+            <p><em>Kamu:</em> "Tolong rangkum meeting tadi. Format output-nya pakai ringkasan eksekutif, keputusan, action items dengan PIC dan deadline, dan pertanyaan yang belum terjawab. Bahasa Indonesia formal. Kalau PIC tidak disebut tulis 'Perlu ditentukan'..."</p>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.5rem;">→ Harus diulang setiap sesi baru</p>
+          </div>
+        </div>
+
+        <div class="example-arrow">vs.</div>
+
+        <div class="example-block">
+          <div class="example-label output">Dengan Skill rangkuman-meeting</div>
+          <div class="example-content">
+            <p><em>Kamu:</em> "rangkum meeting tadi"</p>
+            <p><em>Claude:</em> ✓ Langsung output format yang benar</p>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.5rem;">→ Selalu konsisten, tidak perlu instruksi ulang</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section">
+        <h2>Siapa yang Cocok Pakai Claude Code?</h2>
+        <div class="persona-grid">
+          <div class="persona-card">👩‍💻 <strong>Product Manager</strong><br/>yang sering buat PRD, recap meeting, riset kompetitor</div>
+          <div class="persona-card">📣 <strong>Marketing</strong><br/>yang butuh caption, proposal, konten dalam jumlah banyak</div>
+          <div class="persona-card">👥 <strong>HR & Recruiter</strong><br/>yang sering buat JD, email kandidat, atau laporan</div>
+          <div class="persona-card">📚 <strong>Guru & Trainer</strong><br/>yang butuh lesson plan, materi, atau penilaian terstruktur</div>
+        </div>
+      </section>
+
+      <section class="skill-section">
+        <h2>Butuh Bisa Coding?</h2>
+        <p><strong>Tidak.</strong> Claude Code dirancang untuk semua orang yang nyaman pakai terminal. Kalau kamu bisa ketik perintah seperti <code>cd Documents</code> atau <code>ls</code>, kamu sudah cukup siap.</p>
+        <p style="margin-top: 1rem;">Untuk pakai skill dari SkillClaude.id, kamu hanya perlu:</p>
+        <ol style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 2;">
+          <li>Install Claude Code (panduan di bawah)</li>
+          <li>Copy file skill ke folder kerjamu</li>
+          <li>Ketik instruksi natural ke Claude</li>
+        </ol>
+      </section>
+
+      <section class="skill-section">
+        <h2>Harganya Berapa?</h2>
+        <div class="output-list">
+          <div class="output-item">
+            <span class="output-check" style="background: #e0f2fe; color: #0284c7;">$</span>
+            <div>
+              <strong>Claude Code — berbayar</strong>
+              <p>Anthropic mengenakan biaya berdasarkan penggunaan (per token). Untuk penggunaan harian normal (meeting summary, PRD, email), biaya bulanan biasanya <strong>$5–20</strong>. Ada juga opsi Claude Max ($100/bulan) untuk usage tidak terbatas.</p>
+            </div>
+          </div>
+          <div class="output-item">
+            <span class="output-check">✓</span>
+            <div>
+              <strong>Skills dari SkillClaude.id — gratis selamanya</strong>
+              <p>File SKILL.md yang kami sediakan 100% gratis. Kamu hanya bayar ke Anthropic untuk penggunaan Claude-nya.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill-section">
+        <h2>Siap Mulai?</h2>
+        <div class="steps-row" style="margin-top: 1rem;">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>Install Claude Code</h3>
+            <p>Ikuti panduan instalasi lengkap di halaman berikutnya.</p>
+            <a href={`${BASE}/cara-install`} class="link-arrow" style="margin-top: 1rem; display: block;">Cara Install →</a>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>Pilih Skill</h3>
+            <p>Pilih skill yang sesuai kebutuhanmu, copy file SKILL.md-nya.</p>
+            <a href={`${BASE}/`} class="link-arrow" style="margin-top: 1rem; display: block;">Browse Skills →</a>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>Mulai Kerja</h3>
+            <p>Claude langsung paham standar kerjamu. Tidak perlu instruksi ulang.</p>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <aside class="toc-sidebar">
+      <div class="toc-card">
+        <div class="toc-title">Di Halaman Ini</div>
+        <nav class="toc-nav">
+          <a href="#" class="toc-item">Claude Code vs Browser</a>
+          <a href="#" class="toc-item">Apa itu Skill?</a>
+          <a href="#" class="toc-item">Siapa yang Cocok</a>
+          <a href="#" class="toc-item">Perlu Coding?</a>
+          <a href="#" class="toc-item">Harga</a>
+          <a href="#" class="toc-item">Mulai Sekarang</a>
+        </nav>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">📖</div>
+        <strong>Langkah berikutnya</strong>
+        <p>Setelah paham konsepnya, ikuti panduan instalasi Claude Code step by step.</p>
+        <a href={`${BASE}/cara-install`} class="btn-cta">Cara Install Claude Code →</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span class="logo-mark small">⟨S⟩</span>
+          <span class="logo-text small">SkillClaude<span class="logo-tld">.id</span></span>
+        </div>
+        <p>Skill Claude terbaik untuk profesional Indonesia.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-heading">Panduan</div>
+          <a href={`${BASE}/cara-install`}>Cara Install Skill</a>
+          <a href={`${BASE}/apa-itu-claude-code`}>Apa itu Claude Code?</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Skills Populer</div>
+          <a href={`${BASE}/skills/rangkuman-meeting`}>Rangkuman Meeting</a>
+          <a href={`${BASE}/skills/prd-generator`}>PRD Generator</a>
+          <a href={`${BASE}/skills/email-profesional`}>Email Profesional</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillClaude.id · Dibuat oleh <strong>Sobat Produk</strong></span>
+      <span class="footer-note">Skills gratis, selamanya.</span>
+    </div>
+  </footer>
+</BaseLayout>

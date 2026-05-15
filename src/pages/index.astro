@@ -1,17 +1,174 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+const skills = [
+  { href: "/skills/prd-generator", icon: "🧩", name: "PRD Generator", desc: "Buat Product Requirements Document lengkap dari brief singkat. Dengan konteks engineering, UX, dan bisnis.", tags: ["Product Manager", "Founder"], cat: "pm", featured: false },
+  { href: "/skills/riset-kompetitor", icon: "🔍", name: "Riset Kompetitor", desc: "Framework analisis kompetitor terstruktur. Positioning, fitur, pricing, dan gap opportunity.", tags: ["Product Manager", "Founder"], cat: "pm", featured: false },
+  { href: "/skills/rangkuman-meeting", icon: "📝", name: "Rangkuman Meeting", desc: "Ubah catatan meeting berantakan jadi ringkasan profesional: summary, keputusan, dan action items.", tags: ["Semua Profesi"], cat: "pm", featured: true },
+  { href: "/skills/caption-instagram", icon: "📣", name: "Caption Instagram", desc: "Dari brief singkat jadi caption Instagram yang engaging, lengkap dengan hashtag dan CTA.", tags: ["Marketing", "Content Creator"], cat: "marketing", featured: false },
+  { href: "/skills/proposal-klien", icon: "💼", name: "Proposal Klien", desc: "Buat proposal bisnis yang meyakinkan dalam menit. Struktur profesional, tone yang tepat.", tags: ["Freelancer", "Agency"], cat: "marketing", featured: false },
+  { href: "/skills/email-profesional", icon: "✉️", name: "Email Profesional", desc: "Tulis email kerja yang tepat sasaran: follow-up, negosiasi, eskalasi, atau permintaan — sesuai konteks.", tags: ["Semua Profesi"], cat: "semua", featured: false },
+  { href: "/skills/analisis-data", icon: "📊", name: "Analisis Data & Narasi", desc: "Ubah angka dari Excel/CSV jadi narasi insight yang bisa langsung dipresentasikan ke atasan.", tags: ["Analis", "Finance"], cat: "semua", featured: false },
+  { href: "/skills/job-description", icon: "👥", name: "Job Description Writer", desc: "Buat JD yang menarik kandidat terbaik. Jelas, tidak berlebihan, dan sesuai level posisi.", tags: ["HR", "Rekruter"], cat: "semua", featured: false },
+  { href: "/skills/lesson-plan", icon: "📚", name: "Lesson Plan Generator", desc: "Buat rencana pembelajaran yang terstruktur, lengkap dengan tujuan, aktivitas, dan penilaian.", tags: ["Guru", "Trainer"], cat: "semua", featured: false },
+  { href: "/skills/desain-brief", icon: "🎨", name: "Desain Brief ke Feedback", desc: "Ubah brief desain jadi feedback terstruktur yang bisa langsung dikirim ke desainer atau klien.", tags: ["Desainer", "Product Manager"], cat: "semua", featured: false },
+];
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="SkillClaude.id — Skills Claude Bahasa Indonesia" activePath="/">
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-right">
+      <span class="stat-pill">✦ {skills.length} Skills</span>
+      <span class="stat-pill">🇮🇩 Bahasa Indonesia</span>
+      <span class="stat-pill free">Gratis Selamanya</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="badge-new">BARU</span>
+      Skill Claude Code pertama dalam Bahasa Indonesia
+    </div>
+    <h1 class="hero-title">
+      Kerja lebih cepat<br/>
+      dengan <span class="highlight">Claude Skills</span><br/>
+      <span class="hero-sub">siap pakai, gratis, untuk profesional Indonesia.</span>
+    </h1>
+    <p class="hero-desc">
+      Bukan prompt biasa. Skills adalah instruksi permanen yang membuat Claude
+      bekerja sesuai standar kerjamu — setiap saat, tanpa perlu explain dari awal.
+    </p>
+    <div class="hero-actions">
+      <a href="#skills-grid" class="btn-primary">Lihat Semua Skills ↓</a>
+      <a href={`${BASE}/apa-itu-claude-code`} class="btn-ghost">Apa itu Claude Code? →</a>
+    </div>
+    <div class="hero-demo">
+      <div class="demo-terminal">
+        <div class="terminal-bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="terminal-title">Claude Code</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">claude</span></div>
+          <div class="t-line t-delay-1"><span class="t-user">You:</span> rangkum meeting tadi</div>
+          <div class="t-line t-delay-2"><span class="t-claude">Claude:</span> <span class="t-thinking">Menggunakan skill rangkuman-meeting...</span></div>
+          <div class="t-line t-delay-3 t-output">
+            <span class="t-result">✓ Ringkasan Eksekutif<br/>
+            &nbsp;&nbsp;✓ 3 Action Items ditemukan<br/>
+            &nbsp;&nbsp;✓ PIC & deadline diidentifikasi</span>
+          </div>
+          <div class="t-line t-delay-4"><span class="t-cursor">▊</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <h2 class="section-title">Cara Kerjanya</h2>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Pilih Skill</h3>
+        <p>Browse skill sesuai pekerjaanmu. PM, marketing, HR, guru — semua ada.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Copy SKILL.md</h3>
+        <p>Salin file instruksi ke folder proyekmu di Claude Code. Satu kali setup.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Langsung Pakai</h3>
+        <p>Claude otomatis mengenali skill dan bekerja sesuai standarmu.</p>
+      </div>
+    </div>
+    <div class="how-cta">
+      <a href={`${BASE}/cara-install`} class="link-arrow">Panduan lengkap cara install →</a>
+    </div>
+  </section>
+
+  <section class="skills-section" id="skills-grid">
+    <div class="skills-header">
+      <h2 class="section-title">Semua Skills</h2>
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="pm">Product Manager</button>
+        <button class="filter-btn" data-filter="marketing">Marketing</button>
+        <button class="filter-btn" data-filter="semua">Semua Profesi</button>
+      </div>
+    </div>
+
+    <div class="skills-grid" id="skillsGrid">
+      {skills.map(skill => (
+        <a href={`${BASE}${skill.href}`} class={`skill-card ${skill.featured ? "featured" : ""}`} data-cat={skill.cat}>
+          {skill.featured && <div class="skill-badge">Populer</div>}
+          <div class="skill-icon">{skill.icon}</div>
+          <div class="skill-info">
+            <div class="skill-name">{skill.name}</div>
+            <div class="skill-desc">{skill.desc}</div>
+            <div class="skill-meta">
+              {skill.tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </div>
+          <div class="skill-arrow">→</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="promo-section">
+    <div class="promo-card">
+      <div class="promo-left">
+        <div class="promo-eyebrow">Dari pembuat SkillClaude.id</div>
+        <h3 class="promo-title">PM Intelligence Pack</h3>
+        <p class="promo-desc">Sistem kerja lengkap untuk Product Manager — PRD Generator, Research Synthesis, Stakeholder Deck, Competitor Framework. Dibuat dari pengalaman nyata di 4 industri.</p>
+        <a href={`${BASE}/pm-intelligence-pack`} class="btn-promo">Lihat PM Intelligence Pack →</a>
+      </div>
+      <div class="promo-right">
+        <div class="promo-price">
+          <div class="price-label">Mulai dari</div>
+          <div class="price-value">Rp 350.000</div>
+          <div class="price-note">vs. satu jam konsultan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark small">⟨S⟩</span>
+        <span class="logo-text small">SkillClaude<span class="logo-tld">.id</span></span>
+        <p>Skill Claude terbaik untuk profesional Indonesia.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-heading">Skills</div>
+          <a href={`${BASE}/skills/prd-generator`}>PRD Generator</a>
+          <a href={`${BASE}/skills/rangkuman-meeting`}>Rangkuman Meeting</a>
+          <a href={`${BASE}/skills/email-profesional`}>Email Profesional</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Panduan</div>
+          <a href={`${BASE}/cara-install`}>Cara Install Skill</a>
+          <a href={`${BASE}/apa-itu-claude-code`}>Apa itu Claude Code?</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Produk</div>
+          <a href={`${BASE}/pm-intelligence-pack`}>PM Intelligence Pack</a>
+          <a href="#">Sobat Produk</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillClaude.id · Dibuat oleh <strong>Sobat Produk</strong></span>
+      <span class="footer-note">Skills gratis, selamanya.</span>
+    </div>
+  </footer>
+</BaseLayout>

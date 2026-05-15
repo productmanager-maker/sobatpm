@@ -1,0 +1,206 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+
+const skillCode = `
+---
+name: rangkuman-meeting
+description: Buat ringkasan meeting profesional dari catatan atau transkrip kasar.
+  Gunakan skill ini ketika user menyebut "rangkum meeting", "notulen", "recap rapat",
+  atau mengupload transkrip meeting.
+---
+
+# Rangkuman Meeting Otomatis
+
+## Cara Kerja
+Ketika user memberikan catatan atau transkrip meeting, buat ringkasan
+dengan format berikut secara konsisten.
+
+## Format Output
+
+### 📋 Ringkasan Eksekutif
+[3-5 kalimat: konteks meeting, peserta utama, topik, dan kesimpulan utama]
+
+### ✅ Keputusan yang Diambil
+- [Keputusan 1]
+- [Keputusan 2]
+[Jika tidak ada keputusan eksplisit, tulis: "Tidak ada keputusan final yang tercatat."]
+
+### 📌 Action Items
+| No | Task | PIC | Deadline |
+|----|------|-----|----------|
+| 1  | ...  | ... | ...      |
+
+### ❓ Pertanyaan yang Belum Terjawab
+- [Jika ada — hal yang muncul tapi belum ada jawaban/keputusan]
+[Jika tidak ada, hapus bagian ini]
+
+## Panduan Tone & Bahasa
+- Gunakan Bahasa Indonesia formal tapi tidak kaku
+- Pertahankan nama orang seperti aslinya
+- Jika deadline tidak disebutkan, tulis "Perlu dikonfirmasi"
+- Jika PIC tidak disebutkan, tulis "Perlu ditentukan"
+- Jangan menambah informasi yang tidak ada di catatan asli`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<SkillLayout
+  activePath="/skills/rangkuman-meeting"
+  skill={{
+    icon: "📝",
+    name: "Rangkuman Meeting Otomatis",
+    tagline: "Ubah catatan meeting berantakan jadi ringkasan profesional dalam 30 detik.",
+    tags: ["Semua Profesi"],
+    popular: true,
+    category: "Semua Profesi",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <p>Dari transkrip atau catatan kasar meeting kamu, skill ini menghasilkan:</p>
+    <div class="output-list">
+      <div class="output-item">
+        <span class="output-check">✓</span>
+        <div>
+          <strong>Ringkasan Eksekutif</strong>
+          <p>3–5 kalimat konteks meeting: siapa, apa yang dibahas, kesimpulan utama.</p>
+        </div>
+      </div>
+      <div class="output-item">
+        <span class="output-check">✓</span>
+        <div>
+          <strong>Keputusan yang Diambil</strong>
+          <p>Daftar keputusan final yang muncul selama meeting.</p>
+        </div>
+      </div>
+      <div class="output-item">
+        <span class="output-check">✓</span>
+        <div>
+          <strong>Action Items + PIC + Deadline</strong>
+          <p>Siapa harus melakukan apa, kapan harus selesai — dalam format tabel.</p>
+        </div>
+      </div>
+      <div class="output-item">
+        <span class="output-check">✓</span>
+        <div>
+          <strong>Pertanyaan yang Belum Terjawab</strong>
+          <p>Flag otomatis untuk hal-hal yang masih perlu klarifikasi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Product Manager</strong><br/>yang harus kirim recap setelah sprint planning atau stakeholder meeting</div>
+      <div class="persona-card">👤 <strong>Project Manager</strong><br/>yang manage banyak meeting sekaligus dan sering lupa follow-up</div>
+      <div class="persona-card">👤 <strong>Tim Marketing / HR</strong><br/>yang butuh notulen rapi tapi tidak punya waktu format manual</div>
+      <div class="persona-card">👤 <strong>Siapapun</strong><br/>yang pernah ketinggalan action items karena notulen terlalu panjang</div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="install">
+    <h2>Cara Install — 3 Langkah</h2>
+    <div class="install-steps">
+      <div class="install-step">
+        <div class="install-num">1</div>
+        <div>
+          <strong>Pastikan Claude Code sudah terinstall</strong>
+          <p>Belum punya? <a href={`${BASE}/apa-itu-claude-code`}>Lihat panduan instalasi →</a></p>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-num">2</div>
+        <div>
+          <strong>Buat folder <code>skills/</code> di proyek kamu</strong>
+          <p>Di terminal: <code>mkdir skills</code></p>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-num">3</div>
+        <div>
+          <strong>Copy SKILL.md di bawah, simpan sebagai <code>skills/rangkuman-meeting.md</code></strong>
+          <p>Claude akan otomatis mengenali skill ini saat kamu bekerja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="skill-md">
+    <div class="code-header">
+      <h2>File SKILL.md</h2>
+      <button class="copy-skill-btn" data-target="skill-code">📋 Copy SKILL.md</button>
+    </div>
+    <div class="code-block">
+      <pre id="skill-code">{skillCode}</pre>
+    </div>
+  </section>
+
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block">
+      <div class="example-label input">Input — Catatan Kasar</div>
+      <div class="example-content">
+        <p>meeting sama tim dev, bahas launch fitur payment. Rafa bilang butuh 2 minggu lagi. Design udah approve. Dewanti handle QA. Next meeting Jumat.</p>
+      </div>
+    </div>
+    <div class="example-arrow">↓ Claude menggunakan skill rangkuman-meeting</div>
+    <div class="example-block">
+      <div class="example-label output">Output — Ringkasan Profesional</div>
+      <div class="example-content output-content">
+        <h4>📋 Ringkasan Eksekutif</h4>
+        <p>Meeting membahas persiapan launch fitur payment bersama tim development. Tim desain telah memberikan approval, sementara sisi pengembangan masih membutuhkan waktu 2 minggu lagi. Follow-up meeting dijadwalkan pada Jumat mendatang.</p>
+        <h4>✅ Keputusan yang Diambil</h4>
+        <ul>
+          <li>Desain fitur payment telah disetujui — tidak perlu revisi</li>
+          <li>Timeline development: 2 minggu dari tanggal meeting</li>
+        </ul>
+        <h4>📌 Action Items</h4>
+        <table>
+          <thead><tr><th>No</th><th>Task</th><th>PIC</th><th>Deadline</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Selesaikan development fitur payment</td><td>Rafa</td><td>+2 minggu</td></tr>
+            <tr><td>2</td><td>Jalankan QA testing</td><td>Dewanti</td><td>Perlu dikonfirmasi</td></tr>
+            <tr><td>3</td><td>Meeting follow-up</td><td>Tim</td><td>Jumat</td></tr>
+          </tbody>
+        </table>
+        <h4>❓ Pertanyaan yang Belum Terjawab</h4>
+        <ul>
+          <li>Tanggal pasti launch setelah development selesai?</li>
+          <li>Scope QA testing yang diharapkan?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="skill-section" id="related">
+    <h2>Skills Lain yang Mungkin Kamu Suka</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/email-profesional`} class="related-card">
+        <span>✉️</span>
+        <div>
+          <strong>Email Profesional</strong>
+          <p>Kirim recap meeting via email yang tepat sasaran</p>
+        </div>
+        <span class="skill-arrow">→</span>
+      </a>
+      <a href={`${BASE}/skills/prd-generator`} class="related-card">
+        <span>🧩</span>
+        <div>
+          <strong>PRD Generator</strong>
+          <p>Lanjut dari meeting ke dokumen requirements</p>
+        </div>
+        <span class="skill-arrow">→</span>
+      </a>
+    </div>
+  </section>
+</SkillLayout>

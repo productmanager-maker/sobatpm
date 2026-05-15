@@ -1,0 +1,108 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  activePath?: string;
+}
+
+const { title, description = "Kumpulan skill siap pakai untuk Claude Code. Gratis, bahasa Indonesia, dibuat dari pengalaman kerja nyata.", activePath = "/" } = Astro.props;
+
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const pmSkills = [
+  { href: "/skills/prd-generator", label: "🧩 PRD Generator" },
+  { href: "/skills/riset-kompetitor", label: "🔍 Riset Kompetitor" },
+  { href: "/skills/rangkuman-meeting", label: "📝 Rangkuman Meeting" },
+];
+
+const marketingSkills = [
+  { href: "/skills/caption-instagram", label: "📣 Caption Instagram" },
+  { href: "/skills/proposal-klien", label: "💼 Proposal Klien" },
+];
+
+const generalSkills = [
+  { href: "/skills/email-profesional", label: "✉️ Email Profesional" },
+  { href: "/skills/analisis-data", label: "📊 Analisis Data" },
+  { href: "/skills/job-description", label: "👥 Job Description" },
+  { href: "/skills/lesson-plan", label: "📚 Lesson Plan" },
+  { href: "/skills/desain-brief", label: "🎨 Desain Brief" },
+];
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href={`${BASE}/styles/main.css`} />
+  <slot name="head" />
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href={`${BASE}/`} class="logo">
+      <span class="logo-mark">⟨S⟩</span>
+      <span class="logo-text">SkillClaude<span class="logo-tld">.id</span></span>
+    </a>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Mulai di Sini</div>
+    <nav class="sidebar-nav">
+      <a href={`${BASE}/`} class={`nav-item ${activePath === "/" ? "active" : ""}`}>🏠 Semua Skills</a>
+      <a href={`${BASE}/cara-install`} class={`nav-item ${activePath === "/cara-install" ? "active" : ""}`}>📖 Cara Install Skill</a>
+      <a href={`${BASE}/apa-itu-claude-code`} class={`nav-item ${activePath === "/apa-itu-claude-code" ? "active" : ""}`}>⚡ Apa itu Claude Code?</a>
+    </nav>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Skills untuk PM</div>
+    <nav class="sidebar-nav">
+      {pmSkills.map(s => (
+        <a href={`${BASE}${s.href}`} class={`nav-item ${activePath === s.href ? "active" : ""}`}>{s.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Skills untuk Marketing</div>
+    <nav class="sidebar-nav">
+      {marketingSkills.map(s => (
+        <a href={`${BASE}${s.href}`} class={`nav-item ${activePath === s.href ? "active" : ""}`}>{s.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Skills untuk Semua</div>
+    <nav class="sidebar-nav">
+      {generalSkills.map(s => (
+        <a href={`${BASE}${s.href}`} class={`nav-item ${activePath === s.href ? "active" : ""}`}>{s.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-label">Dari</div>
+    <a href={`${BASE}/pm-intelligence-pack`} class="sidebar-promo">
+      <span class="promo-badge">PRO</span>
+      <span>PM Intelligence Pack →</span>
+    </a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <slot />
+</main>
+
+<script src={`${BASE}/js/main.js`} is:inline></script>
+</body>
+</html>

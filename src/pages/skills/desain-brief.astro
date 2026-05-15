@@ -1,0 +1,138 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+const skillCode = `
+---
+name: desain-brief
+description: Ubah brief desain jadi feedback terstruktur atau brief yang clear untuk desainer.
+  Aktif ketika user menyebut "feedback desain", "brief ke desainer", "review desain",
+  "komentar desain", atau memberikan deskripsi kebutuhan visual yang perlu dikomunikasikan.
+---
+# Desain Brief ke Feedback
+## Dua Mode
+**Mode 1 — Brief ke Desainer:**
+User punya ide/kebutuhan visual → bantu tulis brief yang jelas untuk desainer
+**Mode 2 — Feedback Desain:**
+User dapat hasil desain dan ingin kasih feedback yang konstruktif dan spesifik
+Tentukan mode dari konteks user. Jika tidak jelas, tanya.
+---
+## Mode 1: Format Brief
+### 🎨 DESIGN BRIEF
+**Proyek:** [nama proyek]
+**Deadline:** [tanggal]
+**Format output:** [ukuran, format file — misal: 1080x1080px JPG, PDF A4]
+---
+**Background & Konteks**
+[Mengapa konten ini dibuat? Apa konteksnya? Event, campaign, atau kebutuhan rutin?]
+**Pesan Utama**
+[Satu kalimat — apa yang paling penting untuk dikomunikasikan?]
+**Target Audiens**
+[Siapa yang akan melihat ini? Usia, konteks, platform?]
+**Tone & Gaya Visual**
+[Modern/klasik? Playful/serius? Ada referensi visual yang bisa dijadikan acuan?]
+**Elemen yang Harus Ada**
+- [ ] Logo [posisi: header/footer]
+- [ ] Headline: "[teks headline]"
+- [ ] [elemen lain]
+**Elemen yang Harus Dihindari**
+- [hal-hal yang tidak boleh muncul]
+**Referensi**
+[Link atau deskripsi referensi visual — warna, tipografi, komposisi]
+---
+## Mode 2: Format Feedback
+### ✏️ FEEDBACK DESAIN: [nama file/versi]
+**Overall:** [1 kalimat kesan umum — mulai dari yang positif]
+---
+**Yang Sudah Baik ✓**
+- [elemen yang berhasil — spesifik]
+**Yang Perlu Direvisi ✗**
+| # | Elemen | Masalah | Saran Konkret |
+|---|--------|---------|---------------|
+| 1 | [elemen] | [apa yang kurang] | [perubahan spesifik] |
+**Prioritas Revisi**
+🔴 Harus diubah: [daftar]
+🟡 Sebaiknya diubah: [daftar]
+🟢 Optional: [daftar]
+---
+## Panduan Feedback yang Baik
+- Selalu mulai dengan yang positif — ini mengurangi defensiveness
+- Feedback harus spesifik, bukan "kurang bagus" tapi "margin kiri terlalu sempit — target 24px"
+- Sertakan saran solusi, bukan hanya kritik
+- Pisahkan preferensi personal dari kebutuhan fungsional
+- Maksimal 5-7 item revisi — lebih dari itu akan overwhelming`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<SkillLayout
+  activePath="/skills/desain-brief"
+  skill={{
+    icon: "🎨",
+    name: "Desain Brief ke Feedback",
+    tagline: "Brief yang jelas untuk desainer, atau feedback konstruktif untuk revisi — dua mode dalam satu skill.",
+    tags: ["Desainer", "Product Manager"],
+    category: "Semua Profesi",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <p>Skill ini punya dua mode — pilih sesuai kebutuhan:</p>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Mode Brief: Instruksi yang Crystal Clear</strong><p>Desainer tidak perlu tanya-tanya ulang — pesan utama, tone, elemen wajib, dan referensi sudah tercantum.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Mode Feedback: Terstruktur & Konstruktif</strong><p>Dimulai dari yang positif, revisi diprioritaskan (must/should/optional), dan setiap kritik ada saran konkretnya.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Tidak Ada Ambiguitas</strong><p>"Kurang bagus" diganti dengan "margin kiri terlalu sempit — target 24px".</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Prioritas Revisi Jelas</strong><p>Desainer tahu mana yang harus diubah duluan — merah/kuning/hijau.</p></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>Product Manager</strong><br/>yang brief desainer untuk UI/UX tapi sering hasilnya tidak sesuai ekspektasi</div>
+      <div class="persona-card">👤 <strong>Marketing Manager</strong><br/>yang review materi visual dari desainer dan butuh feedback yang jelas</div>
+      <div class="persona-card">👤 <strong>Klien Agensi</strong><br/>yang menerima hasil desain dari vendor dan bingung cara memberikan revisi yang tepat</div>
+      <div class="persona-card">👤 <strong>Desainer Senior</strong><br/>yang review karya junior dan butuh format feedback yang konsisten</div>
+    </div>
+  </section>
+  <section class="skill-section" id="install">
+    <h2>Cara Install</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan sebagai <code>skills/desain-brief.md</code></strong></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="skill-md">
+    <div class="code-header"><h2>File SKILL.md</h2><button class="copy-skill-btn" data-target="skill-desain">📋 Copy SKILL.md</button></div>
+    <div class="code-block"><pre id="skill-desain">{skillCode}</pre></div>
+  </section>
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block"><div class="example-label input">Input</div><div class="example-content"><p>kasih feedback untuk banner event webinar kami. desainer sudah kirim draft. masalahnya: teks terlalu kecil, warna background terlalu gelap, logo tidak kelihatan. tapi overall layoutnya sudah bagus.</p></div></div>
+    <div class="example-arrow">↓ Claude menggunakan skill desain-brief (Mode Feedback)</div>
+    <div class="example-block"><div class="example-label output">Output</div><div class="example-content output-content">
+      <h4>✏️ FEEDBACK DESAIN: Banner Webinar Draft v1</h4>
+      <p><strong>Overall:</strong> Layout dan komposisi sudah solid — hierarki informasi jelas dan eye-catching dari jarak jauh.</p>
+      <h4>Yang Sudah Baik ✓</h4>
+      <ul><li>Hierarki visual: judul event menonjol dengan baik</li><li>Komposisi elemen seimbang dan tidak crowded</li></ul>
+      <h4>Yang Perlu Direvisi</h4>
+      <table><thead><tr><th>#</th><th>Elemen</th><th>Masalah</th><th>Saran</th></tr></thead><tbody>
+        <tr><td>1</td><td>Body text</td><td>Font size terlalu kecil untuk dibaca di mobile</td><td>Naikan ke min. 14px, weight medium</td></tr>
+        <tr><td>2</td><td>Background</td><td>Terlalu gelap — kontras dengan teks kurang</td><td>Lightness +20%, atau tambah overlay putih 15%</td></tr>
+        <tr><td>3</td><td>Logo</td><td>Tidak visible di atas background gelap</td><td>Gunakan versi logo putih atau tambah background putih di belakang logo</td></tr>
+      </tbody></table>
+      <p><strong>🔴 Harus diubah:</strong> Font size body text, kontras logo</p>
+    </div></div>
+  </section>
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/caption-instagram`} class="related-card"><span>📣</span><div><strong>Caption Instagram</strong><p>Caption untuk konten visual yang sudah didesain</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/proposal-klien`} class="related-card"><span>💼</span><div><strong>Proposal Klien</strong><p>Proposal untuk proyek desain ke klien</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>

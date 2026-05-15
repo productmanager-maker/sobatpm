@@ -1,0 +1,122 @@
+---
+import SkillLayout from "../../layouts/SkillLayout.astro";
+const skillCode = `
+---
+name: job-description
+description: Buat job description yang menarik kandidat berkualitas.
+  Aktif ketika user menyebut "buat JD", "tulis job description", "lowongan kerja",
+  "job posting", atau meminta deskripsi posisi pekerjaan.
+---
+# Job Description Writer
+## Format Output
+### 💼 [JUDUL POSISI]
+**Tipe:** Full-time / Part-time / Contract / Remote
+**Departemen:** [departemen]
+**Level:** Junior / Mid / Senior / Lead
+---
+#### Tentang Peran Ini
+[2-3 kalimat — apa yang akan dilakukan orang ini, mengapa posisi ini penting, dan dampak yang diharapkan. Bukan basa-basi korporat.]
+---
+#### Yang Akan Kamu Lakukan
+- [Tanggung jawab utama 1 — spesifik, bukan abstrak]
+- [Tanggung jawab utama 2]
+- [3-6 poin total — tidak perlu terlalu banyak]
+---
+#### Yang Kami Cari
+**Wajib:**
+- [requirement 1 — pengalaman, skill, atau sertifikasi yang benar-benar dibutuhkan]
+- [requirement 2]
+
+**Nilai Plus:**
+- [nice to have — tidak wajib tapi menguntungkan]
+---
+#### Yang Kami Tawarkan
+- [benefit konkret — bukan "lingkungan kerja yang dinamis"]
+- [kompensasi jika bisa disebutkan]
+- [growth opportunity]
+---
+#### Cara Melamar
+[Instruksi jelas — kirim ke mana, lampirkan apa, deadline jika ada]
+---
+## Panduan Penulisan JD
+- Judul posisi: gunakan yang umum di industri, bukan internal code name
+- Hindari jargon korporat: "passionate", "rockstar", "ninja", "self-starter"
+- Tulis tanggung jawab dengan action verb: "memimpin", "menganalisis", "berkoordinasi"
+- Requirements: bedakan yang wajib vs nice to have — jangan terlalu panjang
+- Tone: profesional tapi tidak kaku — sesuaikan dengan budaya perusahaan
+- Jika diminta remote/hybrid, sebutkan secara eksplisit`;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<SkillLayout
+  activePath="/skills/job-description"
+  skill={{
+    icon: "👥",
+    name: "Job Description Writer",
+    tagline: "Buat JD yang menarik kandidat terbaik — jelas, tidak berlebihan, sesuai level posisi.",
+    tags: ["HR", "Rekruter"],
+    category: "Semua Profesi",
+  }}
+>
+  <Fragment slot="toc">
+    <a href="#output" class="toc-item">Apa yang Dihasilkan</a>
+    <a href="#untuk-siapa" class="toc-item">Untuk Siapa</a>
+    <a href="#install" class="toc-item">Cara Install</a>
+    <a href="#skill-md" class="toc-item">File SKILL.md</a>
+    <a href="#contoh" class="toc-item">Contoh Nyata</a>
+    <a href="#related" class="toc-item">Skills Terkait</a>
+  </Fragment>
+  <section class="skill-section" id="output">
+    <h2>Apa yang Dihasilkan</h2>
+    <div class="output-list">
+      <div class="output-item"><span class="output-check">✓</span><div><strong>JD yang Manusiawi</strong><p>Tanpa jargon korporat seperti "rockstar", "ninja", atau "passionate self-starter".</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Tanggung Jawab yang Spesifik</strong><p>Action verb yang jelas — "memimpin", "menganalisis" — bukan deskripsi abstrak.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Requirements Realistis</strong><p>Dibedakan wajib vs nice to have — tidak bikin kandidat takut melamar.</p></div></div>
+      <div class="output-item"><span class="output-check">✓</span><div><strong>Benefit yang Konkret</strong><p>Bukan "lingkungan kerja yang dinamis" — tapi benefit yang benar-benar menarik.</p></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="untuk-siapa">
+    <h2>Untuk Siapa</h2>
+    <div class="persona-grid">
+      <div class="persona-card">👤 <strong>HR & Rekruter</strong><br/>yang buka banyak posisi sekaligus dan butuh JD cepat tapi berkualitas</div>
+      <div class="persona-card">👤 <strong>Hiring Manager</strong><br/>yang diminta HR untuk tulis JD tapi tidak tahu harus mulai dari mana</div>
+      <div class="persona-card">👤 <strong>Startup Founder</strong><br/>yang pertama kali rekrut dan belum punya template JD yang proper</div>
+      <div class="persona-card">👤 <strong>Tim People Ops</strong><br/>yang ingin konsistensi format dan tone di semua JD perusahaan</div>
+    </div>
+  </section>
+  <section class="skill-section" id="install">
+    <h2>Cara Install</h2>
+    <div class="install-steps">
+      <div class="install-step"><div class="install-num">1</div><div><strong>Pastikan Claude Code terinstall</strong><p><a href={`${BASE}/apa-itu-claude-code`}>Panduan →</a></p></div></div>
+      <div class="install-step"><div class="install-num">2</div><div><strong>Buat <code>skills/</code></strong><p><code>mkdir skills</code></p></div></div>
+      <div class="install-step"><div class="install-num">3</div><div><strong>Simpan sebagai <code>skills/job-description.md</code></strong></div></div>
+    </div>
+  </section>
+  <section class="skill-section" id="skill-md">
+    <div class="code-header"><h2>File SKILL.md</h2><button class="copy-skill-btn" data-target="skill-jd">📋 Copy SKILL.md</button></div>
+    <div class="code-block"><pre id="skill-jd">{skillCode}</pre></div>
+  </section>
+  <section class="skill-section" id="contoh">
+    <h2>Contoh Nyata</h2>
+    <div class="example-block"><div class="example-label input">Input</div><div class="example-content"><p>buat JD untuk posisi Product Designer di startup edtech, mid-level, full-remote, kolaborasi sama PM dan engineering</p></div></div>
+    <div class="example-arrow">↓ Claude menggunakan skill job-description</div>
+    <div class="example-block"><div class="example-label output">Output (ringkasan)</div><div class="example-content output-content">
+      <h4>💼 PRODUCT DESIGNER</h4>
+      <p><strong>Full-time · Remote · Mid-level · Product Team</strong></p>
+      <h4>Tentang Peran Ini</h4>
+      <p>Kamu akan bertanggung jawab atas pengalaman belajar jutaan siswa Indonesia. Bekerja langsung dengan PM dan engineers untuk menerjemahkan kebutuhan pengguna menjadi desain yang intuitif dan berdampak.</p>
+      <h4>Yang Akan Kamu Lakukan</h4>
+      <ul>
+        <li>Memimpin proses desain dari research hingga handoff ke engineering</li>
+        <li>Menganalisis data penggunaan dan feedback user untuk iterasi desain</li>
+        <li>Berkolaborasi dengan PM dalam mendefinisikan problem dan solusi</li>
+      </ul>
+    </div></div>
+  </section>
+  <section class="skill-section" id="related">
+    <h2>Skills Terkait</h2>
+    <div class="related-skills">
+      <a href={`${BASE}/skills/email-profesional`} class="related-card"><span>✉️</span><div><strong>Email Profesional</strong><p>Email ke kandidat — offer, rejection, atau interview invite</p></div><span class="skill-arrow">→</span></a>
+      <a href={`${BASE}/skills/desain-brief`} class="related-card"><span>🎨</span><div><strong>Desain Brief ke Feedback</strong><p>Feedback untuk kandidat yang submit portofolio</p></div><span class="skill-arrow">→</span></a>
+    </div>
+  </section>
+</SkillLayout>
