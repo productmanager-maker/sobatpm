@@ -2,6 +2,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  base: '/sobatpm',
+  base: '/sobatpm/skillclaude',
   output: 'static',
 });

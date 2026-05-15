@@ -37,11 +37,17 @@ jobs:
         run: npm run build
         working-directory: skillclaude
 
+      - name: Assemble Pages output
+        run: |
+          mkdir -p _site/skillclaude
+          cp tools-recap.html _site/tools-recap.html
+          cp -r skillclaude/dist/. _site/skillclaude/
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: skillclaude/dist
+          path: _site
 
   deploy:
     needs: build
