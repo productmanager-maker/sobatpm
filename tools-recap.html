@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools & Platform Recap — product.manager@sekolahmu.co.id</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f6;
+      --border: #e4e6ef;
+      --border2: #d0d4e8;
+      --text: #1a1d2e;
+      --text2: #4a5068;
+      --text3: #8b91a8;
+      --primary: #4f46e5;
+      --primary-light: #ede9fe;
+      --primary-mid: #c4b5fd;
+      --accent: #0ea5e9;
+      --accent-light: #e0f2fe;
+      --green: #059669;
+      --green-light: #d1fae5;
+      --orange: #ea580c;
+      --orange-light: #ffedd5;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --yellow: #d97706;
+      --yellow-light: #fef3c7;
+      --pink: #db2777;
+      --pink-light: #fce7f3;
+      --teal: #0d9488;
+      --teal-light: #ccfbf1;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 32px;
+      overflow-x: auto; gap: 0;
+    }
+    .nav-brand {
+      font-size: 13px; font-weight: 700; color: var(--primary);
+      margin-right: 24px; white-space: nowrap; padding: 14px 0;
+    }
+    nav a {
+      color: var(--text3); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      padding: 14px 14px; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--primary-mid); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #0ea5e9 100%);
+      padding: 60px 40px 48px; color: white;
+    }
+    .hero-inner { max-width: 960px; margin: 0 auto; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+      color: white; font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 99px; margin-bottom: 18px;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .hero h1 em { font-style: normal; opacity: .75; font-weight: 500; font-size: 22px; display: block; margin-top: 4px; }
+    .hero p { font-size: 14.5px; opacity: .85; max-width: 580px; line-height: 1.65; margin-bottom: 24px; }
+
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; }
+    .stat {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px; padding: 10px 18px;
+      font-size: 13px; color: rgba(255,255,255,0.8);
+    }
+    .stat strong { color: white; font-size: 20px; font-weight: 800; display: block; line-height: 1.2; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 100px; }
+
+    .section { margin-top: 52px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--text3);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label .sicon { font-size: 16px; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── CARD GRID ── */
+    .grid { display: grid; gap: 12px; }
+    .g2 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .g3 { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .g4 { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--primary-mid);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .card:hover .open-hint { opacity: 1; }
+
+    .open-hint {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 10px; color: var(--primary); opacity: 0;
+      font-weight: 600; transition: opacity .2s;
+      background: var(--primary-light); padding: 2px 7px;
+      border-radius: 4px; letter-spacing: .3px;
+    }
+
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .icon {
+      width: 34px; height: 34px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .card h3 { font-size: 13.5px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .card .url-chip {
+      font-size: 10.5px; color: var(--accent); font-weight: 500;
+      display: inline-flex; align-items: center; gap: 3px;
+      margin-top: 1px;
+    }
+    .card .url-chip::before { content: '↗'; font-size: 9px; }
+    .card p { font-size: 12.5px; color: var(--text2); line-height: 1.55; }
+    .card .used-in {
+      margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px;
+    }
+    .tag {
+      font-size: 10.5px; padding: 2px 7px; border-radius: 4px;
+      background: var(--surface2); color: var(--text3);
+      border: 1px solid var(--border); font-weight: 500;
+    }
+
+    /* color themes */
+    .c-indigo { background: var(--primary-light); color: var(--primary); }
+    .c-blue    { background: var(--accent-light);  color: #0369a1; }
+    .c-green   { background: var(--green-light);   color: var(--green); }
+    .c-orange  { background: var(--orange-light);  color: var(--orange); }
+    .c-red     { background: var(--red-light);     color: var(--red); }
+    .c-yellow  { background: var(--yellow-light);  color: var(--yellow); }
+    .c-pink    { background: var(--pink-light);    color: var(--pink); }
+    .c-teal    { background: var(--teal-light);    color: var(--teal); }
+    .c-slate   { background: #f1f5f9; color: #475569; }
+    .c-purple  { background: #f3e8ff; color: #7c3aed; }
+
+    /* ── APP TABLE ── */
+    .app-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+    }
+    .app-row:hover {
+      border-color: var(--primary-mid);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .app-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .app-desc { font-size: 12.5px; color: var(--text2); margin-top: 2px; }
+    .app-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .t-api   { background: #ede9fe; color: #6d28d9; border-color: #c4b5fd; }
+    .t-db    { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+    .t-infra { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+    .t-ai    { background: #f3e8ff; color: #6b21a8; border-color: #d8b4fe; }
+
+    .badge-status {
+      font-size: 11px; font-weight: 600; padding: 3px 10px;
+      border-radius: 99px; white-space: nowrap; align-self: start;
+    }
+    .s-active  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .s-build   { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .s-backlog { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+
+    /* ── APP PUBLIC URL ── */
+    .app-url {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 6px; margin-bottom: 2px;
+    }
+    .app-url a {
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
+    }
+    .app-url a:hover { text-decoration: underline; }
+    .app-url a::before { content: '🌐'; font-size: 11px; }
+    .app-url .url-internal {
+      font-size: 11px; color: var(--text3); font-weight: 500;
+      background: var(--surface2); padding: 1px 7px;
+      border-radius: 4px; border: 1px solid var(--border);
+    }
+
+    /* ── COST CARDS ── */
+    .cost-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .cost-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      box-shadow: var(--shadow); cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+    }
+    .cost-card:hover { border-color: var(--primary-mid); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .cost-card:hover .open-hint { opacity: 1; }
+    .cost-amount {
+      font-size: 28px; font-weight: 800; color: var(--text);
+      line-height: 1; margin-bottom: 2px;
+    }
+    .cost-amount span { font-size: 14px; font-weight: 500; color: var(--text3); }
+    .cost-label { font-size: 13px; font-weight: 700; color: var(--text); margin-top: 8px; }
+    .cost-sub   { font-size: 12px; color: var(--text3); margin-top: 3px; }
+    .cost-total {
+      background: linear-gradient(135deg, var(--primary-light), #e0f2fe);
+      border: 1px solid var(--primary-mid);
+      border-radius: var(--radius); padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px;
+    }
+    .cost-total .label { font-size: 13px; font-weight: 700; color: var(--primary); }
+    .cost-total .amount { font-size: 22px; font-weight: 800; color: var(--primary); }
+
+    /* ── MCP MINI CARDS ── */
+    .mcp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .mcp-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 12px;
+      text-align: center; cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+    }
+    .mcp-card:hover {
+      border-color: var(--primary-mid);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .mcp-card .mi { font-size: 24px; margin-bottom: 8px; }
+    .mcp-card h4 { font-size: 12.5px; font-weight: 700; color: var(--text); }
+    .mcp-card p  { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.4; }
+
+    /* ── MODAL ── */
+    .overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(15,17,30,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      width: 100%; max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp .2s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      padding: 24px 24px 0;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .modal-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .modal-title { flex: 1; }
+    .modal-title h2 { font-size: 18px; font-weight: 800; color: var(--text); line-height: 1.2; }
+    .modal-title .mcat {
+      font-size: 11px; font-weight: 600; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--text3); margin-top: 3px;
+    }
+
+    .modal-close {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--surface2); border: none; cursor: pointer;
+      font-size: 16px; color: var(--text3); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, color .15s;
+    }
+    .modal-close:hover { background: var(--border); color: var(--text); }
+
+    .modal-url {
+      margin: 14px 24px 0;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--accent-light); border: 1px solid #bae6fd;
+      border-radius: 8px; padding: 10px 14px;
+    }
+    .modal-url span { font-size: 12px; color: #0369a1; font-weight: 600; flex: 1; word-break: break-all; }
+    .modal-url a {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--accent); color: white;
+      font-size: 11.5px; font-weight: 600;
+      padding: 5px 12px; border-radius: 6px;
+      text-decoration: none; white-space: nowrap;
+      transition: opacity .15s;
+    }
+    .modal-url a:hover { opacity: .85; }
+
+    .modal-body { padding: 20px 24px 24px; }
+
+    .modal-section { margin-bottom: 18px; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text3);
+      margin-bottom: 8px;
+    }
+    .modal-section p {
+      font-size: 13.5px; color: var(--text2); line-height: 1.65;
+    }
+
+    .use-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .use-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 13px; color: var(--text2); line-height: 1.5;
+    }
+    .use-list li::before {
+      content: '✓'; color: var(--green); font-weight: 700;
+      font-size: 12px; margin-top: 2px; flex-shrink: 0;
+    }
+
+    .used-projects { display: flex; flex-wrap: wrap; gap: 6px; }
+    .used-projects span {
+      font-size: 11.5px; padding: 3px 10px; border-radius: 6px;
+      background: var(--primary-light); color: var(--primary);
+      font-weight: 600; border: 1px solid var(--primary-mid);
+    }
+
+    .code-chip {
+      display: inline-block;
+      background: #1e293b; color: #e2e8f0;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 12px; padding: 2px 8px; border-radius: 5px;
+      margin: 2px 0;
+    }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+
+    .tip-box {
+      background: linear-gradient(135deg, var(--primary-light), #e0f2fe);
+      border: 1px solid var(--primary-mid);
+      border-radius: var(--radius); padding: 18px 20px;
+      margin-top: 14px;
+    }
+    .tip-box h4 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .tip-box p  { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    .footer {
+      text-align: center; padding: 30px 20px;
+      font-size: 12px; color: var(--text3);
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 36px 20px 32px; }
+      .hero h1 { font-size: 24px; }
+      .container { padding: 24px 16px 60px; }
+      .g2, .g3, .g4 { grid-template-columns: 1fr; }
+      .mcp-grid { grid-template-columns: repeat(2, 1fr); }
+      nav { padding: 0 16px; }
+      .app-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-brand">&#x1f4cb; Tech Stack</div>
+  <a href="#hosting">Hosting</a>
+  <a href="#database">Database</a>
+  <a href="#ai">AI & API</a>
+  <a href="#biaya">Biaya</a>
+  <a href="#frontend">Frontend</a>
+  <a href="#deploy">Deployment</a>
+  <a href="#mcp">MCP</a>
+  <a href="#apps">Aplikasi</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge">&#x1f4cb; Full Stack Overview</div>
+    <h1>Tools, API & Platform<em>product.manager@sekolahmu.co.id</em></h1>
+    <p>Rekap lengkap semua tools, API, hosting, dan stack yang sudah dipakai. Klik tiap kartu untuk melihat URL, kegunaan, dan cara pemakaiannya.</p>
+    <div class="stats">
+      <div class="stat"><strong>7</strong>Aplikasi</div>
+      <div class="stat"><strong>3</strong>Cloud DB</div>
+      <div class="stat"><strong>5</strong>External API</div>
+      <div class="stat"><strong>4</strong>Apps di Docker</div>
+      <div class="stat"><strong>11</strong>MCP Servers</div>
+      <div class="stat"><strong>$150</strong>Total/bulan</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ HOSTING & INFRA ══ -->
+<div class="section" id="hosting">
+  <div class="section-label"><span class="sicon">🏗️</span> Hosting & Infrastructure</div>
+  <div class="grid g2">
+
+    <div class="card" onclick="openModal('biznet')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-orange">🖥️</div>
+        <div><h3>Biznet SID Server</h3><div class="url-chip">sekolahmu.net</div></div>
+      </div>
+      <p>Server internal PT Semesta Integrasi Digital via Biznet. Semua Docker container production di-deploy ke sini via SSH.</p>
+      <div class="used-in"><span class="tag">ichan@10.122.169.101</span><span class="tag">PRDify</span><span class="tag">Expert App</span><span class="tag">SkillClaude</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('cloudflare')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-yellow">☁️</div>
+        <div><h3>Cloudflare</h3><div class="url-chip">cloudflare.com</div></div>
+      </div>
+      <p>DNS, CDN, dan SSL untuk domain <strong>tumbuh.us</strong> (Nyerat) dan routing ke server Biznet SID.</p>
+      <div class="used-in"><span class="tag">tumbuh.us</span><span class="tag">nyerat.tumbuh.us</span><span class="tag">SSL/CDN</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('docker')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-blue">🐳</div>
+        <div><h3>Docker + Docker Compose</h3><div class="url-chip">docker.com</div></div>
+      </div>
+      <p>Semua app dikontainerisasi. Multi-stage build, restart policy, dan environment variable via .env.production.</p>
+      <div class="used-in"><span class="tag">PRDify</span><span class="tag">Expert</span><span class="tag">SkillClaude</span><span class="tag">AI Agent</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('nginx')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-green">🌐</div>
+        <div><h3>Nginx</h3><div class="url-chip">nginx.org</div></div>
+      </div>
+      <p>Reverse proxy dan static file server. Dipakai di SkillClaude untuk serve Astro build dengan base path.</p>
+      <div class="used-in"><span class="tag">SkillClaude</span><span class="tag">Static serve</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ DATABASE ══ -->
+<div class="section" id="database">
+  <div class="section-label"><span class="sicon">🗄️</span> Database & Storage</div>
+  <div class="grid g2">
+
+    <div class="card" onclick="openModal('neon')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-green">⚡</div>
+        <div><h3>Neon</h3><div class="url-chip">console.neon.tech</div></div>
+      </div>
+      <p>Serverless PostgreSQL cloud. Branching per environment, connection pooling, free tier tersedia.</p>
+      <div class="used-in"><span class="tag">PostgreSQL cloud</span><span class="tag">Serverless</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('prismadb')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-purple">📦</div>
+        <div><h3>Prisma Postgres Cloud</h3><div class="url-chip">prisma.io/postgres</div></div>
+      </div>
+      <p>Managed PostgreSQL dari Prisma. Dipakai via @prisma/adapter-pg dengan Prisma 7 ORM.</p>
+      <div class="used-in"><span class="tag">SupportHQ</span><span class="tag">CRM App</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('supabase')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-green">💚</div>
+        <div><h3>Supabase</h3><div class="url-chip">supabase.com</div></div>
+      </div>
+      <p>PostgreSQL + Auth + Storage + Realtime. Backend-as-a-service lengkap untuk Nyerat.</p>
+      <div class="used-in"><span class="tag">Nyerat</span><span class="tag">Auth</span><span class="tag">Storage</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('gsheets')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-teal">📊</div>
+        <div><h3>Google Sheets API</h3><div class="url-chip">developers.google.com/sheets</div></div>
+      </div>
+      <p>Spreadsheet sebagai database operasional. Price list dan transaction log untuk Telegram Sales Bot.</p>
+      <div class="used-in"><span class="tag">AI Agent 001</span><span class="tag">Price list</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('prismaorm')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-indigo">🔷</div>
+        <div><h3>Prisma ORM v7</h3><div class="url-chip">prisma.io</div></div>
+      </div>
+      <p>ORM TypeScript untuk schema, migration, dan query. Gotcha v7: datasource URL via prisma.config.ts, bukan schema.prisma.</p>
+      <div class="used-in"><span class="tag">SupportHQ</span><span class="tag">CRM App</span><span class="tag">PRDify</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ AI & API ══ -->
+<div class="section" id="ai">
+  <div class="section-label"><span class="sicon">🤖</span> AI & External APIs</div>
+  <div class="grid g2">
+
+    <div class="card" onclick="openModal('claudecode')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-purple">🤖</div>
+        <div><h3>Claude Code (CLI)</h3><div class="url-chip">claude.ai/code</div></div>
+      </div>
+      <p>Primary AI coding assistant. Build semua project dari scaffold sampai fitur kompleks via terminal.</p>
+      <div class="used-in"><span class="tag">Semua project</span><span class="tag">Sub-agents</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('anthropic')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-purple">🧠</div>
+        <div><h3>Anthropic API</h3><div class="url-chip">console.anthropic.com</div></div>
+      </div>
+      <p>Claude AI API untuk PRDify dan AI Agent 001. SDK tersedia untuk Node.js dan Python.</p>
+      <div class="used-in"><span class="tag">PRDify</span><span class="tag">AI Agent 001</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('gemini')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-blue">🔮</div>
+        <div><h3>Google Gemini API</h3><div class="url-chip">aistudio.google.com</div></div>
+      </div>
+      <p>Alternatif AI di PRDify. User bisa pilih antara Claude atau Gemini untuk generate PRD.</p>
+      <div class="used-in"><span class="tag">PRDify</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('lovable')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-pink">❤️</div>
+        <div><h3>Lovable</h3><div class="url-chip">lovable.dev</div></div>
+      </div>
+      <p>AI app builder berbasis cloud. Build Nyerat tanpa setup lokal — React + Vite + Supabase, langsung live preview.</p>
+      <div class="used-in"><span class="tag">Nyerat</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('telegram')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-blue">💬</div>
+        <div><h3>Telegram Bot API</h3><div class="url-chip">core.telegram.org/bots</div></div>
+      </div>
+      <p>Channel komunikasi Sales ke Manager. Inline button approve/reject, notifikasi otomatis, multi-grup.</p>
+      <div class="used-in"><span class="tag">AI Agent 001</span></div>
+    </div>
+
+    <div class="card" onclick="openModal('googleapi')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header">
+        <div class="icon c-red">🔴</div>
+        <div><h3>Google APIs (googleapis)</h3><div class="url-chip">console.cloud.google.com</div></div>
+      </div>
+      <p>SDK Node.js untuk Drive, Sheets, dan service account management. Dipakai di PRDify untuk fitur document parsing.</p>
+      <div class="used-in"><span class="tag">PRDify</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ BIAYA ══ -->
+<div class="section" id="biaya">
+  <div class="section-label"><span class="sicon">💳</span> Biaya & Subscription Aktif</div>
+  <div class="cost-grid">
+
+    <div class="cost-card" onclick="openModal('cost-anthropic')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="cost-amount">$100 <span>/bulan</span></div>
+      <div class="cost-label">🧠 Anthropic API</div>
+      <div class="cost-sub">console.anthropic.com · claude-sonnet-4-6</div>
+    </div>
+
+    <div class="cost-card" onclick="openModal('cost-lovable')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="cost-amount">$50 <span>/bulan</span></div>
+      <div class="cost-label">❤️ Lovable + Cloud</div>
+      <div class="cost-sub">lovable.dev · Nyerat project</div>
+    </div>
+
+  </div>
+  <div class="cost-total">
+    <div>
+      <div class="label">Total Pengeluaran Bulanan</div>
+      <div style="font-size:12px;color:#6d28d9;margin-top:2px;">≈ Rp 2.400.000 / bulan (kurs $1 = Rp 16.000)</div>
+    </div>
+    <div class="amount">$150<span style="font-size:14px;font-weight:500;color:#7c3aed;">/mo</span></div>
+  </div>
+</div>
+
+<!-- ══ FRONTEND ══ -->
+<div class="section" id="frontend">
+  <div class="section-label"><span class="sicon">🎨</span> Frontend Stack & Libraries</div>
+  <div class="grid g3">
+
+    <div class="card" onclick="openModal('nextjs')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-slate">⏭️</div><h3>Next.js 16</h3></div>
+      <div class="url-chip">nextjs.org</div>
+      <p style="margin-top:6px">App Router + TypeScript. Framework utama semua web app lokal.</p>
+    </div>
+
+    <div class="card" onclick="openModal('shadcn')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-indigo">🧩</div><h3>shadcn/ui</h3></div>
+      <div class="url-chip">ui.shadcn.com</div>
+      <p style="margin-top:6px">Component library berbasis Radix UI. Semua web app pakai ini.</p>
+    </div>
+
+    <div class="card" onclick="openModal('tailwind')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-blue">💨</div><h3>Tailwind CSS</h3></div>
+      <div class="url-chip">tailwindcss.com</div>
+      <p style="margin-top:6px">Utility-first CSS. Terintegrasi di semua project.</p>
+    </div>
+
+    <div class="card" onclick="openModal('astro')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-orange">🚀</div><h3>Astro</h3></div>
+      <div class="url-chip">astro.build</div>
+      <p style="margin-top:6px">Static site generator untuk SkillClaude. Output HTML statis, zero JS overhead.</p>
+    </div>
+
+    <div class="card" onclick="openModal('msw')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-red">🔧</div><h3>MSW</h3></div>
+      <div class="url-chip">mswjs.io</div>
+      <p style="margin-top:6px">Mock Service Worker. Mock API di browser, zero backend untuk Expert App.</p>
+    </div>
+
+    <div class="card" onclick="openModal('tanstack')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-teal">🔄</div><h3>TanStack Query</h3></div>
+      <div class="url-chip">tanstack.com/query</div>
+      <p style="margin-top:6px">Server state management. Caching + background refetch otomatis.</p>
+    </div>
+
+    <div class="card" onclick="openModal('zustand')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-yellow">🐻</div><h3>Zustand</h3></div>
+      <div class="url-chip">zustand-demo.pmnd.rs</div>
+      <p style="margin-top:6px">Client state management ringan. Alternatif Redux tanpa boilerplate.</p>
+    </div>
+
+    <div class="card" onclick="openModal('mermaid')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-purple">📐</div><h3>Mermaid</h3></div>
+      <div class="url-chip">mermaid.js.org</div>
+      <p style="margin-top:6px">Diagram as code. Render flowchart & ERD dari markdown syntax di PRDify.</p>
+    </div>
+
+    <div class="card" onclick="openModal('blocknote')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-indigo">📝</div><h3>BlockNote + Yjs</h3></div>
+      <div class="url-chip">blocknotejs.org</div>
+      <p style="margin-top:6px">Block editor + real-time collab. Planned Phase 2 Nyerat.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ DEPLOYMENT ══ -->
+<div class="section" id="deploy">
+  <div class="section-label"><span class="sicon">🚀</span> Deployment Pattern</div>
+  <div class="grid g2">
+
+    <div class="card" onclick="openModal('deploy-pattern')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-orange">📤</div><h3>Pattern Deploy ke Biznet SID</h3></div>
+      <p>Build lokal → SCP via deploy.sh → docker compose up -d di <code style="font-size:11px">ichan@10.122.169.101</code>. Port: PRDify 3001, Expert 3002, SkillClaude 3003.</p>
+    </div>
+
+    <div class="card" onclick="openModal('lovable-deploy')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-pink">❤️</div><h3>Lovable → GitHub → VPS</h3></div>
+      <p>Khusus Nyerat: build di Lovable → export GitHub → clone di Contabo → Docker build → live.</p>
+    </div>
+
+    <div class="card" onclick="openModal('pm-agents')">
+      <span class="open-hint">Lihat detail</span>
+      <div class="card-header"><div class="icon c-indigo">🧠</div><h3>PM Agent Workspace</h3></div>
+      <p>5 sub-agents Claude Code di ~/.claude/agents/. Orchestrate task PM secara otomatis dari terminal.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ MCP SERVERS ══ -->
+<div class="section" id="mcp">
+  <div class="section-label"><span class="sicon">🔌</span> MCP Servers di Claude Code</div>
+  <p style="font-size:13px;color:var(--text3);margin-bottom:16px;">Model Context Protocol — integrasi langsung dari Claude Code ke platform eksternal. Klik untuk detail cara setup dan kegunaan.</p>
+  <div class="mcp-grid">
+    <div class="mcp-card" onclick="openModal('mcp-lovable')"><div class="mi">❤️</div><h4>Lovable</h4><p>Build & iterate app cloud</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-figma')"><div class="mi">🎨</div><h4>Figma</h4><p>Design-to-code sync</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-notion')"><div class="mi">🗒️</div><h4>Notion</h4><p>Baca & tulis halaman</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-clickup')"><div class="mi">✅</div><h4>ClickUp</h4><p>Task management</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-gmail')"><div class="mi">📧</div><h4>Gmail</h4><p>Kelola email</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-calendar')"><div class="mi">📅</div><h4>Google Calendar</h4><p>Event & jadwal</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-drive')"><div class="mi">📂</div><h4>Google Drive</h4><p>Akses file Drive</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-miro')"><div class="mi">🗺️</div><h4>Miro</h4><p>Whiteboard & diagram</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-gamma')"><div class="mi">⚡</div><h4>Gamma</h4><p>Presentasi AI</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-canva')"><div class="mi">🎨</div><h4>Canva</h4><p>Design assets</p></div>
+    <div class="mcp-card" onclick="openModal('mcp-lenny')"><div class="mi">📚</div><h4>Lenny's Data</h4><p>PM frameworks</p></div>
+  </div>
+</div>
+
+<hr />
+
+<!-- ══ APPS ══ -->
+<div class="section" id="apps">
+  <div class="section-label"><span class="sicon">📱</span> Semua Aplikasi yang Dibangun</div>
+
+  <div class="app-row" onclick="openModal('app-expert')">
+    <div>
+      <div class="app-name">🎓 Expert App — Sekolah Murid Merdeka</div>
+      <div class="app-url"><a href="https://sobatpm.sekolahmu.net/expert" target="_blank" rel="noopener">sobatpm.sekolahmu.net/expert</a></div>
+      <div class="app-desc">Platform expert: Presensi, Penilaian, Program. Zero-backend, murni client-side dengan MSW mock</div>
+      <div class="app-tags">
+        <span class="tag">Next.js 16</span><span class="tag t-infra">MSW</span><span class="tag">TanStack Query</span><span class="tag">Zustand</span><span class="tag t-infra">Docker</span><span class="tag t-infra">Biznet SID</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif ★</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-prdify')">
+    <div>
+      <div class="app-name">📋 PRDify (SobatPM)</div>
+      <div class="app-url"><a href="https://sobatpm.sekolahmu.net/prd" target="_blank" rel="noopener">sobatpm.sekolahmu.net/prd</a></div>
+      <div class="app-desc">AI-powered PRD creation tool. Multi-AI: Claude + Gemini, upload PDF, export ZIP, diagram Mermaid</div>
+      <div class="app-tags">
+        <span class="tag">Next.js 16</span><span class="tag t-ai">Anthropic API</span><span class="tag t-ai">Gemini API</span><span class="tag t-db">Prisma 7</span><span class="tag t-db">PostgreSQL</span><span class="tag t-infra">Docker</span><span class="tag t-infra">Biznet SID</span><span class="tag t-infra">Cloudflare</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-nyerat')">
+    <div>
+      <div class="app-name">✍️ Nyerat (fka Notevo)</div>
+      <div class="app-url"><a href="https://nyerat.tumbuh.us" target="_blank" rel="noopener">nyerat.tumbuh.us</a></div>
+      <div class="app-desc">Notion+Evernote replacement untuk tim internal. Build via Lovable + Supabase cloud</div>
+      <div class="app-tags">
+        <span class="tag">React + Vite</span><span class="tag t-db">Supabase</span><span class="tag">Lovable</span><span class="tag">shadcn/ui</span><span class="tag t-infra">Docker (planned)</span>
+      </div>
+    </div>
+    <span class="badge-status s-build">Phase 1</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-bot')">
+    <div>
+      <div class="app-name">🤖 AI Agent 001 — Telegram Sales Bot</div>
+      <div class="app-url"><span class="url-internal">Telegram only — tidak ada URL publik</span></div>
+      <div class="app-desc">Sales bot B2B distributor sayuran/buah. Claude AI + Google Sheets + PDF invoice otomatis</div>
+      <div class="app-tags">
+        <span class="tag">Python</span><span class="tag t-ai">Anthropic API</span><span class="tag">Telegram Bot API</span><span class="tag t-db">Google Sheets</span><span class="tag">reportlab</span><span class="tag t-infra">Docker</span><span class="tag t-infra">Biznet SID</span>
+      </div>
+    </div>
+    <span class="badge-status s-backlog">8 backlog</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-crm')">
+    <div>
+      <div class="app-name">🤝 CRM App</div>
+      <div class="app-url"><span class="url-internal">Internal — belum ada public URL</span></div>
+      <div class="app-desc">CRM dengan fitur Tag — Contact, Deal, Account, Activity. TagInput autocomplete, filter by tag</div>
+      <div class="app-tags">
+        <span class="tag">Next.js 16</span><span class="tag">shadcn/ui</span><span class="tag t-db">Prisma 7</span><span class="tag t-db">Prisma Postgres</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-supporthq')">
+    <div>
+      <div class="app-name">🎫 SupportHQ</div>
+      <div class="app-url"><span class="url-internal">Internal — belum ada public URL</span></div>
+      <div class="app-desc">Helpdesk app — Dashboard, Ticket List, Ticket Detail, Customers, Knowledge Base, New Ticket</div>
+      <div class="app-tags">
+        <span class="tag">Next.js 16</span><span class="tag">shadcn/ui</span><span class="tag t-db">Prisma 7</span><span class="tag t-db">Prisma Postgres</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-skillclaude')">
+    <div>
+      <div class="app-name">💡 SkillClaude (SobatPM Brain)</div>
+      <div class="app-url"><a href="https://sobatpm.sekolahmu.net/skillclaude" target="_blank" rel="noopener">sobatpm.sekolahmu.net/skillclaude</a></div>
+      <div class="app-desc">Knowledge base & resource site untuk PM. Static site Astro di-serve via Nginx</div>
+      <div class="app-tags">
+        <span class="tag">Astro</span><span class="tag">TypeScript</span><span class="tag t-infra">Nginx</span><span class="tag t-infra">Docker</span><span class="tag t-infra">Biznet SID</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif</span>
+  </div>
+
+  <div class="app-row" onclick="openModal('app-agents')">
+    <div>
+      <div class="app-name">🧠 PM Agent Workspace</div>
+      <div class="app-url"><span class="url-internal">Local only — ~/.claude/agents/</span></div>
+      <div class="app-desc">5 Claude Code sub-agents: PM Orchestrator, PRD Writer, Coaching, Knowledge Manager, Design Reviewer</div>
+      <div class="app-tags">
+        <span class="tag t-ai">Claude Code</span><span class="tag t-ai">Sub-agents</span><span class="tag">~/.claude/agents/</span>
+      </div>
+    </div>
+    <span class="badge-status s-active">Aktif</span>
+  </div>
+
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  Dibuat dengan Claude Code &nbsp;·&nbsp; product.manager@sekolahmu.co.id &nbsp;·&nbsp; 15 Mei 2026
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="overlay" id="overlay" onclick="closeOnBackdrop(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-icon" id="m-icon"></div>
+      <div class="modal-title">
+        <h2 id="m-title"></h2>
+        <div class="mcat" id="m-cat"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-url" id="m-url-box">
+      <span id="m-url"></span>
+      <a id="m-url-link" href="#" target="_blank" rel="noopener">Buka ↗</a>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+
+  /* ── HOSTING ── */
+  biznet: {
+    icon: '🖥️', iconClass: 'c-orange',
+    title: 'Biznet SID Server',
+    cat: 'Server Internal PT SID via Biznet',
+    url: 'https://biznetgio.com/',
+    desc: 'Server milik PT Semesta Integrasi Digital (SID/Sekolah.mu) yang dihost di infrastruktur Biznet. Diakses via SSH internal. Domain publik: sekolahmu.net. Semua Docker container production dijalankan di server ini.',
+    uses: [
+      'SSH access: ichan@10.122.169.101 (IP internal Biznet)',
+      'Host semua Docker container production SID',
+      'Port mapping aktif: PRDify (3001), Expert App (3002), SkillClaude (3003)',
+      'Subdomain publik: sobatpm.sekolahmu.net → routing ke port masing-masing app',
+      'Docker + Docker Compose untuk container orchestration',
+      'Systemd atau docker restart policy untuk uptime 24/7',
+    ],
+    projects: ['PRDify', 'Expert App', 'AI Agent 001', 'SkillClaude'],
+    extra: 'Akses tim: minta admin tambahkan SSH public key ke server. Command deploy: scp files ke 10.122.169.101 → ssh ichan@10.122.169.101 → docker compose up -d.'
+  },
+
+  cloudflare: {
+    icon: '☁️', iconClass: 'c-yellow',
+    title: 'Cloudflare',
+    cat: 'DNS, CDN & Security',
+    url: 'https://cloudflare.com/',
+    desc: 'Platform DNS, CDN, dan keamanan web untuk domain tumbuh.us. Free tier sudah sangat powerful — SSL otomatis, proteksi DDoS, dan caching global. Domain sekolahmu.net dikelola terpisah di infrastruktur SID.',
+    uses: [
+      'Kelola DNS domain tumbuh.us — pointing ke server Biznet SID',
+      'nyerat.tumbuh.us → Nyerat knowledge management app',
+      'SSL/HTTPS otomatis tanpa perlu setup certbot manual di server',
+      'CDN caching untuk static assets (gambar, JS, CSS) di edge Cloudflare',
+      'Proteksi DDoS level enterprise — gratis di free tier',
+      'Firewall rules: blokir traffic mencurigakan sebelum sampai server',
+    ],
+    projects: ['tumbuh.us', 'nyerat.tumbuh.us', 'Semua subdomain tumbuh.us'],
+    extra: 'Cara tambah subdomain: Login cloudflare.com → pilih domain tumbuh.us → DNS → Add Record → Type A → Name: nyerat → Content: IP server Biznet SID → Save.'
+  },
+
+  docker: {
+    icon: '🐳', iconClass: 'c-blue',
+    title: 'Docker + Docker Compose',
+    cat: 'Container Platform',
+    url: 'https://docker.com/',
+    desc: 'Platform kontainerisasi. Semua app dikemas dalam Docker image agar environment di lokal dan production konsisten. Docker Compose untuk orchestrate multi-container.',
+    uses: [
+      'Multi-stage build: deps → builder → runner (pakai node:20-alpine)',
+      'docker-compose.yml: define service, port mapping, env vars, restart policy',
+      'restart: unless-stopped → app otomatis nyala lagi setelah server reboot',
+      'Build image lokal, lalu SCP + run di Contabo',
+    ],
+    projects: ['PRDify', 'Expert App', 'SkillClaude', 'AI Agent 001'],
+    extra: 'Command rutin: docker compose build → docker compose up -d → docker compose logs -f untuk monitoring.'
+  },
+
+  nginx: {
+    icon: '🌐', iconClass: 'c-green',
+    title: 'Nginx',
+    cat: 'Web Server / Reverse Proxy',
+    url: 'https://nginx.org/',
+    desc: 'Web server dan reverse proxy yang sangat efisien. Di SkillClaude dipakai sebagai static file server di dalam Docker container, serve output Astro build.',
+    uses: [
+      'Serve static files hasil Astro build dari /usr/share/nginx/html',
+      'Handle base path /skillclaude/ dengan alias directive',
+      'Fallback ke index.html untuk SPA routing (try_files)',
+      'Berjalan di dalam Docker container sendiri',
+    ],
+    projects: ['SkillClaude'],
+    extra: 'Di project lain, Nginx bisa juga dipakai sebagai reverse proxy di depan beberapa app (port 80/443 → forward ke 3001, 3002, dst).'
+  },
+
+  /* ── DATABASE ── */
+  neon: {
+    icon: '⚡', iconClass: 'c-green',
+    title: 'Neon',
+    cat: 'Serverless PostgreSQL Cloud',
+    url: 'https://console.neon.tech/',
+    desc: 'Serverless PostgreSQL yang auto-scale. Keunggulan utama: branching database seperti git branch — bisa buat branch DB untuk dev/staging tanpa duplikasi data. Free tier tersedia dengan generous limit.',
+    uses: [
+      'PostgreSQL cloud tanpa manage server sendiri',
+      'Database branching: main branch untuk prod, dev branch untuk development',
+      'Connection pooling built-in via pgbouncer (penting untuk serverless)',
+      'Connect langsung via DATABASE_URL standard PostgreSQL',
+    ],
+    projects: ['Bisa dipakai di semua project Next.js + Prisma'],
+    extra: 'Cara mulai: Daftar di neon.tech → Create project → Copy connection string → paste ke DATABASE_URL di .env.'
+  },
+
+  prismadb: {
+    icon: '📦', iconClass: 'c-purple',
+    title: 'Prisma Postgres Cloud',
+    cat: 'Managed PostgreSQL',
+    url: 'https://www.prisma.io/postgres',
+    desc: 'Managed PostgreSQL database dari tim Prisma. Didesain untuk bekerja seamless dengan Prisma ORM. Sudah dipakai di SupportHQ dan CRM App.',
+    uses: [
+      'Managed PostgreSQL — zero ops, langsung connect',
+      'Diakses via @prisma/adapter-pg dengan PrismaPg({ connectionString })',
+      'Prisma v7 gotcha: DATABASE_URL harus di prisma.config.ts, BUKAN di schema.prisma',
+      'Connection: new PrismaPg({ connectionString: process.env.DATABASE_URL })',
+    ],
+    projects: ['SupportHQ', 'CRM App'],
+    extra: 'Kode runtime: import { PrismaPg } from "@prisma/adapter-pg"; const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });'
+  },
+
+  supabase: {
+    icon: '💚', iconClass: 'c-green',
+    title: 'Supabase',
+    cat: 'Backend-as-a-Service',
+    url: 'https://supabase.com/',
+    desc: 'Open-source Firebase alternative. Satu platform untuk PostgreSQL database, Auth, File Storage, dan Realtime subscriptions. Cocok untuk tim yang butuh backend lengkap tanpa manage server.',
+    uses: [
+      'PostgreSQL database dengan dashboard visual untuk manage data',
+      'Supabase Auth: login email/password, OAuth (Google, GitHub), magic link',
+      'Storage: upload file/gambar dengan bucket management',
+      'Realtime: subscribe ke perubahan database via websocket',
+      'SQL editor langsung dari dashboard untuk query manual',
+    ],
+    projects: ['Nyerat'],
+    extra: 'Schema Nyerat sudah ada di file SUPABASE_SCHEMA.sql. Cara setup: Create project di supabase.com → jalankan SQL schema → copy anon key & project URL ke env.'
+  },
+
+  gsheets: {
+    icon: '📊', iconClass: 'c-teal',
+    title: 'Google Sheets API',
+    cat: 'Spreadsheet as Database',
+    url: 'https://developers.google.com/sheets/api',
+    desc: 'API untuk baca/tulis Google Sheets secara programmatic. Dipakai di AI Agent 001 sebagai database price list dan transaction log — mudah diedit manual oleh tim non-teknis.',
+    uses: [
+      'Sheet "Harga": price list produk yang dibaca bot saat proses order',
+      'Sheet "Log Transaksi": catat semua deal yang sudah diproses',
+      'Auth via Service Account JSON (service-account.json) — no OAuth flow',
+      'Library Python: gspread 6.2.1 + google-auth 2.52.0',
+    ],
+    projects: ['AI Agent 001'],
+    extra: 'Cara setup: Google Cloud Console → Create Service Account → Download JSON key → Share Google Sheet ke email service account → pakai gspread.service_account().'
+  },
+
+  prismaorm: {
+    icon: '🔷', iconClass: 'c-indigo',
+    title: 'Prisma ORM v7',
+    cat: 'TypeScript ORM',
+    url: 'https://www.prisma.io/',
+    desc: 'ORM TypeScript untuk define schema, generate migration, dan query database dengan type-safe. Versi 7 punya breaking change penting soal konfigurasi datasource.',
+    uses: [
+      'schema.prisma: define model/tabel dan relasi',
+      'npx prisma migrate dev: generate dan jalankan migration',
+      'npx prisma generate: generate Prisma Client setelah schema berubah',
+      'GOTCHA v7: DATABASE_URL tidak boleh di schema.prisma, harus di prisma.config.ts',
+      'Runtime: pakai @prisma/adapter-pg dengan PrismaPg({ connectionString })',
+    ],
+    projects: ['SupportHQ', 'CRM App', 'PRDify'],
+    extra: 'prisma.config.ts wajib ada: import { defineConfig } from "prisma/config"; export default defineConfig({ datasourceUrl: process.env.DATABASE_URL });'
+  },
+
+  /* ── AI & API ── */
+  claudecode: {
+    icon: '🤖', iconClass: 'c-purple',
+    title: 'Claude Code (CLI)',
+    cat: 'AI Coding Assistant',
+    url: 'https://claude.ai/code',
+    desc: 'AI coding assistant dari Anthropic yang berjalan di terminal. Bisa baca, tulis, edit file, jalankan command, dan build aplikasi lengkap dengan context seluruh codebase.',
+    uses: [
+      'Build aplikasi dari scratch: scaffold, fitur, bug fix, refactor',
+      'Baca dan pahami codebase yang sudah ada',
+      'Jalankan command terminal (npm, git, docker, dll)',
+      'Sub-agents: orchestrate task kompleks dengan multiple specialized agents',
+      'MCP servers: extend kemampuan dengan integrasi platform eksternal',
+    ],
+    projects: ['Semua project'],
+    extra: 'Install: npm install -g @anthropic-ai/claude-code. Jalankan: claude di direktori project. Ketik /help untuk daftar command.'
+  },
+
+  anthropic: {
+    icon: '🧠', iconClass: 'c-purple',
+    title: 'Anthropic API',
+    cat: 'Claude AI API',
+    url: 'https://console.anthropic.com/',
+    desc: 'API untuk mengakses model Claude secara programmatic. Dipakai di aplikasi yang butuh AI capability — bukan via Claude Code CLI, tapi embed langsung di kode app.',
+    uses: [
+      'PRDify: generate PRD dari deskripsi produk menggunakan Claude',
+      'AI Agent 001: proses pesan sales dalam bahasa natural → extract order details',
+      'Node.js SDK: @anthropic-ai/sdk — import Anthropic, new Anthropic({ apiKey })',
+      'Python SDK: anthropic==0.102.0 — dari package yang dipakai di bot',
+      'Model default: claude-sonnet-4-6 (balance kecepatan & kemampuan)',
+    ],
+    projects: ['PRDify', 'AI Agent 001'],
+    extra: 'Cara mulai: Daftar di console.anthropic.com → Settings → API Keys → Create Key. Simpan di .env sebagai ANTHROPIC_API_KEY.'
+  },
+
+  gemini: {
+    icon: '🔮', iconClass: 'c-blue',
+    title: 'Google Gemini API',
+    cat: 'Google AI API',
+    url: 'https://aistudio.google.com/',
+    desc: 'API model AI dari Google. Di PRDify tersedia sebagai alternatif Claude — user bisa pilih AI mana yang dipakai untuk generate PRD mereka.',
+    uses: [
+      'PRDify: opsi kedua untuk AI generation, berdampingan dengan Anthropic',
+      'SDK: @google/generative-ai package di Node.js',
+      'Env var: GEMINI_API_KEY di .env PRDify',
+      'Free tier tersedia di Google AI Studio dengan rate limit yang cukup generous',
+    ],
+    projects: ['PRDify'],
+    extra: 'Cara mulai: Buka aistudio.google.com → Get API Key → Copy ke GEMINI_API_KEY. Lebih mudah dari Google Cloud Console karena tidak perlu billing setup.'
+  },
+
+  lovable: {
+    icon: '❤️', iconClass: 'c-pink',
+    title: 'Lovable',
+    cat: 'AI App Builder',
+    url: 'https://lovable.dev/',
+    desc: 'AI-powered full-stack app builder berbasis cloud. Cukup describe apa yang mau dibangun, AI generate kode React + Tailwind + shadcn/ui + Supabase. Ada live preview langsung.',
+    uses: [
+      'Build Nyerat tanpa setup lokal — langsung di browser',
+      'Send message natural language → AI edit kode + rebuild preview',
+      'Connect Supabase dengan satu klik dari dalam editor',
+      'Export ke GitHub untuk deploy sendiri ke VPS',
+      'MCP integration: bisa di-control dari Claude Code via Lovable MCP',
+    ],
+    projects: ['Nyerat'],
+    extra: 'Project Nyerat: lovable.dev/projects/d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e. Preview: id-preview--d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e.lovable.app'
+  },
+
+  telegram: {
+    icon: '💬', iconClass: 'c-blue',
+    title: 'Telegram Bot API',
+    cat: 'Messaging Platform API',
+    url: 'https://core.telegram.org/bots/api',
+    desc: 'API resmi Telegram untuk buat bot. Dipakai di AI Agent 001 sebagai channel komunikasi antara Sales dan Manager untuk proses order dan approval.',
+    uses: [
+      'Sales grup: tim sales ketik pesan order dalam bahasa natural',
+      'Manager grup: terima notifikasi deal + inline button Approve/Reject',
+      'Python library: python-telegram-bot 22.7 (async)',
+      'Env vars: TELEGRAM_TOKEN, MANAGER_CHAT_ID, SALES_CHAT_IDS',
+      'Inline keyboard: button approve/reject/custom discount langsung di chat',
+    ],
+    projects: ['AI Agent 001'],
+    extra: 'Cara buat bot: Chat @BotFather di Telegram → /newbot → dapat TELEGRAM_TOKEN. Tambahkan bot ke grup → dapatkan CHAT_ID via getUpdates API.'
+  },
+
+  googleapi: {
+    icon: '🔴', iconClass: 'c-red',
+    title: 'Google APIs (googleapis)',
+    cat: 'Google Cloud APIs',
+    url: 'https://console.cloud.google.com/',
+    desc: 'SDK Node.js untuk semua Google services. Di PRDify dipakai untuk integrasi Google Drive dan service account management.',
+    uses: [
+      'Service account auth: JWT-based tanpa perlu OAuth flow user',
+      'Google Drive API: akses dan baca dokumen dari Drive',
+      'Env var: GOOGLE_SERVICE_ACCOUNT_JSON (JSON string service account)',
+      'Package: googleapis di package.json PRDify',
+    ],
+    projects: ['PRDify'],
+    extra: 'Cara setup: Google Cloud Console → Enable APIs (Drive, Sheets) → Create Service Account → Download JSON → base64/stringify dan simpan ke env var.'
+  },
+
+  /* ── FRONTEND ── */
+  nextjs: {
+    icon: '⏭️', iconClass: 'c-slate',
+    title: 'Next.js 16',
+    cat: 'React Framework',
+    url: 'https://nextjs.org/',
+    desc: 'Framework React production-ready. App Router (bukan Pages Router), Server Components, built-in API routes. Standar di semua web app lokal yang dibangun.',
+    uses: [
+      'App Router: folder app/ → automatic routing berdasarkan struktur folder',
+      'Server Components: fetch data di server, kirim HTML ke client',
+      'API Routes: app/api/... → endpoint backend tanpa server terpisah',
+      'TypeScript native — zero config',
+      'Built-in optimasi: image, font, bundle splitting',
+    ],
+    projects: ['SupportHQ', 'CRM App', 'PRDify', 'Expert App'],
+    extra: 'Bootstrap: npx create-next-app@latest --typescript --tailwind --app. Port default 3000, bisa override dengan PORT env atau npm run dev -- -p 3001.'
+  },
+
+  shadcn: {
+    icon: '🧩', iconClass: 'c-indigo',
+    title: 'shadcn/ui',
+    cat: 'Component Library',
+    url: 'https://ui.shadcn.com/',
+    desc: 'Bukan npm package — component di-copy langsung ke codebase. Built di atas Radix UI (accessibility) + Tailwind CSS (styling). Fully customizable karena code ada di repo sendiri.',
+    uses: [
+      'npx shadcn@latest add button card dialog sheet — install per komponen',
+      'Komponen tersimpan di src/components/ui/',
+      'Bisa modify langsung tanpa override library',
+      'Variants dengan class-variance-authority (cva)',
+      'Accessible by default via Radix UI primitives',
+    ],
+    projects: ['SupportHQ', 'CRM App', 'PRDify', 'Nyerat'],
+    extra: 'Cara init di project baru: npx shadcn@latest init → pilih style (Default/New York) → pilih base color → otomatis setup tailwind config.'
+  },
+
+  tailwind: {
+    icon: '💨', iconClass: 'c-blue',
+    title: 'Tailwind CSS',
+    cat: 'CSS Framework',
+    url: 'https://tailwindcss.com/',
+    desc: 'Utility-first CSS framework. Styling langsung di className JSX, tidak perlu tulis file CSS terpisah. Purge otomatis untuk production bundle yang kecil.',
+    uses: [
+      'className="flex items-center gap-4 px-4 py-2 rounded-lg bg-blue-500"',
+      'Responsive: sm:, md:, lg: prefix untuk breakpoint',
+      'Dark mode: dark: prefix (jika dark mode diaktifkan)',
+      'Arbitrary values: w-[342px], mt-[13px] untuk nilai custom',
+      'Plugin: tw-animate-css untuk animasi, @tailwindcss/typography untuk prose',
+    ],
+    projects: ['Semua web app'],
+    extra: 'Di project Next.js + shadcn/ui, Tailwind sudah auto-configured. Pastikan content di tailwind.config.ts mencakup semua file yang pakai className.'
+  },
+
+  astro: {
+    icon: '🚀', iconClass: 'c-orange',
+    title: 'Astro',
+    cat: 'Static Site Generator',
+    url: 'https://astro.build/',
+    desc: 'Framework untuk build static sites yang sangat cepat. Output: HTML/CSS/JS minimal tanpa runtime JavaScript overhead. Perfect untuk content sites, docs, dan knowledge bases.',
+    uses: [
+      'SkillClaude: build knowledge base SobatPM sebagai static site',
+      'Output di-serve via Nginx di dalam Docker container',
+      'Base path config: base: "/skillclaude" di astro.config.mjs',
+      'Support Markdown, MDX, dan berbagai UI framework (React, Vue)',
+      'npm run build → output di dist/ → copy ke Nginx container',
+    ],
+    projects: ['SkillClaude'],
+    extra: 'Bootstrap: npm create astro@latest. Build: npm run build → folder dist/ berisi static files siap deploy.'
+  },
+
+  msw: {
+    icon: '🔧', iconClass: 'c-red',
+    title: 'MSW (Mock Service Worker)',
+    cat: 'API Mocking',
+    url: 'https://mswjs.io/',
+    desc: 'Intercept HTTP requests di browser via Service Worker, return mock response. Expert App sepenuhnya bergantung MSW — tidak ada backend server sama sekali.',
+    uses: [
+      'mocks/handlers.ts: define endpoint mock (GET/POST/PATCH/DELETE)',
+      'mocks/state.ts: in-memory state yang persist selama session browser',
+      'lib/master-seed.ts: initial data untuk semua mock endpoint',
+      'TanStack Query + MSW: fetch data seperti biasa, MSW intercept di belakang',
+      '@mswjs/data: type-safe in-memory database untuk mock data',
+    ],
+    projects: ['Expert App'],
+    extra: 'Keunggulan: bisa deploy ke production tanpa backend. Data hilang saat refresh — untuk prod tetap perlu database nyata, MSW hanya untuk prototyping/development.'
+  },
+
+  tanstack: {
+    icon: '🔄', iconClass: 'c-teal',
+    title: 'TanStack Query',
+    cat: 'Server State Management',
+    url: 'https://tanstack.com/query',
+    desc: 'Library untuk manage "server state" — data yang di-fetch dari API. Handle loading/error state, caching, background refetch, dan invalidation otomatis.',
+    uses: [
+      'useQuery: fetch dan cache data dari API/MSW endpoint',
+      'useMutation: POST/PATCH/DELETE dengan optimistic updates',
+      'queryClient.invalidateQueries: refresh data setelah mutation',
+      'staleTime, gcTime: config berapa lama cache valid',
+      'Lebih ringan dari Redux untuk use case fetch/cache data',
+    ],
+    projects: ['Expert App'],
+    extra: 'Provider setup: bungkus app dengan QueryClientProvider. Semua useQuery di komponen mana pun otomatis share cache yang sama.'
+  },
+
+  zustand: {
+    icon: '🐻', iconClass: 'c-yellow',
+    title: 'Zustand',
+    cat: 'Client State Management',
+    url: 'https://zustand-demo.pmnd.rs/',
+    desc: 'Minimal state management library. Jauh lebih simple dari Redux — tidak ada action, reducer, atau boilerplate. Cocok untuk global UI state yang tidak di-fetch dari server.',
+    uses: [
+      'create store: const useStore = create((set) => ({ count: 0, inc: () => set(s => ({count: s.count+1})) }))',
+      'Konsumsi di komponen: const { count, inc } = useStore()',
+      'Di Expert App: manage selected filters, active sheet, UI state global',
+      'Tidak perlu Provider — store adalah singleton',
+      'Devtools support untuk debug state changes',
+    ],
+    projects: ['Expert App'],
+    extra: 'Install: npm install zustand. Tidak perlu setup apapun selain define store. Persist ke localStorage bisa via zustand/middleware.'
+  },
+
+  mermaid: {
+    icon: '📐', iconClass: 'c-purple',
+    title: 'Mermaid',
+    cat: 'Diagram as Code',
+    url: 'https://mermaid.js.org/',
+    desc: 'Render diagram dari text syntax mirip markdown. Di PRDify dipakai untuk visualisasi arsitektur, user flow, dan ERD langsung dari dalam dokumen PRD.',
+    uses: [
+      'Render flowchart, sequence diagram, ERD, gantt dari text',
+      'Integrasi di React: import mermaid, panggil mermaid.render()',
+      'User bisa tulis/edit diagram langsung di PRD editor',
+      'Output: SVG yang bisa di-copy atau di-export',
+    ],
+    projects: ['PRDify'],
+    extra: 'Contoh: flowchart LR → A[Start] --> B{Decision} --> C[End]. Mermaid Live Editor (mermaid.live) berguna untuk eksperimen syntax.'
+  },
+
+  blocknote: {
+    icon: '📝', iconClass: 'c-indigo',
+    title: 'BlockNote + Yjs',
+    cat: 'Block Editor + Real-time Collab',
+    url: 'https://www.blocknotejs.org/',
+    desc: 'BlockNote adalah block editor seperti Notion (drag-drop blocks, slash commands, rich text). Yjs adalah CRDT library untuk real-time collaborative editing — beberapa user edit dokumen bersamaan.',
+    uses: [
+      'BlockNote: editor dengan blocks (paragraph, heading, list, image, dll)',
+      'Slash commands: ketik / untuk insert block baru',
+      'Yjs: CRDT (Conflict-free Replicated Data Type) untuk resolve conflicts secara otomatis',
+      'y-websocket: sync Yjs document antar user via WebSocket server',
+      'Planned untuk Phase 2 Nyerat sebagai core editor',
+    ],
+    projects: ['Nyerat (Phase 2 - planned)'],
+    extra: 'Butuh WebSocket server untuk real-time collab. Bisa pakai y-websocket package atau Supabase Realtime sebagai transport layer.'
+  },
+
+  /* ── DEPLOYMENT ── */
+  'deploy-pattern': {
+    icon: '📤', iconClass: 'c-orange',
+    title: 'Pattern Deploy ke Biznet SID',
+    cat: 'Deployment Workflow',
+    url: '',
+    desc: 'Standar deployment semua app ke server Biznet SID menggunakan script deploy.sh yang otomatis build, upload, dan restart container via SSH.',
+    uses: [
+      '1. docker compose build — build Docker image di lokal',
+      '2. scp files ke server: app code + Dockerfile + docker-compose.yml + .env',
+      '3. ssh ichan@10.122.169.101 → cd [app-dir] → docker compose down',
+      '4. docker compose build → docker compose up -d',
+      '5. docker compose ps → verify container running',
+      '6. docker compose logs --tail=20 → check startup logs',
+    ],
+    projects: ['PRDify', 'Expert App', 'SkillClaude', 'AI Agent 001'],
+    extra: 'Script deploy.sh sudah ada di AI Agent 001 — template bisa dipakai semua app. Ganti variabel SERVER="ichan@10.122.169.101" dan REMOTE="/home/ichan/[app-name]".'
+  },
+
+  'lovable-deploy': {
+    icon: '❤️', iconClass: 'c-pink',
+    title: 'Lovable → GitHub → VPS',
+    cat: 'Cloud-to-VPS Deployment',
+    url: 'https://lovable.dev/',
+    desc: 'Pipeline deployment khusus Nyerat: develop di Lovable (cloud IDE) → export ke GitHub repo → deploy sendiri ke Contabo.',
+    uses: [
+      'Development: build di lovable.dev editor, live preview langsung',
+      'Export: Lovable push kode ke GitHub repository',
+      'VPS: git clone / git pull → docker compose build → up -d',
+      'Preview selama dev: id-preview--[project-id].lovable.app',
+      'Production: domain sendiri pointing via Cloudflare ke Contabo',
+    ],
+    projects: ['Nyerat'],
+    extra: 'Keunggulan: bisa iterasi cepat di Lovable tanpa setup lokal, lalu self-host di VPS untuk production dengan full control.'
+  },
+
+  'pm-agents': {
+    icon: '🧠', iconClass: 'c-indigo',
+    title: 'PM Agent Workspace',
+    cat: 'Claude Code Sub-agents',
+    url: 'https://claude.ai/code',
+    desc: 'Kumpulan sub-agents Claude Code yang di-setup untuk task-task spesifik Product Manager. Setiap agent punya persona, tools, dan instruksi sendiri.',
+    uses: [
+      'pm-orchestrator: koordinasi dan delegate task ke agent lain',
+      'prd-writer: tulis dan refine Product Requirements Document',
+      'coaching-assistant: coaching dan feedback untuk PM skill',
+      'knowledge-manager: kelola dan retrieve knowledge base tim',
+      'design-reviewer: review desain dari perspektif UX/PM',
+      'Semua tersimpan di ~/.claude/agents/ sebagai YAML files',
+    ],
+    projects: ['PM Agent Workspace'],
+    extra: 'Cara pakai: jalankan claude di terminal → ketik @pm-orchestrator [task] untuk activate agent. Tim bisa share agent files via git.'
+  },
+
+  /* ── BIAYA ── */
+  'cost-anthropic': {
+    icon: '🧠', iconClass: 'c-purple',
+    title: 'Anthropic API — $100/bulan',
+    cat: 'AI API Subscription',
+    url: 'https://console.anthropic.com/',
+    desc: 'Subscription Anthropic API sebesar $100/bulan untuk akses Claude model di semua aplikasi. Dengan budget ini bisa handle volume penggunaan production yang cukup tinggi.',
+    uses: [
+      'PRDify: generate PRD dari deskripsi produk (per request ~$0.003–0.01)',
+      'AI Agent 001: proses percakapan sales bot Telegram (per conversation ~$0.01–0.05)',
+      'Claude Code CLI: coding assistant sehari-hari (billed via Anthropic account)',
+      'Model default: claude-sonnet-4-6 — balance terbaik kecepatan vs kualitas',
+      'Monitor usage real-time di console.anthropic.com/usage — breakdown per API key',
+      'Set spending limits dan email alert dari dashboard console',
+    ],
+    projects: ['PRDify', 'AI Agent 001', 'Claude Code CLI'],
+    extra: 'Tips hemat: pakai claude-haiku-4-5 untuk task sederhana (10x lebih murah dari Sonnet). Aktifkan prompt caching untuk input repetitif — hemat sampai 90% token cost.'
+  },
+
+  'cost-lovable': {
+    icon: '❤️', iconClass: 'c-pink',
+    title: 'Lovable + Cloud — $50/bulan',
+    cat: 'AI App Builder Subscription',
+    url: 'https://lovable.dev/',
+    desc: 'Subscription Lovable (AI app builder) termasuk paket cloud untuk build dan host project Nyerat. Dengan paket berbayar dapat lebih banyak AI messages, custom domain, dan priority build.',
+    uses: [
+      'Lovable plan: unlimited projects, lebih banyak AI edit messages per bulan',
+      'Build Nyerat via AI chat interface — describe fitur → AI generate kode',
+      'Live preview otomatis setiap perubahan, tidak perlu rebuild manual',
+      'Export ke GitHub untuk self-deploy ke Biznet SID server',
+      'Supabase integration: connect database + auth + storage dengan 1 klik',
+      'Custom domain: nyerat.tumbuh.us bisa di-connect langsung dari dashboard',
+    ],
+    projects: ['Nyerat'],
+    extra: 'ROI: $50/bulan untuk build app yang butuh berminggu-minggu kalau dari scratch. Cocok untuk prototyping cepat sebelum production. Setelah stabil, bisa export ke GitHub dan self-host.'
+  },
+
+  /* ── MCP SERVERS ── */
+  'mcp-lovable': {
+    icon: '❤️', iconClass: 'c-pink',
+    title: 'Lovable MCP',
+    cat: 'MCP Server',
+    url: 'https://lovable.dev/',
+    desc: 'MCP server untuk kontrol Lovable dari dalam Claude Code. Kirim message ke Lovable project, baca kode, lihat diff perubahan — semua tanpa buka browser.',
+    uses: [
+      'send_message: kirim instruksi build ke Lovable agent',
+      'get_diff: lihat perubahan kode yang dibuat agent',
+      'list_files / read_file: baca file di Lovable project',
+      'get_project: info project, editor URL, preview URL',
+      'Nyerat dikelola full via MCP ini dari Claude Code',
+    ],
+    projects: ['Nyerat'],
+    extra: 'Setup: tambahkan Lovable MCP di Claude Code settings. Authenticate dengan Lovable account. Project ID Nyerat: d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e.'
+  },
+
+  'mcp-figma': {
+    icon: '🎨', iconClass: 'c-pink',
+    title: 'Figma MCP',
+    cat: 'MCP Server',
+    url: 'https://figma.com/',
+    desc: 'Bridge antara Figma design dan kode. Bisa baca design dari Figma (desain → kode) atau push komponen dari kode ke Figma (kode → desain).',
+    uses: [
+      'get_design_context: baca layout, komponen, dan style dari Figma file',
+      'get_screenshot: capture visual dari node Figma tertentu',
+      'use_figma: buat atau edit elemen di Figma langsung dari Claude',
+      'generate_diagram: buat diagram di FigJam',
+      'Code Connect: map komponen Figma ke komponen kode yang sesuai',
+    ],
+    projects: ['Design review', 'Component mapping'],
+    extra: 'Cara pakai: share Figma URL ke Claude, Claude otomatis pakai MCP ini. Format URL: figma.com/design/[fileKey]/[name]?node-id=[nodeId].'
+  },
+
+  'mcp-notion': {
+    icon: '🗒️', iconClass: 'c-slate',
+    title: 'Notion MCP',
+    cat: 'MCP Server',
+    url: 'https://notion.so/',
+    desc: 'Integrasi Notion langsung dari Claude Code. Baca halaman, tulis konten, buat database, dan query data Notion tanpa buka aplikasi.',
+    uses: [
+      'notion-search: cari halaman/database di workspace',
+      'notion-fetch: baca konten halaman Notion',
+      'notion-create-pages: buat halaman baru dengan konten',
+      'notion-update-page: update konten halaman yang ada',
+      'notion-query-database-view: query data dari Notion database',
+    ],
+    projects: ['Knowledge management', 'Dokumentasi'],
+    extra: 'Setup: connect Notion workspace di Claude Code settings. Pastikan halaman/database yang mau diakses sudah di-share ke integration.'
+  },
+
+  'mcp-clickup': {
+    icon: '✅', iconClass: 'c-purple',
+    title: 'ClickUp MCP',
+    cat: 'MCP Server',
+    url: 'https://clickup.com/',
+    desc: 'Kelola tasks dan project di ClickUp langsung dari Claude Code. Buat task, update status, assign member, dan track progress tanpa buka browser.',
+    uses: [
+      'clickup_create_task: buat task baru dari hasil discussion',
+      'clickup_update_task: update status, assignee, due date',
+      'clickup_get_task: baca detail task tertentu',
+      'clickup_filter_tasks: filter task by list/status/assignee',
+      'clickup_create_task_comment: tambah comment ke task',
+    ],
+    projects: ['Project management', 'Sprint planning'],
+    extra: 'Workflow: planning dengan Claude → auto-create tasks di ClickUp via MCP → assign ke anggota tim → track progress.'
+  },
+
+  'mcp-gmail': {
+    icon: '📧', iconClass: 'c-red',
+    title: 'Gmail MCP',
+    cat: 'MCP Server',
+    url: 'https://mail.google.com/',
+    desc: 'Kelola Gmail langsung dari Claude Code. Search email, baca thread, buat draft, dan kelola label tanpa buka Gmail.',
+    uses: [
+      'search_threads: cari email berdasarkan query (from:, subject:, dll)',
+      'get_thread: baca seluruh thread email termasuk reply',
+      'create_draft: buat draft email untuk di-review sebelum kirim',
+      'label_thread: organisasi email dengan label',
+      'list_labels: lihat semua label yang ada',
+    ],
+    projects: ['Email management', 'Follow-up otomatis'],
+    extra: 'Catatan: MCP ini bisa buat draft tapi tidak langsung kirim — ada review step. Berguna untuk draft email panjang atau email yang butuh context dari codebase.'
+  },
+
+  'mcp-calendar': {
+    icon: '📅', iconClass: 'c-blue',
+    title: 'Google Calendar MCP',
+    cat: 'MCP Server',
+    url: 'https://calendar.google.com/',
+    desc: 'Buat dan kelola event Google Calendar dari Claude. Berguna untuk scheduling meeting, set reminder, dan cek availability.',
+    uses: [
+      'list_events: lihat jadwal ke depan',
+      'create_event: buat event dengan attendees, lokasi, dan deskripsi',
+      'suggest_time: minta saran waktu meeting berdasarkan availability',
+      'update_event / delete_event: kelola event yang sudah ada',
+      'respond_to_event: accept/decline undangan meeting',
+    ],
+    projects: ['Scheduling', 'Sprint ceremonies'],
+    extra: 'Berguna untuk: "Claude, jadwalkan sprint review Jumat jam 3 sore, undang semua anggota tim dari email yang ada di Notion page ini."'
+  },
+
+  'mcp-drive': {
+    icon: '📂', iconClass: 'c-yellow',
+    title: 'Google Drive MCP',
+    cat: 'MCP Server',
+    url: 'https://drive.google.com/',
+    desc: 'Akses dan baca file di Google Drive dari Claude. Berguna untuk membaca dokumen, spreadsheet, atau presentasi yang tersimpan di Drive.',
+    uses: [
+      'search_files: cari file berdasarkan nama atau tipe',
+      'read_file_content: baca isi dokumen (Google Docs, Sheets)',
+      'get_file_metadata: info file (owner, last modified, sharing)',
+      'download_file_content: download isi file',
+      'create_file: buat file baru di Drive',
+    ],
+    projects: ['Document access', 'File management'],
+    extra: 'Berguna untuk: baca spec dokumen dari Drive lalu langsung implement di kode, atau summarize dokumen panjang.'
+  },
+
+  'mcp-miro': {
+    icon: '🗺️', iconClass: 'c-yellow',
+    title: 'Miro MCP',
+    cat: 'MCP Server',
+    url: 'https://miro.com/',
+    desc: 'Buat dan kelola whiteboard Miro dari Claude. Berguna untuk membuat diagram, user journey, dan wireframe kolaboratif.',
+    uses: [
+      'diagram_create: buat diagram dari DSL text',
+      'doc_create: buat sticky note atau text card di board',
+      'table_create: buat tabel di whiteboard',
+      'board_list_items: lihat semua item di board',
+      'context_explore: pahami konten board yang ada',
+    ],
+    projects: ['User journey mapping', 'Architecture diagram'],
+    extra: 'Berguna untuk: "Claude, buatkan user flow diagram untuk fitur onboarding di Miro board [URL]."'
+  },
+
+  'mcp-gamma': {
+    icon: '⚡', iconClass: 'c-indigo',
+    title: 'Gamma MCP',
+    cat: 'MCP Server',
+    url: 'https://gamma.app/',
+    desc: 'Generate presentasi, dokumen, dan halaman web dengan AI. Output profesional yang langsung bisa di-edit di Gamma editor.',
+    uses: [
+      'generate: buat presentasi baru dari prompt/outline',
+      'generate_from_template: pakai template yang sudah ada',
+      'get_gammas: list semua presentasi yang sudah dibuat',
+      'read_gamma: baca konten presentasi yang ada',
+      'Output: shareable link yang bisa dibuka tim tanpa account',
+    ],
+    projects: ['Presentasi stakeholder', 'Deck produk'],
+    extra: 'Berguna untuk: convert PRD atau hasil research menjadi presentasi yang bagus untuk stakeholder meeting.'
+  },
+
+  'mcp-canva': {
+    icon: '🎨', iconClass: 'c-blue',
+    title: 'Canva MCP',
+    cat: 'MCP Server',
+    url: 'https://canva.com/',
+    desc: 'Akses Canva untuk design assets langsung dari Claude. Berguna untuk membuat visual marketing, thumbnail, atau ilustrasi.',
+    uses: [
+      'Buat design dari template yang tersedia di Canva',
+      'Generate visual assets dengan instruksi natural language',
+      'Akses design yang sudah dibuat sebelumnya',
+    ],
+    projects: ['Marketing assets', 'Visual content'],
+    extra: 'Setup butuh authenticate akun Canva. Gunakan untuk quick visual creation tanpa buka Canva browser.'
+  },
+
+  'mcp-lenny': {
+    icon: '📚', iconClass: 'c-teal',
+    title: "Lenny's Data MCP",
+    cat: 'MCP Server — PM Knowledge Base',
+    url: 'https://www.lennysnewsletter.com/',
+    desc: "Akses ke arsip newsletter dan podcast Lenny Rachitsky — salah satu resource PM terbaik. Berisi framework, case study, dan insights dari operator top.",
+    uses: [
+      'search_content: cari artikel/episode berdasarkan topik',
+      'read_content: baca full artikel atau transcript podcast',
+      'list_content: browse semua konten yang tersedia',
+      'Topik: growth, pricing, B2B SaaS, leadership, AI product, career',
+      'Berguna saat butuh framework atau benchmark untuk keputusan produk',
+    ],
+    projects: ['Product strategy', 'PM research'],
+    extra: 'Contoh: "Claude, cari di Lenny\'s data tentang framework pricing untuk B2B SaaS dengan free tier" → dapat insights dari artikel yang relevan.'
+  },
+
+  /* ── APPS ── */
+  'app-expert': {
+    icon: '🎓', iconClass: 'c-blue',
+    title: 'Expert App — Sekolah Murid Merdeka',
+    cat: 'Platform Utama (Aktif)',
+    url: 'https://sobatpm.sekolahmu.net/expert',
+    desc: 'Platform untuk Expert (pengajar) di program Sekolah Murid Merdeka. Kelola presensi, penilaian, dan program. Dibangun murni client-side tanpa backend — semua data via MSW mock.',
+    uses: [
+      'Presensi: catat kehadiran peserta, upload hasil karya, beri umpan balik',
+      'Penilaian: nilai peserta per aktivitas dengan berbagai kriteria',
+      'Program: lihat daftar program dan detail aktivitas',
+      'Bottom nav: Presensi · Penilaian · Program',
+      'Sticky CTA button untuk aksi utama di setiap halaman',
+      'Back button restore: kembali dari sub-page otomatis buka bottom sheet',
+    ],
+    projects: ['Expert App (~/Desktop/expert)'],
+    extra: 'Jalankan: cd ~/Desktop/expert && npm run dev (port 3002). Docker: docker compose up --build untuk production build.'
+  },
+
+  'app-prdify': {
+    icon: '📋', iconClass: 'c-indigo',
+    title: 'PRDify (SobatPM)',
+    cat: 'AI Tool (Aktif)',
+    url: 'https://sobatpm.sekolahmu.net/prd',
+    desc: 'AI-powered tool untuk membuat Product Requirements Document. User describe produk → AI generate PRD lengkap. Support multi-AI (Claude + Gemini), upload PDF, export ZIP, dan visualisasi diagram Mermaid.',
+    uses: [
+      'Generate PRD dari deskripsi produk dengan Claude atau Gemini',
+      'Upload PDF dokumen → AI baca dan incorporasi isinya ke PRD',
+      'Mermaid diagram: user flow, architecture, ERD otomatis di-generate',
+      'Export PRD sebagai ZIP (markdown + assets)',
+      'Auth dengan JWT + bcrypt — user management sendiri',
+      'Google Drive integration untuk simpan/load dokumen',
+    ],
+    projects: ['PRDify (~/Desktop/prdify)'],
+    extra: 'Jalankan: cd ~/Desktop/prdify && npm run dev (port 3001). Production: sobatpm.sekolahmu.net/prd — deploy via Docker ke Biznet SID server.'
+  },
+
+  'app-nyerat': {
+    icon: '✍️', iconClass: 'c-green',
+    title: 'Nyerat (fka Notevo)',
+    cat: 'Knowledge Management (Phase 1)',
+    url: 'https://id-preview--d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e.lovable.app',
+    desc: 'Platform knowledge management pengganti Notion+Evernote untuk tim internal. Nama "Nyerat" dari Bahasa Jawa Krama: serat → nyerat (to write). Dibangun di Lovable + Supabase.',
+    uses: [
+      'Phase 1 (current): Auth, workspace, page tree, sidebar, command palette, dark mode',
+      'Phase 2: Block editor (BlockNote) + real-time collab (Yjs)',
+      'Phase 3: Database views (Table, Kanban, Calendar, Gallery)',
+      'Phase 4: Evernote features — Tags, PDF viewer, Web Clipper',
+      'Phase 5: Full-text search, offline PWA, versioning',
+    ],
+    projects: ['Nyerat (Lovable + Supabase)'],
+    extra: 'URL Production: nyerat.tumbuh.us (via Cloudflare → Biznet SID). Editor Lovable: lovable.dev/projects/d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e. Preview dev: id-preview--d8e8f4f3.lovable.app.'
+  },
+
+  'app-bot': {
+    icon: '🤖', iconClass: 'c-purple',
+    title: 'AI Agent 001 — Telegram Sales Bot',
+    cat: 'Automation Bot (Aktif)',
+    url: '',
+    desc: 'Sales bot B2B untuk distributor sayuran/buah. Sales ketik pesan natural → Claude AI parse order → request approval Manager via Telegram → approve → generate PDF Sales Order.',
+    uses: [
+      '2 grup Telegram: Sales (input order) + Manager (approval)',
+      'Claude AI: extract produk, qty, harga, nama partner dari pesan bebas',
+      'Google Sheets: price list real-time + log semua transaksi',
+      'Manager: terima notifikasi + inline button Approve/Reject',
+      'ReportLab: generate PDF Sales Order otomatis saat approved',
+      'Deploy: Docker di Contabo, berjalan 24/7',
+    ],
+    projects: ['AI Agent 001 (~/Desktop/ai-agent-001)'],
+    extra: '8 item backlog: state persistence (SQLite), partner lookup, fix Markdown crash, custom discount, timeout approval, /history command, /summary harian, validasi produk.'
+  },
+
+  'app-crm': {
+    icon: '🤝', iconClass: 'c-teal',
+    title: 'CRM App',
+    cat: 'Internal Tool (Aktif)',
+    url: '',
+    desc: 'Customer Relationship Management app dengan sistem tagging. Kelola Contact, Deal, Account, dan Activity dengan fitur TagInput autocomplete dan filter by tag.',
+    uses: [
+      'Contact: kelola data kontak dengan tag kategori',
+      'Deal: track pipeline sales dengan status dan nilai',
+      'Account: kelola data perusahaan/klien',
+      'Activity: log semua interaksi (call, email, meeting)',
+      'TagInput: autocomplete + create tag baru inline',
+      'Filter: filter semua entitas berdasarkan satu atau lebih tag',
+    ],
+    projects: ['CRM App (~/Desktop/crm-app)'],
+    extra: 'Jalankan: cd ~/Desktop/crm-app && npm run dev. Database di Prisma Postgres Cloud via DATABASE_URL.'
+  },
+
+  'app-supporthq': {
+    icon: '🎫', iconClass: 'c-orange',
+    title: 'SupportHQ',
+    cat: 'Internal Tool (Aktif)',
+    url: '',
+    desc: 'Helpdesk application untuk kelola customer support tickets. Berdasarkan mockup CRM_Design_Mockup.html. Fitur lengkap dari Dashboard sampai Knowledge Base.',
+    uses: [
+      'Dashboard: overview metrics — open tickets, response time, satisfaction',
+      'Ticket List: semua ticket dengan filter status/priority/assignee',
+      'Ticket Detail: full conversation thread + status management',
+      'Customers: database customer + riwayat ticket',
+      'Knowledge Base: artikel FAQ untuk self-service',
+      'New Ticket: form buat ticket baru',
+    ],
+    projects: ['SupportHQ (~/Desktop/supporthq)'],
+    extra: 'Jalankan: cd ~/Desktop/supporthq && npm run dev. Database di Prisma Postgres Cloud.'
+  },
+
+  'app-skillclaude': {
+    icon: '💡', iconClass: 'c-yellow',
+    title: 'SkillClaude (SobatPM Brain)',
+    cat: 'Knowledge Site (Aktif)',
+    url: 'https://sobatpm.sekolahmu.net/skillclaude',
+    desc: 'Knowledge base dan resource site untuk Product Manager. Dibangun dengan Astro sebagai static site, di-deploy via Nginx di dalam Docker container di Contabo.',
+    uses: [
+      'Kompilasi framework, template, dan resource untuk PM',
+      'Static site: load sangat cepat, zero JavaScript runtime',
+      'Base path /skillclaude/ — bisa jalan berdampingan dengan app lain',
+      'Build: npm run build → copy dist/ ke Nginx image',
+      'Port 3003 di Contabo',
+    ],
+    projects: ['SkillClaude (~/Desktop/skillclaude)'],
+    extra: 'URL Production: sobatpm.sekolahmu.net/skillclaude. Jalankan lokal: npm run dev. Build: npm run build → docker compose up --build → deploy ke Biznet SID port 3003.'
+  },
+
+  'app-agents': {
+    icon: '🧠', iconClass: 'c-indigo',
+    title: 'PM Agent Workspace',
+    cat: 'Claude Code Sub-agents',
+    url: 'https://claude.ai/code',
+    desc: 'Workspace sub-agents Claude Code untuk task-task Product Manager. 5 specialized agents yang bisa di-orchestrate untuk handle task kompleks secara otomatis.',
+    uses: [
+      'pm-orchestrator: koordinasi task, delegate ke agent yang tepat',
+      'prd-writer: tulis PRD, user story, acceptance criteria',
+      'coaching-assistant: feedback dan coaching untuk skill PM',
+      'knowledge-manager: simpan dan retrieve knowledge dari codebase/docs',
+      'design-reviewer: review mockup dan UI dari perspektif PM/UX',
+      'Semua agents tersimpan di ~/Desktop/pm-agent-workspace/.claude/agents/',
+    ],
+    projects: ['PM Agent Workspace (~/Desktop/pm-agent-workspace)'],
+    extra: 'Cara pakai: buka terminal di folder workspace → jalankan claude → ketik @[agent-name] untuk activate agent tertentu.'
+  },
+
+};
+
+function openModal(key) {
+  const d = DATA[key];
+  if (!d) return;
+
+  document.getElementById('m-icon').className = 'modal-icon ' + d.iconClass;
+  document.getElementById('m-icon').textContent = d.icon;
+  document.getElementById('m-title').textContent = d.title;
+  document.getElementById('m-cat').textContent = d.cat;
+
+  const urlBox = document.getElementById('m-url-box');
+  const urlSpan = document.getElementById('m-url');
+  const urlLink = document.getElementById('m-url-link');
+  if (d.url) {
+    urlBox.style.display = 'flex';
+    urlSpan.textContent = d.url;
+    urlLink.href = d.url;
+  } else {
+    urlBox.style.display = 'none';
+  }
+
+  let body = `
+    <div class="modal-section">
+      <h4>Apa ini?</h4>
+      <p>${d.desc}</p>
+    </div>
+    <div class="modal-section">
+      <h4>Cara Pemakaian</h4>
+      <ul class="use-list">
+        ${d.uses.map(u => `<li>${u}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  if (d.projects && d.projects.length) {
+    body += `
+      <div class="modal-section">
+        <h4>Dipakai di</h4>
+        <div class="used-projects">
+          ${d.projects.map(p => `<span>${p}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  if (d.extra) {
+    body += `
+      <div class="modal-section">
+        <div class="tip-box">
+          <h4>💡 Cara Mulai / Catatan Penting</h4>
+          <p>${d.extra}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('m-body').innerHTML = body;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOnBackdrop(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
