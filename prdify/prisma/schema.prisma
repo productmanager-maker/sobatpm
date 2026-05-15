@@ -1,0 +1,107 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["prdify"]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(MEMBER)
+  isActive  Boolean  @default(true)
+  prds      PRD[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@schema("prdify")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+
+  @@schema("prdify")
+}
+
+model PRD {
+  id             String    @id @default(uuid())
+  title          String    @default("Untitled PRD")
+  status         PRDStatus @default(DRAFT)
+  quality        Int?
+  problem        String?   @db.Text
+  targetUser     String?   @db.Text
+  whyNow         String?   @db.Text
+  desiredOutcome String?   @db.Text
+  evidence       String?   @db.Text
+  inScope        String[]
+  outOfScope     String[]
+  dependencies   String?   @db.Text
+  risks          String?   @db.Text
+  gdriveUrl      String?
+  gdriveFileId   String?
+  gdriveTitle    String?
+  uploadedFile   String?
+  currentStep    PRDStep   @default(BRIEF_COACH)
+  generatedPRD   String?   @db.Text
+  briefContext   String?   @db.Text
+  briefExtracted Boolean   @default(false)
+  messages       Message[]
+  sections       PRDSection[]
+  author         String    @default("Ihsan Nugraha")
+  authorId       String?
+  user           User?     @relation(fields: [authorId], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@schema("prdify")
+}
+
+enum PRDStatus {
+  DRAFT
+  IN_PROGRESS
+  GENERATED
+  PUBLISHED
+
+  @@schema("prdify")
+}
+
+enum PRDStep {
+  BRIEF_COACH
+  CONTEXT_SCAN
+  DRAFT_PRD
+  PUBLISH
+
+  @@schema("prdify")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  prdId     String
+  prd       PRD      @relation(fields: [prdId], references: [id], onDelete: Cascade)
+  role      String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@schema("prdify")
+}
+
+model PRDSection {
+  id          String   @id @default(uuid())
+  prdId       String
+  prd         PRD      @relation(fields: [prdId], references: [id], onDelete: Cascade)
+  sectionType String
+  content     String?  @db.Text
+  status      String   @default("pending") // pending | generating | done | error
+  version     Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([prdId, sectionType])
+  @@schema("prdify")
+}
