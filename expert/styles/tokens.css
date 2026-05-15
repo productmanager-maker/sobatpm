@@ -1,0 +1,260 @@
+/* ============================================================
+   LERN Design System — Colors & Typography CSS Custom Properties
+   Source: LERN for Claude.fig (Figma)
+   ============================================================ */
+
+/* Google Fonts loaded in globals.css */
+
+/* Satoshi — local brand fonts */
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Light.otf') format('opentype'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Black.otf') format('opentype'); font-weight: 900; font-style: normal; }
+
+:root {
+  /* ─────────────────────────────────────────
+     FONT FAMILIES
+  ───────────────────────────────────────── */
+  --font-display:   'Satoshi', sans-serif;
+  --font-body:      'Satoshi', sans-serif;
+  --font-mono:      'Courier New', Courier, monospace;
+
+  /* ─────────────────────────────────────────
+     TEXT COLORS  ($text-*)
+  ───────────────────────────────────────── */
+  --text-100: #333333;   /* Carbon — primary text */
+  --text-200: #53555A;   /* Dark Grey */
+  --text-300: #6B6B6B;   /* Granite — secondary text */
+
+  /* ─────────────────────────────────────────
+     NEUTRAL SCALE  ($neutral-*)
+  ───────────────────────────────────────── */
+  --neutral-900: #3A3A3A;   /* Charcoal */
+  --neutral-800: #828282;   /* Trolley */
+  --neutral-700: #BDBDBD;   /* Vapor */
+  --neutral-600: #C0C0C0;   /* Silver */
+  --neutral-500: #E0E0E0;   /* Smoke */
+  --neutral-400: #F2F2F2;   /* Snow */
+  --neutral-300: #F7F7F7;   /* Whisper */
+  --neutral-200: #F9FAFB;   /* Baby Powder */
+  --neutral-100: #FFFFFF;   /* White */
+
+  /* ─────────────────────────────────────────
+     PRIMARY (Persian Blue)  ($primary-*)
+  ───────────────────────────────────────── */
+  --primary-1000: #000017;
+  --primary-900:  #00013D;
+  --primary-800:  #000563;
+  --primary-700:  #000B8A;
+  --primary-600:  #0519B0;   /* $brand-primary */
+  --primary-500:  #243BBD;   /* hover */
+  --primary-400:  #475FC9;
+  --primary-300:  #6D84D6;
+  --primary-200:  #98ABE3;
+  --primary-100:  #D8DFF0;
+
+  /* Brand alias */
+  --brand-primary: var(--primary-600);
+  --brand-hover:   var(--primary-500);
+  --brand-pressed: var(--primary-700);
+
+  /* ─────────────────────────────────────────
+     LILAC — Banner & Background  ($lilac-*)
+  ───────────────────────────────────────── */
+  --lilac-600: #BA8CD9;
+  --lilac-500: #C9A6E0;
+  --lilac-400: #E1CBEF;
+  --lilac-300: #EADCF2;
+  --lilac-200: #FAF1FF;
+  --lilac-100: #FDF9FF;
+
+  /* ─────────────────────────────────────────
+     DANGER / ERROR
+  ───────────────────────────────────────── */
+  --danger-1000: #520026;
+  --danger-900:  #780034;
+  --danger-800:  #9E003F;
+  --danger-700:  #C40048;
+  --danger-600:  #EB0B54;   /* primary danger */
+  --danger-500:  #F7346F;
+  --danger-400:  #FF5E89;
+  --danger-300:  #FF87A3;
+  --danger-200:  #FFB0C0;
+  --danger-100:  #FFE6EA;
+
+  /* ─────────────────────────────────────────
+     SEMANTIC SURFACE COLORS
+  ───────────────────────────────────────── */
+  --color-bg-page:      var(--neutral-400);   /* #F2F2F2 */
+  --color-bg-card:      var(--neutral-100);   /* #FFFFFF */
+  --color-bg-subtle:    var(--neutral-300);   /* #F7F7F7 */
+  --color-border:       var(--neutral-500);   /* #E0E0E0 */
+  --color-border-focus: var(--brand-primary);
+  --color-text:         var(--text-100);
+  --color-text-muted:   var(--text-200);
+  --color-text-subtle:  var(--text-300);
+  --color-link:         var(--brand-primary);
+
+  /* ─────────────────────────────────────────
+     OPACITY TOKENS  ($opacity-*)
+  ───────────────────────────────────────── */
+  --opacity-1: 0.05;
+  --opacity-2: 0.30;
+  --opacity-3: 0.50;
+  --opacity-4: 0.80;
+  --opacity-5: 1.00;
+
+  /* ─────────────────────────────────────────
+     SHADOW
+  ───────────────────────────────────────── */
+  --shadow-sm:  0 1px 4px rgba(51,51,51,0.10);
+  --shadow-md:  0 4px 16px rgba(51,51,51,0.10);
+  --shadow-lg:  0 8px 32px rgba(51,51,51,0.10);
+
+  /* ─────────────────────────────────────────
+     BORDER RADIUS
+  ───────────────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   8px;    /* standard UI: buttons, inputs, cards */
+  --radius-lg:   10px;   /* inner doc cards */
+  --radius-xl:   16px;
+  --radius-2xl:  40px;   /* large frames */
+  --radius-pill: 100px;  /* ghost/text buttons */
+
+  /* ─────────────────────────────────────────
+     SPACING SCALE (multiples of 8)
+  ───────────────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  40px;
+  --space-9:  48px;
+  --space-10: 64px;
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY TOKENS  ($font-*)
+     Desktop values
+  ───────────────────────────────────────── */
+
+  /* — Headings (Satoshi Bold) — */
+  --font-heading-1-size:   40px;
+  --font-heading-1-lh:     60px;
+  --font-heading-2-size:   36px;
+  --font-heading-2-lh:     54px;
+  --font-heading-3-size:   32px;
+  --font-heading-3-lh:     48px;
+  --font-heading-4-size:   28px;
+  --font-heading-4-lh:     42px;
+  --font-heading-5-size:   24px;
+  --font-heading-5-lh:     32px;
+  --font-heading-6-size:   20px;
+  --font-heading-6-lh:     26px;
+
+  /* — Body (Inter Regular) — */
+  --font-body-1-size:  18px;
+  --font-body-1-lh:    28px;
+  --font-body-2-size:  16px;
+  --font-body-2-lh:    24px;
+  --font-body-3-size:  14px;
+  --font-body-3-lh:    20px;
+
+  /* — Paragraph (Inter Light Italic) — */
+  --font-paragraph-1-size: 18px;
+  --font-paragraph-1-lh:   28px;
+  --font-paragraph-2-size: 16px;
+  --font-paragraph-2-lh:   24px;
+  --font-paragraph-3-size: 14px;
+  --font-paragraph-3-lh:   20px;
+
+  /* — Labels (Inter) — */
+  --font-label-1-size:  14px;   /* Semi Bold */
+  --font-label-1-lh:    20px;
+  --font-label-2-size:  12px;   /* Semi Bold — breadcrumb/tag */
+  --font-label-2-lh:    20px;
+  --font-label-3-size:  12px;   /* Regular — tooltip/info */
+  --font-label-3-lh:    16px;
+  --font-label-4-size:  10px;   /* Bold — notification dot */
+  --font-label-4-lh:    16px;
+  --font-label-5-size:  12px;   /* Bold — description title */
+  --font-label-5-lh:    16px;
+
+  /* — Buttons (Satoshi Bold) — */
+  --font-button-1-size: 18px;
+  --font-button-1-lh:   28px;
+  --font-button-2-size: 16px;
+  --font-button-2-lh:   24px;
+  --font-button-3-size: 14px;
+  --font-button-3-lh:   20px;
+}
+
+/* ─────────────────────────────────────────
+   SEMANTIC ELEMENT STYLES
+───────────────────────────────────────── */
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-1-size);
+  line-height: var(--font-heading-1-lh);
+  color: var(--color-text);
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-2-size);
+  line-height: var(--font-heading-2-lh);
+  color: var(--color-text);
+}
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-3-size);
+  line-height: var(--font-heading-3-lh);
+  color: var(--color-text);
+}
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-4-size);
+  line-height: var(--font-heading-4-lh);
+  color: var(--color-text);
+}
+h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-5-size);
+  line-height: var(--font-heading-5-lh);
+  color: var(--color-text);
+}
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--font-heading-6-size);
+  line-height: var(--font-heading-6-lh);
+  color: var(--color-text);
+}
+p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--font-body-2-size);
+  line-height: var(--font-body-2-lh);
+  color: var(--color-text);
+}
+code, pre {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-100);
+}
+label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--font-label-1-size);
+  line-height: var(--font-label-1-lh);
+  color: var(--color-text);
+}

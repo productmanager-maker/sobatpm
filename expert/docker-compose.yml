@@ -1,0 +1,12 @@
+services:
+  expert:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: expert-platform:latest
+    container_name: expert-platform
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=production
