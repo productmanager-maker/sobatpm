@@ -1,0 +1,6 @@
+__pycache__
+*.pyc
+setup_dummy_data.py
+deploy.sh
+sales-bot.service
+nyerat_about_us.html

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nyerat — Tentang &amp; Panduan Tim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --surface: #16161f;
+      --surface2: #1e1e2a;
+      --border: #2c2c3e;
+      --border2: #3a3a50;
+      --accent: #7c6af7;
+      --accent2: #a395f9;
+      --text: #ede9ff;
+      --text2: #a099b8;
+      --text3: #6b6482;
+      --gold: #c9a84c;
+      --gold2: #e8c97a;
+      --green: #4caf7d;
+      --radius: 14px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 30%, rgba(124,106,247,.2) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(201,168,76,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-aksara {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(72px, 16vw, 180px);
+      font-weight: 400;
+      color: var(--accent2);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 4px;
+      text-shadow: 0 0 100px rgba(124,106,247,.35);
+    }
+
+    .hero-ipa {
+      font-size: 15px;
+      color: var(--text3);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .hero-meaning {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4vw, 34px);
+      font-weight: 400;
+      color: var(--text);
+      max-width: 540px;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .hero-meaning em { font-style: italic; color: var(--gold2); }
+
+    .hero-origin {
+      font-size: 13px;
+      color: var(--text3);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+    }
+
+    .hero-tagline {
+      font-size: 17px;
+      color: var(--accent2);
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text3);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: scrollBounce 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: .6; }
+      50%       { transform: translateX(-50%) translateY(10px); opacity: 1; }
+    }
+
+    /* ─── LAYOUT ────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 96px 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    h2.section-title em { font-style: italic; color: var(--accent2); }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.85;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+
+    .sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── ETYMOLOGY ─────────────────────────────── */
+    .ety-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .ety-top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ety-cell {
+      padding: 28px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .ety-cell:last-child { border-right: none; }
+
+    .ety-cell-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 6px;
+    }
+
+    .ety-cell-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .ety-cell-value.gold { color: var(--gold2); font-style: italic; }
+    .ety-cell-value.accent { color: var(--accent2); }
+
+    .ety-body {
+      padding: 36px 32px;
+    }
+
+    .ety-row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .ety-row:last-child { margin-bottom: 0; }
+
+    .ety-row-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      flex-shrink: 0;
+      width: 90px;
+      padding-top: 3px;
+    }
+
+    .ety-row-text {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .ety-row-text strong { color: var(--text); font-weight: 500; }
+
+    /* ─── PHILOSOPHY ─────────────────────────────── */
+    .phil-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .phil-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .phil-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-2px);
+    }
+
+    .phil-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+    .phil-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .phil-desc { font-size: 13px; color: var(--text2); line-height: 1.65; font-weight: 300; }
+
+    /* ─── QUOTE ──────────────────────────────────── */
+    .quote-wrap {
+      background: linear-gradient(135deg, rgba(124,106,247,.07) 0%, rgba(201,168,76,.05) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(18px, 3vw, 28px);
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .quote-attr {
+      font-size: 12px;
+      color: var(--text3);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    /* ─── FEATURES ───────────────────────────────── */
+    .feat-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .feat-group {
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feat-group:last-child { border-bottom: none; }
+
+    .feat-group-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feat-group-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .feat-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+    }
+
+    .feat-list li {
+      font-size: 13px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 300;
+    }
+
+    .feat-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      opacity: .7;
+    }
+
+    /* ─── GUIDEBOOK ──────────────────────────────── */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .guide-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .guide-step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--border2);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .guide-step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .guide-step ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .guide-step li {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 300;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .guide-step li::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .shortcut-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .shortcut-key {
+      font-family: 'DM Sans', monospace;
+      font-size: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      padding: 3px 8px;
+      color: var(--accent2);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .shortcut-desc {
+      font-size: 12px;
+      color: var(--text2);
+      font-weight: 300;
+    }
+
+    /* ─── CTA ────────────────────────────────────── */
+    .cta-wrap {
+      text-align: center;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, transparent, rgba(124,106,247,.07), transparent);
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: .3px;
+      transition: opacity .2s, transform .15s;
+    }
+
+    .cta-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--text3);
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    footer strong { color: var(--accent2); font-weight: 500; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 640px) {
+      .ety-top { grid-template-columns: 1fr; }
+      .ety-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .ety-cell:last-child { border-bottom: none; }
+      .ety-row { flex-direction: column; gap: 4px; }
+      .ety-row-label { width: auto; }
+      .ety-body { padding: 24px 20px; }
+      .feat-group { padding: 24px 20px; }
+      .guide-step { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ══════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-aksara">Nyerat</div>
+  <div class="hero-ipa">/ ɲərat /</div>
+  <h1 class="hero-meaning">Kata kerja yang berarti <em>"menulis"</em></h1>
+  <p class="hero-origin">Bahasa Jawa Krama &nbsp;·&nbsp; Nusantara</p>
+  <p class="hero-tagline">Tulis. Simpan. Temukan.</p>
+  <div class="hero-scroll">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M7 2v10M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Gulir ke bawah
+  </div>
+</div>
+
+<hr class="sep" />
+
+<!-- ═══ SECTION: ASAL KATA ════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Asal Nama</p>
+    <h2 class="section-title">Dari mana <em>Nyerat</em> berasal?</h2>
+    <p class="section-desc">Setiap nama membawa makna. Di balik Nyerat, ada kearifan bahasa dan tradisi budaya Nusantara yang mengakar ribuan tahun.</p>
+
+    <div class="ety-card">
+      <div class="ety-top">
+        <div class="ety-cell">
+          <div class="ety-cell-label">Bahasa</div>
+          <div class="ety-cell-value accent">Jawa Krama</div>
+        </div>
+        <div class="ety-cell">
+          <div class="ety-cell-label">Kata Dasar</div>
+          <div class="ety-cell-value">serat &nbsp;<span style="color:var(--text3);font-size:14px">(tulisan/surat)</span></div>
+        </div>
+        <div class="ety-cell">
+          <div class="ety-cell-label">Makna</div>
+          <div class="ety-cell-value gold">menulis / menuliskan</div>
+        </div>
+      </div>
+      <div class="ety-body">
+        <div class="ety-row">
+          <div class="ety-row-label">Linguistik</div>
+          <div class="ety-row-text">
+            <strong>Nyerat</strong> [ɲərat] adalah bentuk aktif dari kata dasar <strong>serat</strong> dalam Bahasa Jawa Krama — tingkatan bahasa yang digunakan dalam konteks resmi, penuh hormat, dan kehati-hatian. Awalan nasal <em>ny-</em> mengubah nomina <em>serat</em> (tulisan) menjadi verba aktif: <em>tindakan menulis</em>.
+          </div>
+        </div>
+        <div class="ety-row">
+          <div class="ety-row-label">Budaya</div>
+          <div class="ety-row-text">
+            Dalam tradisi Jawa dan Nusantara, <strong>nyerat</strong> bukan sekadar menggores huruf — ia adalah tindakan menjaga, merawat, dan mewariskan pengetahuan. Leluhur kita mencatat sejarah di daun lontar, memahat gagasan di prasasti batu, merangkai petuah dalam <em>serat</em> dan <em>kakawin</em>. Mereka paham bahwa pikiran yang tak dituliskan akan hilang bersama waktu.
+          </div>
+        </div>
+        <div class="ety-row">
+          <div class="ety-row-label">Pilihan</div>
+          <div class="ety-row-text">
+            Kami memilih nama ini bukan hanya karena maknanya, tapi karena ia mengingatkan kami setiap hari bahwa platform ini bukan sekadar tools. Ini soal manusia yang ingin meninggalkan jejak — <strong>di kepala mereka sendiri, di tim mereka, dan pada dunia</strong>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep" />
+
+<!-- ═══ SECTION: FILOSOFI ═════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Filosofi</p>
+    <h2 class="section-title">Empat prinsip yang <em>membentuk</em> Nyerat</h2>
+    <p class="section-desc">Kami tidak membangun fitur semata. Kami membangun tempat di mana pikiran tim bisa hidup dan berkembang.</p>
+
+    <div class="phil-grid">
+      <div class="phil-card">
+        <span class="phil-icon">✍️</span>
+        <div class="phil-name">Tulis untuk Bertahan</div>
+        <p class="phil-desc">Ide yang tidak dituliskan akan hilang. Nyerat hadir agar setiap keputusan, diskusi, dan pengetahuan tim terdokumentasi — bukan tersebar di obrolan yang terlupakan.</p>
+      </div>
+      <div class="phil-card">
+        <span class="phil-icon">🤝</span>
+        <div class="phil-name">Kolaborasi Nyata</div>
+        <p class="phil-desc">Satu halaman, banyak kepala. Real-time collaboration memastikan tim selalu satu suara — di kantor, di rumah, atau di perjalanan.</p>
+      </div>
+      <div class="phil-card">
+        <span class="phil-icon">🔍</span>
+        <div class="phil-name">Temukan, Bukan Cari</div>
+        <p class="phil-desc">Pencarian penuh-teks, tag, dan database terstruktur membantu tim menemukan apa yang dibutuhkan — bukan membuang waktu menggulir chat history panjang.</p>
+      </div>
+      <div class="phil-card">
+        <span class="phil-icon">🏛️</span>
+        <div class="phil-name">Milik Tim, Selamanya</div>
+        <p class="phil-desc">Data di server sendiri, kode bisa di-export. Tidak ada vendor lock-in. Nyerat tumbuh bersama tim, bukan produk SaaS yang bisa hilang besok.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep" />
+
+<!-- ═══ QUOTE ══════════════════════════════════════ -->
+<section style="padding: 64px 0;">
+  <div class="container">
+    <div class="quote-wrap">
+      <p class="quote-text">"Kulo pun dangu mboten nyerat" — sudah lama saya tidak menulis.<br>Jangan biarkan itu terjadi lagi pada pengetahuan timmu.</p>
+      <p class="quote-attr">Dari frasa Jawa Krama &nbsp;·&nbsp; Filosofi Nyerat</p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep" />
+
+<!-- ═══ SECTION: FITUR ════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Fitur Platform</p>
+    <h2 class="section-title">Semua yang tim kamu <em>butuhkan</em></h2>
+    <p class="section-desc">Nyerat menggabungkan kekuatan Notion (blocks, database, kolaborasi) dan Evernote (capture, tag, offline) dalam satu platform yang kamu kontrol sepenuhnya.</p>
+
+    <div class="feat-wrap">
+
+      <div class="feat-group">
+        <div class="feat-group-title">Editor Blok</div>
+        <ul class="feat-list">
+          <li>Paragraph, Heading H1–H3</li>
+          <li>Bullet &amp; Numbered list</li>
+          <li>Checklist / To-do</li>
+          <li>Toggle / Collapsible</li>
+          <li>Callout berwarna</li>
+          <li>Code block</li>
+          <li>Quote block</li>
+          <li>Divider</li>
+          <li>Tabel inline</li>
+          <li>Kolom (2–4 kolom)</li>
+          <li>Slash command menu (/)</li>
+          <li>Inline formatting (bold, italic, code, link)</li>
+          <li>Drag &amp; drop blok</li>
+          <li>Upload gambar</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Evernote Features</div>
+        <ul class="feat-list">
+          <li>PDF embed &amp; inline viewer</li>
+          <li>PDF annotation</li>
+          <li>Audio recording + waveform</li>
+          <li>Drawing / Whiteboard (Excalidraw)</li>
+          <li>Web bookmark card</li>
+          <li>File attachment</li>
+          <li>Tag sistem global</li>
+          <li>Email-to-note (kirim email → halaman baru)</li>
+          <li>Web clipper (Chrome extension)</li>
+          <li>OCR gambar (Phase 2)</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Database &amp; Views</div>
+        <ul class="feat-list">
+          <li>Database per halaman</li>
+          <li>Table view</li>
+          <li>Kanban view</li>
+          <li>Calendar view</li>
+          <li>Gallery view</li>
+          <li>Filter &amp; sort multi-level</li>
+          <li>10+ tipe properti</li>
+          <li>Text, Number, Date, URL</li>
+          <li>Select, Multi-select</li>
+          <li>Checkbox, Formula</li>
+          <li>Relasi antar database</li>
+          <li>Row detail panel</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Organisasi &amp; Navigasi</div>
+        <ul class="feat-list">
+          <li>Halaman bersarang (nested)</li>
+          <li>Sidebar page tree</li>
+          <li>Multi-workspace</li>
+          <li>Notebook grouping</li>
+          <li>Favorites</li>
+          <li>Trash &amp; restore</li>
+          <li>Breadcrumb</li>
+          <li>All Pages view</li>
+          <li>Recent pages</li>
+          <li>Command palette ⌘K</li>
+          <li>Full-text search (FTS)</li>
+          <li>Tag-based filtering</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Kolaborasi &amp; Real-time</div>
+        <ul class="feat-list">
+          <li>Real-time presence</li>
+          <li>Avatar kolaborator</li>
+          <li>Typing indicator</li>
+          <li>CRDT conflict resolution</li>
+          <li>Komentar inline</li>
+          <li>Mention @user</li>
+          <li>Notifikasi real-time</li>
+          <li>Share halaman ke publik</li>
+          <li>Permission per halaman</li>
+          <li>Workspace roles (Owner, Admin, Member)</li>
+          <li>Invite via email</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Produktivitas &amp; AI</div>
+        <ul class="feat-list">
+          <li>AI Assistant (tanya, ringkas, lanjutkan)</li>
+          <li>AI Improve writing</li>
+          <li>AI Translate</li>
+          <li>AI Suggest tags</li>
+          <li>Template library (8 built-in)</li>
+          <li>Reminders &amp; notifikasi</li>
+          <li>Page history &amp; restore</li>
+          <li>Export Markdown</li>
+          <li>Export PDF</li>
+          <li>Keyboard shortcuts</li>
+          <li>Dark mode</li>
+          <li>Install as PWA</li>
+          <li>Offline support</li>
+          <li>Mobile responsive</li>
+        </ul>
+      </div>
+
+      <div class="feat-group">
+        <div class="feat-group-title">Settings &amp; Admin</div>
+        <ul class="feat-list">
+          <li>User profile &amp; avatar</li>
+          <li>Ganti password</li>
+          <li>Timezone &amp; bahasa</li>
+          <li>Workspace settings</li>
+          <li>Kelola anggota &amp; roles</li>
+          <li>Workspace icon &amp; nama</li>
+          <li>Hapus workspace</li>
+          <li>Audit log</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="sep" />
+
+<!-- ═══ SECTION: GUIDEBOOK ════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Panduan Tim</p>
+    <h2 class="section-title">Mulai menggunakan <em>Nyerat</em> hari ini</h2>
+    <p class="section-desc">Panduan singkat untuk onboarding anggota tim baru. Selesai dalam 10 menit.</p>
+
+    <div class="guide-grid">
+      <div class="guide-step">
+        <div class="guide-step-num">01</div>
+        <div class="guide-step-title">Buat Akun</div>
+        <ul>
+          <li>Buka URL Nyerat yang diberikan admin</li>
+          <li>Klik "Sign Up" → masukkan email + password</li>
+          <li>Beri nama workspace tim (mis: "Tim Product")</li>
+          <li>Pilih icon dan template awal workspace</li>
+          <li>Klik "Create workspace"</li>
+        </ul>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">02</div>
+        <div class="guide-step-title">Buat Halaman Pertama</div>
+        <ul>
+          <li>Klik "+ New" di sidebar atau tekan ⌘N</li>
+          <li>Ketik judul halaman, Enter untuk mulai menulis</li>
+          <li>Ketik "/" untuk slash command menu</li>
+          <li>Pilih jenis blok: teks, list, gambar, dll</li>
+          <li>Drag blok untuk mengubah urutan</li>
+        </ul>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">03</div>
+        <div class="guide-step-title">Organisir dengan Struktur</div>
+        <ul>
+          <li>Buat halaman bersarang: seret halaman ke atas halaman lain</li>
+          <li>Tambah tag: klik "Tags" di sidebar kanan halaman</li>
+          <li>Buat database: ketik "/database" untuk database view</li>
+          <li>Gunakan template: klik "Templates" di sidebar</li>
+          <li>Favorit halaman penting: klik bintang di header</li>
+        </ul>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">04</div>
+        <div class="guide-step-title">Kolaborasi Tim</div>
+        <ul>
+          <li>Buka Settings workspace → Invite anggota via email</li>
+          <li>Share halaman: klik "Share" di header halaman</li>
+          <li>Komentar: highlight teks → klik ikon komentar</li>
+          <li>Mention anggota: ketik @nama di editor</li>
+          <li>Lihat siapa online: avatar di header halaman</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Shortcuts -->
+    <h3 style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:20px;margin-top:48px;">Keyboard Shortcuts Penting</h3>
+    <div class="shortcut-grid">
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ K</span>
+        <span class="shortcut-desc">Command palette / search</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ N</span>
+        <span class="shortcut-desc">Buat halaman baru</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ \</span>
+        <span class="shortcut-desc">Toggle sidebar</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">/</span>
+        <span class="shortcut-desc">Slash command menu</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ B</span>
+        <span class="shortcut-desc">Bold teks</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ I</span>
+        <span class="shortcut-desc">Italic teks</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ Z</span>
+        <span class="shortcut-desc">Undo</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ ⇧ Z</span>
+        <span class="shortcut-desc">Redo</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">⌘ ,</span>
+        <span class="shortcut-desc">Workspace settings</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">Alt ←</span>
+        <span class="shortcut-desc">Navigasi mundur</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">Tab</span>
+        <span class="shortcut-desc">Indent / nest halaman</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">?</span>
+        <span class="shortcut-desc">Lihat semua shortcut</span>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <h3 style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:20px;margin-top:48px;">Tips untuk Tim</h3>
+    <div class="feat-wrap">
+      <div class="feat-group">
+        <div class="feat-group-title">Mulai dari Struktur</div>
+        <ul class="feat-list" style="flex-direction:column;gap:8px;">
+          <li>Buat halaman induk per topik besar: "Product", "Engineering", "HR", "Marketing"</li>
+          <li>Gunakan halaman bersarang untuk sub-topik (mis: Product → PRD → v1.0)</li>
+          <li>Tambah emoji pada setiap halaman agar mudah dikenali di sidebar</li>
+        </ul>
+      </div>
+      <div class="feat-group">
+        <div class="feat-group-title">Gunakan Template</div>
+        <ul class="feat-list" style="flex-direction:column;gap:8px;">
+          <li><strong style="color:var(--text)">Meeting Notes</strong> — untuk setiap rapat: agenda, diskusi, action items</li>
+          <li><strong style="color:var(--text)">Project Brief</strong> — kickoff proyek baru: problem, goals, scope, timeline</li>
+          <li><strong style="color:var(--text)">OKR Tracker</strong> — tracking objectives &amp; key results per quarter</li>
+          <li><strong style="color:var(--text)">Bug Report</strong> — laporan bug terstruktur dengan severity dan langkah reproduksi</li>
+        </ul>
+      </div>
+      <div class="feat-group">
+        <div class="feat-group-title">Database untuk Data Terstruktur</div>
+        <ul class="feat-list" style="flex-direction:column;gap:8px;">
+          <li>Buat database untuk: daftar tugas, bug tracker, content calendar, CRM sederhana</li>
+          <li>Gunakan Kanban view untuk workflow (To Do → In Progress → Done)</li>
+          <li>Gunakan Calendar view untuk deadline dan jadwal konten</li>
+          <li>Filter &amp; sort untuk fokus pada item yang relevan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════ -->
+<div class="cta-wrap">
+  <h2 class="cta-title">Siap mulai <em style="font-style:italic;color:var(--accent2)">nyerat</em>?</h2>
+  <p class="cta-sub">Bergabunglah dengan tim dan mulai dokumentasikan pengetahuan bersama. Karena yang tidak ditulis, akan terlupakan.</p>
+  <a href="https://id-preview--d8e8f4f3-1a8a-4ef9-8aa1-7a145642f55e.lovable.app" class="cta-btn" target="_blank" rel="noopener">
+    Buka Nyerat
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</div>
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
+<footer>
+  <strong>Nyerat</strong> &nbsp;·&nbsp; Tulis. Simpan. Temukan. &nbsp;·&nbsp; Platform knowledge management internal &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+[Unit]
+Description=Sales Agent Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/sales-bot
+ExecStart=/usr/bin/python3 /opt/sales-bot/app.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

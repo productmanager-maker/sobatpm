@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent 001 — System Flow Diagram</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      padding: 40px 24px 64px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .page-header .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── MAIN CANVAS ── */
+    .canvas {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ── SVG connector layer ── */
+    .connector-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    /* ── COLUMNS ── */
+    .columns {
+      display: grid;
+      grid-template-columns: 160px 1fr 180px 180px;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .col-label {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ── NODES ── */
+    .node {
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      position: relative;
+      font-size: 12px;
+      line-height: 1.4;
+      border: 1.5px solid transparent;
+    }
+
+    .node-title {
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .node-sub {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .node-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+
+    /* CHANNEL — blue */
+    .node-channel {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1e40af;
+    }
+    .node-channel .node-tag { background: #dbeafe; color: #1d4ed8; }
+
+    /* AGENT LLM — indigo */
+    .node-llm {
+      background: #eef2ff;
+      border-color: #a5b4fc;
+      color: #3730a3;
+    }
+    .node-llm .node-tag { background: #e0e7ff; color: #4338ca; }
+
+    /* LOGIC — slate */
+    .node-logic {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .node-logic .node-tag { background: #f1f5f9; color: #475569; }
+
+    /* DATA STORE — green */
+    .node-store {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #166534;
+    }
+    .node-store .node-tag { background: #dcfce7; color: #15803d; }
+
+    /* HUMAN — amber */
+    .node-human {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .node-human .node-tag { background: #fef3c7; color: #b45309; }
+
+    /* OUTPUT — emerald */
+    .node-output {
+      background: #ecfdf5;
+      border-color: #6ee7b7;
+      color: #065f46;
+    }
+    .node-output .node-tag { background: #d1fae5; color: #047857; }
+
+    /* ERROR / fallback — red */
+    .node-fallback {
+      background: #fff1f2;
+      border-color: #fca5a5;
+      color: #991b1b;
+    }
+    .node-fallback .node-tag { background: #fee2e2; color: #b91c1c; }
+
+    /* ── SECTION HEADERS inside columns ── */
+    .col-section {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      padding: 6px 0 8px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    /* ── FLOW ARROWS between columns ── */
+    .arrow-label {
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 600;
+      text-align: center;
+      padding: 4px 0;
+    }
+
+    /* ── COMPLEXITY PANEL ── */
+    .complexity-panel {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .complexity-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .complexity-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: #4f46e5;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .complexity-label {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* ── CASE SECTION ── */
+    .cases-section {
+      max-width: 1100px;
+      margin: 40px auto 0;
+    }
+
+    .cases-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6366f1;
+      margin-bottom: 16px;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .case-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .case-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .case-icon {
+      font-size: 18px;
+    }
+
+    .case-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .case-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .case-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .case-step-num {
+      background: #eef2ff;
+      color: #4f46e5;
+      font-weight: 700;
+      font-size: 10px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .case-agents {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .case-agent-tag {
+      font-size: 10px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .columns { grid-template-columns: 1fr; }
+      .complexity-panel, .cases-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="badge">System Architecture</div>
+    <h1>AI Agent 001 — Data & Process Flow</h1>
+    <p>Peta lengkap koneksi antar komponen, data yang mengalir, dan keputusan yang terjadi</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#93c5fd"></div> Channel / I/O</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div> LLM Agent (Claude)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#cbd5e1"></div> Logic / Rules Engine</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#86efac"></div> Data Store</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div> Human Decision</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6ee7b7"></div> Output Action</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fca5a5"></div> Fallback</div>
+  </div>
+
+  <!-- Main Flow -->
+  <div class="canvas">
+    <div class="columns">
+
+      <!-- COL 1: INPUT -->
+      <div>
+        <div class="col-label">Input</div>
+
+        <div class="node node-channel" id="n-tg-in">
+          <div class="node-tag">Channel</div>
+          <div class="node-title">Telegram<br/>Sales Group</div>
+          <div class="node-sub">Pesan natural language dari Sales</div>
+        </div>
+
+        <div class="node node-store" id="n-sheets-harga">
+          <div class="node-tag">Google Sheets</div>
+          <div class="node-title">Sheet: Harga</div>
+          <div class="node-sub">harga/kg, min order, modal, diskon member baru</div>
+        </div>
+
+        <div class="node node-store" id="n-sheets-partner">
+          <div class="node-tag">Google Sheets</div>
+          <div class="node-title">Sheet: Partner</div>
+          <div class="node-sub">nama, tipe (baru/lama/VIP), volume avg, kota</div>
+        </div>
+
+        <div class="node node-store" id="n-sheets-log">
+          <div class="node-tag">Google Sheets</div>
+          <div class="node-title">Sheet: Log Transaksi</div>
+          <div class="node-sub">13 kolom: timestamp → detail SO</div>
+        </div>
+
+        <div class="node node-fallback" id="n-fallback">
+          <div class="node-tag">Fallback</div>
+          <div class="node-title">Static Price Dict</div>
+          <div class="node-sub">Aktif jika Sheets timeout / error</div>
+        </div>
+      </div>
+
+      <!-- COL 2: AGENTS & LOGIC -->
+      <div>
+        <div class="col-label">Agents & Logic</div>
+
+        <div class="node node-logic" id="n-auth">
+          <div class="node-tag">Gate</div>
+          <div class="node-title">Auth Check</div>
+          <div class="node-sub">Validasi SALES_CHAT_IDS + SALES_USER_IDS + FINANCE_USER_IDS</div>
+        </div>
+
+        <div class="node node-logic" id="n-classifier">
+          <div class="node-tag">Classifier</div>
+          <div class="node-title">Message Classifier</div>
+          <div class="node-sub">Keyword heuristic: nego_words ∩ price_words ∖ order_words → route ke pipeline berbeda</div>
+        </div>
+
+        <div class="col-section">Order Pipeline</div>
+
+        <div class="node node-llm" id="n-parse">
+          <div class="node-tag">LLM Agent #1</div>
+          <div class="node-title">Sales Request Parser</div>
+          <div class="node-sub">Claude API · temp=0.0 · max_tokens=500<br/>Input: pesan + price context<br/>Output: JSON {partner, produk, qty, harga, diskon}</div>
+        </div>
+
+        <div class="node node-logic" id="n-partner-lookup">
+          <div class="node-tag">Lookup</div>
+          <div class="node-title">Partner Enricher</div>
+          <div class="node-sub">Fuzzy match nama → override tipe_partner dari data real (bukan asumsi LLM)</div>
+        </div>
+
+        <div class="node node-logic" id="n-enforce">
+          <div class="node-tag">Rules Engine</div>
+          <div class="node-title">Discount Enforcer</div>
+          <div class="node-sub">Deterministic: baru≤5%, lama≤10%, VIP≤15%<br/>+ volume bonus: +2~4% if qty ≥ 300/500kg<br/>→ need_human_approval jika abs_max ≥ 15%</div>
+        </div>
+
+        <div class="node node-llm" id="n-draft">
+          <div class="node-tag">LLM Agent #2</div>
+          <div class="node-title">Negotiation Drafter</div>
+          <div class="node-sub">Claude API · temp=0.6 · max_tokens=200<br/>Input: deal context<br/>Output: draft pesan balik (approve / counter)</div>
+        </div>
+
+        <div class="node node-logic" id="n-logger">
+          <div class="node-tag">Writer</div>
+          <div class="node-title">Transaction Logger</div>
+          <div class="node-sub">Append row ke Sheets, simpan row index untuk SO update</div>
+        </div>
+
+        <div class="col-section">Nego Check Pipeline</div>
+
+        <div class="node node-llm" id="n-nego">
+          <div class="node-tag">LLM Agent #3</div>
+          <div class="node-title">Nego Feasibility Checker</div>
+          <div class="node-sub">Claude API · temp=0.0 · max_tokens=400<br/>Classify: max_inquiry / diskon_check / harga_check<br/>+ partner hint dari lookup</div>
+        </div>
+
+        <div class="col-section">PDF Pipeline</div>
+
+        <div class="node node-logic" id="n-pdf">
+          <div class="node-tag">Generator</div>
+          <div class="node-title">PDF Builder (ReportLab)</div>
+          <div class="node-sub">Render SO dari last_deal[chat_id] → A4 PDF<br/>+ update SO number ke Sheets row</div>
+        </div>
+
+      </div>
+
+      <!-- COL 3: HUMAN & APPROVAL -->
+      <div>
+        <div class="col-label">Human-in-the-Loop</div>
+
+        <div class="node node-human" id="n-manager">
+          <div class="node-tag">Human Decision</div>
+          <div class="node-title">Manager</div>
+          <div class="node-sub">Terima notif di Telegram Manager Group</div>
+        </div>
+
+        <div class="node node-logic" id="n-approve-gate">
+          <div class="node-tag">Inline Button</div>
+          <div class="node-title">Approve / Reject</div>
+          <div class="node-sub">1 klik → callback_data trigger handler</div>
+        </div>
+
+        <div class="node node-logic" id="n-memory">
+          <div class="node-tag">In-Memory</div>
+          <div class="node-title">State Store</div>
+          <div class="node-sub">last_deal[chat_id]<br/>pending_approvals[deal_id]<br/>⚠ Reset saat restart</div>
+        </div>
+
+        <div class="node node-logic" id="n-role-gate">
+          <div class="node-tag">Role Gate</div>
+          <div class="node-title">Finance vs Sales View</div>
+          <div class="node-sub">Finance: lihat diskon_max & harga_modal<br/>Sales: lihat feasible saja</div>
+        </div>
+      </div>
+
+      <!-- COL 4: OUTPUT -->
+      <div>
+        <div class="col-label">Output</div>
+
+        <div class="node node-output" id="n-reply-sales">
+          <div class="node-tag">Output</div>
+          <div class="node-title">Reply ke Sales</div>
+          <div class="node-sub">Hasil deal + draft pesan nego + hint /so</div>
+        </div>
+
+        <div class="node node-output" id="n-notif-mgr">
+          <div class="node-tag">Output</div>
+          <div class="node-title">Notif Manager</div>
+          <div class="node-sub">Partner, produk, diskon diminta vs maks, total deal</div>
+        </div>
+
+        <div class="node node-output" id="n-pdf-out">
+          <div class="node-tag">Output</div>
+          <div class="node-title">PDF Sales Order</div>
+          <div class="node-sub">SO-YYYYMMDD-HHMMSS.pdf dikirim ke Sales chat</div>
+        </div>
+
+        <div class="node node-output" id="n-reply-nego">
+          <div class="node-tag">Output</div>
+          <div class="node-title">Reply Nego Check</div>
+          <div class="node-sub">Feasible/tidak + alasan + diskon maks (role-gated)</div>
+        </div>
+
+        <div class="node node-output" id="n-price-table">
+          <div class="node-tag">Output</div>
+          <div class="node-title">Price Table</div>
+          <div class="node-sub">/cekharga — daftar harga live dari Sheets</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Complexity Stats -->
+  <div class="complexity-panel">
+    <div class="complexity-card">
+      <div class="complexity-num">3</div>
+      <div class="complexity-label">LLM Agent calls<br/>per order request</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">4</div>
+      <div class="complexity-label">External tools<br/>yang digunakan</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">6</div>
+      <div class="complexity-label">Keputusan otonom<br/>per transaksi</div>
+    </div>
+    <div class="complexity-card">
+      <div class="complexity-num">5</div>
+      <div class="complexity-label">Pipeline berbeda<br/>dalam 1 sistem</div>
+    </div>
+  </div>
+
+  <!-- Use Cases -->
+  <div class="cases-section">
+    <div class="cases-title">Kompleksitas per Case</div>
+    <div class="cases-grid">
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">🟢</div>
+          <div class="case-title">Order — Diskon Normal</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Auth check + classify pesan</li>
+          <li class="case-step"><div class="case-step-num">2</div>Claude parse order → JSON</li>
+          <li class="case-step"><div class="case-step-num">3</div>Lookup partner di Sheets</li>
+          <li class="case-step"><div class="case-step-num">4</div>Fetch harga live dari Sheets</li>
+          <li class="case-step"><div class="case-step-num">5</div>Rules engine → auto-approve</li>
+          <li class="case-step"><div class="case-step-num">6</div>Claude draft pesan nego</li>
+          <li class="case-step"><div class="case-step-num">7</div>Log ke Sheets + reply Sales</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">Auth</span>
+          <span class="case-agent-tag">Classifier</span>
+          <span class="case-agent-tag">LLM #1</span>
+          <span class="case-agent-tag">Sheets ×2</span>
+          <span class="case-agent-tag">Rules</span>
+          <span class="case-agent-tag">LLM #2</span>
+          <span class="case-agent-tag">Logger</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">🟡</div>
+          <div class="case-title">Order — Butuh Approval Manager</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Semua step order normal (1–7)</li>
+          <li class="case-step"><div class="case-step-num">2</div>Rules engine → flag need_approval</li>
+          <li class="case-step"><div class="case-step-num">3</div>Simpan ke pending_approvals (memory)</li>
+          <li class="case-step"><div class="case-step-num">4</div>Kirim notif + inline button ke Manager</li>
+          <li class="case-step"><div class="case-step-num">5</div>Manager klik Approve/Reject</li>
+          <li class="case-step"><div class="case-step-num">6</div>Update deal → notif balik ke Sales</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">All Order Agents</span>
+          <span class="case-agent-tag">Memory</span>
+          <span class="case-agent-tag">Human</span>
+          <span class="case-agent-tag">Callback Handler</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">🔍</div>
+          <div class="case-title">Cek Nego (Tanpa Order)</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Auth check + detect nego query</li>
+          <li class="case-step"><div class="case-step-num">2</div>Fetch harga live dari Sheets</li>
+          <li class="case-step"><div class="case-step-num">3</div>Fuzzy lookup partner name</li>
+          <li class="case-step"><div class="case-step-num">4</div>Claude classify: max/diskon/harga check</li>
+          <li class="case-step"><div class="case-step-num">5</div>Role gate: Finance vs Sales view</li>
+          <li class="case-step"><div class="case-step-num">6</div>Reply dengan feasibility + alasan</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">Auth</span>
+          <span class="case-agent-tag">Detector</span>
+          <span class="case-agent-tag">Sheets</span>
+          <span class="case-agent-tag">LLM #3</span>
+          <span class="case-agent-tag">Role Gate</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">📄</div>
+          <div class="case-title">Generate Sales Order PDF</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Ambil last_deal dari in-memory</li>
+          <li class="case-step"><div class="case-step-num">2</div>Render PDF A4 via ReportLab</li>
+          <li class="case-step"><div class="case-step-num">3</div>Kirim PDF ke Sales chat</li>
+          <li class="case-step"><div class="case-step-num">4</div>Update SO number ke Sheets row</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">Memory</span>
+          <span class="case-agent-tag">PDF Builder</span>
+          <span class="case-agent-tag">Telegram API</span>
+          <span class="case-agent-tag">Sheets Writer</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">📦</div>
+          <div class="case-title">/cekharga — Price Lookup</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Auth check</li>
+          <li class="case-step"><div class="case-step-num">2</div>Fetch price list dari Sheets</li>
+          <li class="case-step"><div class="case-step-num">3</div>Filter by product keyword</li>
+          <li class="case-step"><div class="case-step-num">4</div>Role gate: tampilkan harga_modal jika Finance</li>
+          <li class="case-step"><div class="case-step-num">5</div>Format & reply tabel harga</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">Auth</span>
+          <span class="case-agent-tag">Sheets</span>
+          <span class="case-agent-tag">Filter</span>
+          <span class="case-agent-tag">Role Gate</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-header">
+          <div class="case-icon">⚠️</div>
+          <div class="case-title">Sheets Down — Fallback</div>
+        </div>
+        <ul class="case-steps">
+          <li class="case-step"><div class="case-step-num">1</div>Sheets API timeout / exception</li>
+          <li class="case-step"><div class="case-step-num">2</div>Switch otomatis ke static price dict</li>
+          <li class="case-step"><div class="case-step-num">3</div>Claude tetap jalan dengan data statis</li>
+          <li class="case-step"><div class="case-step-num">4</div>Label "sumber: fallback" di reply</li>
+          <li class="case-step"><div class="case-step-num">5</div>Log error ke server log</li>
+        </ul>
+        <div class="case-agents">
+          <span class="case-agent-tag">Error Handler</span>
+          <span class="case-agent-tag">Static Dict</span>
+          <span class="case-agent-tag">LLM #1</span>
+          <span class="case-agent-tag">Logger</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Data Flow Table -->
+  <div class="cases-section" style="margin-top: 40px;">
+    <div class="cases-title">Data yang Mengalir Antar Komponen</div>
+    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:14px; overflow:hidden;">
+      <table style="width:100%; border-collapse:collapse; font-size:12px;">
+        <thead>
+          <tr style="background:#f8fafc; border-bottom:1px solid #e2e8f0;">
+            <th style="text-align:left; padding:12px 16px; color:#475569; font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase;">Dari</th>
+            <th style="text-align:left; padding:12px 16px; color:#475569; font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase;">Ke</th>
+            <th style="text-align:left; padding:12px 16px; color:#475569; font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase;">Data</th>
+            <th style="text-align:left; padding:12px 16px; color:#475569; font-weight:700; font-size:10px; letter-spacing:1px; text-transform:uppercase;">Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Sales Telegram</td>
+            <td style="padding:10px 16px; color:#334155;">Classifier</td>
+            <td style="padding:10px 16px; color:#64748b;">Raw text pesan</td>
+            <td style="padding:10px 16px;"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">string</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Sheets: Harga</td>
+            <td style="padding:10px 16px; color:#334155;">LLM Parser + Nego Checker</td>
+            <td style="padding:10px 16px; color:#64748b;">harga, min_order, harga_modal, newmember_diskon</td>
+            <td style="padding:10px 16px;"><span style="background:#f0fdf4;color:#15803d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">dict[str, dict]</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Sheets: Partner</td>
+            <td style="padding:10px 16px; color:#334155;">Partner Enricher</td>
+            <td style="padding:10px 16px; color:#64748b;">tipe_partner, volume_avg, kota, telegram_chat_id</td>
+            <td style="padding:10px 16px;"><span style="background:#f0fdf4;color:#15803d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">dict | None</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">LLM Agent #1</td>
+            <td style="padding:10px 16px; color:#334155;">Rules Engine</td>
+            <td style="padding:10px 16px; color:#64748b;">partner, produk, qty_kg, harga_per_kg, diskon_diminta</td>
+            <td style="padding:10px 16px;"><span style="background:#eef2ff;color:#4338ca;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">JSON → dict</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Rules Engine</td>
+            <td style="padding:10px 16px; color:#334155;">LLM Agent #2 + Logger</td>
+            <td style="padding:10px 16px; color:#64748b;">deal enriched: diskon_disetujui, diskon_max_allowed, need_human_approval, total_harga</td>
+            <td style="padding:10px 16px;"><span style="background:#eef2ff;color:#4338ca;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">dict</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Rules Engine</td>
+            <td style="padding:10px 16px; color:#334155;">Memory (pending_approvals)</td>
+            <td style="padding:10px 16px; color:#64748b;">deal_id, deal dict, sales_chat_id</td>
+            <td style="padding:10px 16px;"><span style="background:#fffbeb;color:#b45309;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">in-memory dict</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">LLM Agent #2</td>
+            <td style="padding:10px 16px; color:#334155;">Reply Sales</td>
+            <td style="padding:10px 16px; color:#64748b;">draft_pesan (natural lang, 3 kalimat)</td>
+            <td style="padding:10px 16px;"><span style="background:#eef2ff;color:#4338ca;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">string</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Logger</td>
+            <td style="padding:10px 16px; color:#334155;">Memory (last_deal)</td>
+            <td style="padding:10px 16px; color:#64748b;">log_row (Sheets row index 1-based)</td>
+            <td style="padding:10px 16px;"><span style="background:#fffbeb;color:#b45309;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">int | None</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;">
+            <td style="padding:10px 16px; color:#334155;">Manager (1 klik)</td>
+            <td style="padding:10px 16px; color:#334155;">Approval Handler</td>
+            <td style="padding:10px 16px; color:#64748b;">callback_data: "approve_{deal_id}" / "reject_{deal_id}"</td>
+            <td style="padding:10px 16px;"><span style="background:#fffbeb;color:#b45309;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">string</span></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px; color:#334155;">PDF Builder</td>
+            <td style="padding:10px 16px; color:#334155;">Sheets: Log + Sales Chat</td>
+            <td style="padding:10px 16px; color:#64748b;">SO number (SO-YYYYMMDD-HHMMSS) + PDF binary</td>
+            <td style="padding:10px 16px;"><span style="background:#f0fdf4;color:#15803d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;">str + file</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent 001 — Agentic AI Recap</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f7;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #1a1a2e 30%, #4f46e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 16px;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Section titles ── */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6366f1;
+      margin-bottom: 16px;
+    }
+
+    /* ── Cards grid ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    @media (max-width: 640px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: #a5b4fc;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.08);
+    }
+
+    .card-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6366f1;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* ── Flow ── */
+    .flow {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 32px;
+      overflow-x: auto;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 12px;
+    }
+
+    .flow-row:last-child { margin-bottom: 0; }
+
+    .flow-phase {
+      min-width: 110px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding-top: 3px;
+      color: #94a3b8;
+    }
+
+    .flow-arrow {
+      color: #c7d2fe;
+      font-size: 18px;
+      padding: 0 12px;
+      padding-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .flow-node {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      white-space: nowrap;
+    }
+
+    .flow-node.agent {
+      background: #eef2ff;
+      border-color: #a5b4fc;
+      color: #4338ca;
+    }
+
+    .flow-node.output {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #166534;
+    }
+
+    .flow-node.human {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+
+    .step-arrow {
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    /* ── Decisions ── */
+    .decisions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .decision-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .decision-item:hover {
+      border-color: #a5b4fc;
+      box-shadow: 0 2px 12px rgba(99,102,241,0.07);
+    }
+
+    .decision-num {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .decision-text strong {
+      display: block;
+      font-size: 14px;
+      color: #1a1a2e;
+      margin-bottom: 3px;
+    }
+
+    .decision-text span {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* ── HITL Bar ── */
+    .hitl-bar {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .hitl-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+
+    .hitl-cell {
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .hitl-pct {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .hitl-pct.green { color: #16a34a; }
+    .hitl-pct.yellow { color: #d97706; }
+    .hitl-pct.red { color: #dc2626; }
+
+    .hitl-label {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .hitl-divider {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    .hitl-desc {
+      font-size: 13px;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .hitl-desc strong { color: #4f46e5; }
+
+    /* ── Tools ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .tool-item:hover {
+      border-color: #a5b4fc;
+      box-shadow: 0 2px 12px rgba(99,102,241,0.07);
+    }
+
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .tool-icon.purple { background: #eef2ff; }
+    .tool-icon.green  { background: #f0fdf4; }
+    .tool-icon.blue   { background: #eff6ff; }
+    .tool-icon.orange { background: #fff7ed; }
+
+    .tool-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 2px;
+    }
+
+    .tool-role {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="badge">Agentic AI</div>
+      <h1>AI Agent 001<br/>Telegram Sales Bot</h1>
+      <p class="subtitle">
+        Otomasi pipeline negosiasi B2B — dari pesan natural language
+        hingga Sales Order PDF — dengan manusia hanya masuk di titik kritis.
+      </p>
+    </div>
+
+    <!-- Komponen Agentic -->
+    <div class="section">
+      <div class="section-title">Komponen Agentic AI</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">👁️</div>
+          <div class="card-label">Perception</div>
+          <div class="card-title">Baca Intent</div>
+          <div class="card-desc">Menerima pesan natural language dari Sales di Telegram dan mengklasifikasikan tipe request.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-label">Reasoning</div>
+          <div class="card-title">Ekstrak & Putuskan</div>
+          <div class="card-desc">Claude API mengurai partner, produk, qty, harga, diskon — lalu menerapkan aturan bisnis.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <div class="card-label">Tool Use</div>
+          <div class="card-title">Gunakan Tools</div>
+          <div class="card-desc">Akses Google Sheets (harga live, partner DB), Telegram API, dan PDF generator secara sekuensial.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <div class="card-label">Memory</div>
+          <div class="card-title">Short & Long Term</div>
+          <div class="card-desc">In-memory state per session. Google Sheets sebagai long-term log transaksi permanen.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚖️</div>
+          <div class="card-label">Decision Making</div>
+          <div class="card-title">Otomatis vs Eskalasi</div>
+          <div class="card-desc">Enforce aturan diskon. Selesaikan sendiri jika dalam batas — escalate ke Manager jika melampaui.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-label">Action</div>
+          <div class="card-title">Eksekusi Output</div>
+          <div class="card-desc">Reply ke Sales, kirim notif Manager dengan inline button, generate dan kirim PDF Sales Order.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow -->
+    <div class="section">
+      <div class="section-title">Agentic Flow</div>
+      <div class="flow">
+
+        <div class="flow-row">
+          <div class="flow-phase">INPUT</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-node">Pesan Sales (natural lang)</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node agent">Agent: klasifikasi tipe</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-row">
+          <div class="flow-phase">ORDER</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-node agent">Claude: parse JSON</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node">Sheets: lookup partner</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node agent">Enforce rules</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node agent">Draft pesan nego</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node output">Log + Reply Sales</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-row">
+          <div class="flow-phase">ESKALASI</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-node agent">Detect: butuh approval</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node human">Manager: Approve / Reject</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node output">Notif Sales + update deal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-row">
+          <div class="flow-phase">CEK NEGO</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-node">Sheets: harga live</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node agent">Claude: feasibility check</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node output">Reply kontekstual</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-row">
+          <div class="flow-phase">PDF /so</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-node">Ambil last deal</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node agent">Generate PDF ReportLab</div>
+              <div class="step-arrow">→</div>
+              <div class="flow-node output">Kirim PDF + update log</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Keputusan Otonom -->
+    <div class="section">
+      <div class="section-title">Keputusan yang Diambil Otonom</div>
+      <div class="decisions">
+        <div class="decision-item">
+          <div class="decision-num">1</div>
+          <div class="decision-text">
+            <strong>Klasifikasi pesan</strong>
+            <span>Order baru, nego query, atau cek harga? Agent tentukan sendiri berdasarkan keyword detection + LLM.</span>
+          </div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">2</div>
+          <div class="decision-text">
+            <strong>Identifikasi & verifikasi partner</strong>
+            <span>Nama dari pesan di-lookup ke Google Sheets. Tipe partner (baru/lama/VIP) dari data real, bukan asumsi AI.</span>
+          </div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">3</div>
+          <div class="decision-text">
+            <strong>Kalkulasi diskon maksimal</strong>
+            <span>Berdasarkan tipe partner + volume bonus threshold — computed deterministically, tidak diserahkan ke LLM.</span>
+          </div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">4</div>
+          <div class="decision-text">
+            <strong>Auto-approve vs escalate ke Manager</strong>
+            <span>Jika diskon dalam batas → langsung approve. Jika melampaui → eskalasi dengan context lengkap ke Manager.</span>
+          </div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">5</div>
+          <div class="decision-text">
+            <strong>Draft pesan negosiasi</strong>
+            <span>Bahasa natural yang berbeda tergantung konteks: konfirmasi hangat (approved) vs tawaran balik taktis (rejected).</span>
+          </div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">6</div>
+          <div class="decision-text">
+            <strong>Logging otomatis</strong>
+            <span>Setiap transaksi dicatat ke Google Sheets. Nomor SO diupdate ke baris yang sama saat PDF di-generate.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Human in the Loop -->
+    <div class="section">
+      <div class="section-title">Human-in-the-Loop by Design</div>
+      <div class="hitl-bar">
+        <div class="hitl-row">
+          <div class="hitl-cell">
+            <div class="hitl-pct green">~80%</div>
+            <div class="hitl-label">Agent selesaikan<br/>sendiri</div>
+          </div>
+          <div class="hitl-cell">
+            <div class="hitl-pct yellow">~20%</div>
+            <div class="hitl-label">Manager 1 klik<br/>approve / reject</div>
+          </div>
+          <div class="hitl-cell">
+            <div class="hitl-pct red">0%</div>
+            <div class="hitl-label">Sales hubungi<br/>Finance manual</div>
+          </div>
+        </div>
+        <hr class="hitl-divider" />
+        <p class="hitl-desc">
+          Agent tidak menggantikan Manager — ia <strong>memfilter noise</strong> sehingga Manager
+          hanya ditarik untuk keputusan yang benar-benar butuh judgment manusia.
+          Semua kasus standar diselesaikan secara otonom.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="section">
+      <div class="section-title">Tools yang Digunakan Agent</div>
+      <div class="tools-grid">
+        <div class="tool-item">
+          <div class="tool-icon purple">🤖</div>
+          <div>
+            <div class="tool-name">Claude API</div>
+            <div class="tool-role">NLU · Reasoning · Draft text negosiasi</div>
+          </div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-icon green">📊</div>
+          <div>
+            <div class="tool-name">Google Sheets API</div>
+            <div class="tool-role">Harga live · Data partner · Log transaksi</div>
+          </div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-icon blue">✈️</div>
+          <div>
+            <div class="tool-name">Telegram Bot API</div>
+            <div class="tool-role">Input/output channel · Inline buttons approval</div>
+          </div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-icon orange">📄</div>
+          <div>
+            <div class="tool-name">ReportLab</div>
+            <div class="tool-role">Generate PDF Sales Order</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p style="margin-bottom: 10px; color: #475569;">Arsitektur: <strong style="color: #4f46e5;">Single Agent · Multi-Tool · Sequential Execution</strong></p>
+      <div>
+        <span class="tag">python-telegram-bot</span>
+        <span class="tag">claude-sonnet-4-6</span>
+        <span class="tag">gspread</span>
+        <span class="tag">reportlab</span>
+        <span class="tag">Google Sheets</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
