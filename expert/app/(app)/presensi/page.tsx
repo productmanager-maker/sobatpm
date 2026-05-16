@@ -172,7 +172,7 @@ function PresensiContent() {
       <div style={{ background: "var(--neutral-100)", borderBottom: "1px solid var(--neutral-500)", padding: "var(--space-3) var(--space-4)" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-3)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
-            <Image src="/expert/logo.png" alt="SMM" width={36} height={28} style={{ objectFit: "contain", flexShrink: 0 }} />
+            <Image src="/logo.png" alt="SMM" width={36} height={28} style={{ objectFit: "contain", flexShrink: 0 }} />
             <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, color: "var(--text-100)" }}>Sekolah Murid Merdeka</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>

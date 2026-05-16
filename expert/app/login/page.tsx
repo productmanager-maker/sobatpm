@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
+import { EXPERTS } from "@/lib/master-seed";
 
 const TEST_ACCOUNTS = [
   { nama: "Mega Kurnia",       email: "mega.kurnia@sekolahmu.co.id",      roleLabel: "Expert Penuh",   kasus: "15 program, 1 semester, 30 peserta di prog-1" },
@@ -34,26 +35,16 @@ export default function LoginPage() {
       return;
     }
 
-    try {
-      const res = await fetch("/expert/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier: email, password }),
-      });
-      if (res.ok) {
-        const data = await res.json().catch(() => ({}));
-        if (data?.data?.expert?.role === "guest") {
-          sessionStorage.setItem("showGuestPopup", "1");
-        }
-        router.replace("/presensi");
-      } else {
-        setError("Login gagal. Coba lagi.");
-        setLoading(false);
-      }
-    } catch {
-      setError("Terjadi kesalahan. Coba lagi.");
-      setLoading(false);
+    const normalizedEmail = email.toLowerCase().trim();
+    const expert = EXPERTS.find(e => e.email.toLowerCase() === normalizedEmail)
+      ?? { id: "exp-guest", nama: "Tamu", email: normalizedEmail, role: "guest" };
+    const token = `dummy-token-${expert.id}`;
+    document.cookie = `expert_token=${token}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
+
+    if (expert.role === "guest") {
+      sessionStorage.setItem("showGuestPopup", "1");
     }
+    router.replace("/presensi");
   }
 
   return (
@@ -64,7 +55,7 @@ export default function LoginPage() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "var(--space-8)" }}>
           <div style={{ marginBottom: "var(--space-3)" }}>
             <Image
-              src="/expert/logo.png"
+              src="/logo.png"
               alt="Sekolah Murid Merdeka"
               width={72}
               height={56}
