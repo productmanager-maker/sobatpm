@@ -12,7 +12,7 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
     if (mswReady) return;
     import("../mocks/browser")
       .then(({ worker }) => worker.start({
-        serviceWorker: { url: "/expert/mockServiceWorker.js" },
+        serviceWorker: { url: "/sobatpm/expert/mockServiceWorker.js" },
         onUnhandledRequest: "bypass",
       }))
       .then(() => setMswReady(true));
