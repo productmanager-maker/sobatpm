@@ -145,7 +145,26 @@ function seedKarya(aktivitasId: string) {
 
 export const handlers = [
 
-  // ─── Auth ────────────────────────────────────────────────────────────────
+  // ─── Auth (static export: MSW handles login/logout instead of API routes) ──
+
+  http.post("/expert/api/auth/login", async ({ request }) => {
+    const body = await request.json().catch(() => ({})) as { identifier?: string; email?: string };
+    const email = ((body.identifier ?? body.email ?? "") as string).toLowerCase().trim();
+    const expert = ALL_EXPERTS.find(e => e.email.toLowerCase() === email)
+      ?? { id: "exp-guest", nama: "Tamu", email, role: "guest", permissions: [], avatarUrl: null, inisial: "TM" };
+    const token = `dummy-token-${expert.id}`;
+    if (typeof document !== "undefined") {
+      document.cookie = `expert_token=${token}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
+    }
+    return HttpResponse.json({ data: { token, expert } });
+  }),
+
+  http.post("/expert/api/auth/logout", () => {
+    if (typeof document !== "undefined") {
+      document.cookie = "expert_token=; path=/; max-age=0";
+    }
+    return HttpResponse.json({ data: { ok: true } });
+  }),
 
   http.get("/api/auth/me", ({ request }) => {
     const expertId = getExpertId(request);

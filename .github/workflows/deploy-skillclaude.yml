@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'skillclaude/**'
+      - 'expert/**'
       - 'index.html'
       - 'tools-recap.html'
       - '.github/workflows/deploy-skillclaude.yml'
@@ -29,22 +30,26 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: skillclaude/package-lock.json
+          cache-dependency-path: |
+            skillclaude/package-lock.json
+            expert/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install & build skillclaude
+        run: npm ci && npm run build
         working-directory: skillclaude
 
-      - name: Build
-        run: npm run build
-        working-directory: skillclaude
+      - name: Install & build expert
+        run: npm ci && npm run build
+        working-directory: expert
 
       - name: Assemble Pages output
         run: |
           mkdir -p _site/skillclaude
+          mkdir -p _site/expert
           cp index.html _site/index.html
           cp tools-recap.html _site/tools-recap.html
           cp -r skillclaude/dist/. _site/skillclaude/
+          cp -r expert/out/. _site/expert/
 
       - uses: actions/configure-pages@v4
 
